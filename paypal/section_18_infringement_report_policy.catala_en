@@ -1,0 +1,204 @@
+# PayPal Infringement Report Policy
+# Last updated: May 6, 2021
+# Source: PayPal Infringement Report
+# Forms part of the PayPal User Agreement
+
+# --- Policy Statement ---
+
+scope InfringementPolicyStatement =
+  output payPalTakesActionOnInfringingMaterial : Boolean
+  output actionMayIncludeRemoval : Boolean
+  output actionMayIncludeDisallowingServices : Boolean
+
+  definition payPalTakesActionOnInfringingMaterial equals true
+  definition actionMayIncludeRemoval equals true
+  definition actionMayIncludeDisallowingServices equals true
+
+# --- Reporter Eligibility ---
+
+scope InfringementReporterEligibility =
+  input isIPRightsOwner : Boolean
+  input isAuthorizedAgent : Boolean
+  output eligibleToReport : Boolean
+
+  definition eligibleToReport equals
+    isIPRightsOwner or isAuthorizedAgent
+
+# --- Report Submission Method ---
+
+scope InfringementReportSubmission =
+  output submittedByEmail : Boolean
+  output emailAddress : Boolean
+  output directedToAcceptableUsePolicy : Boolean
+
+  definition submittedByEmail equals true
+  definition emailAddress equals true
+  definition directedToAcceptableUsePolicy equals true
+
+# --- Penalty of Perjury Declaration ---
+
+scope InfringementReportPerjuryDeclaration =
+  output madeUnderPenaltyOfPerjury : Boolean
+
+  definition madeUnderPenaltyOfPerjury equals true
+
+# --- Ownership or Agency Declaration ---
+
+scope InfringementReportOwnershipDeclaration =
+  input isIPRightsOwner : Boolean
+  input isAuthorizedAgent : Boolean
+  output declaresOwnerOrAuthorizedAgent : Boolean
+
+  definition declaresOwnerOrAuthorizedAgent equals
+    isIPRightsOwner or isAuthorizedAgent
+
+# --- Good Faith Belief of Infringement ---
+
+scope InfringementReportGoodFaithBelief =
+  output hasGoodFaithBeliefOfInfringement : Boolean
+  output webpageSellsOrOffersInfringingGoods : Boolean
+  output webpageIncludesInfringingContent : Boolean
+
+  definition hasGoodFaithBeliefOfInfringement equals true
+  definition webpageSellsOrOffersInfringingGoods equals true
+  definition webpageIncludesInfringingContent equals true
+
+# --- Intellectual Property Rights Description ---
+
+scope InfringementReportIPDescription =
+  input ipRightType : InfringementReportIPRightType
+  output mustDescribeIPRights : Boolean
+  output mustIncludeRegistrationInfo : Boolean
+
+  definition mustDescribeIPRights equals true
+  definition mustIncludeRegistrationInfo equals
+    ipRightType equals -- Trademark or ipRightType equals -- Patent
+
+# --- Nature of Infringement ---
+
+scope InfringementReportNatureOfInfringement =
+  output mustDescribeInfringementMethod : Boolean
+
+  definition mustDescribeInfringementMethod equals true
+
+# --- Good Faith Belief of Unauthorized Use ---
+
+scope InfringementReportUnauthorizedUse =
+  output hasGoodFaithBeliefNotAuthorized : Boolean
+  output notAuthorizedByIPOwner : Boolean
+  output notAuthorizedByLaw : Boolean
+
+  definition hasGoodFaithBeliefNotAuthorized equals true
+  definition notAuthorizedByIPOwner equals true
+  definition notAuthorizedByLaw equals true
+
+# --- PayPal Services Used for Infringing Payments ---
+
+scope InfringementReportPayPalServiceUse =
+  input involvesPaymentForInfringingGoods : Boolean
+  output mustExplainGoodFaithBeliefOfPayPalUse : Boolean
+  output presenceOfButtonInsufficient : Boolean
+
+  definition mustExplainGoodFaithBeliefOfPayPalUse equals
+    involvesPaymentForInfringingGoods
+  definition presenceOfButtonInsufficient equals true
+
+# --- Understanding of Consequences ---
+
+scope InfringementReportConsequencesUnderstanding =
+  output understandsTemporaryRestrictionPossible : Boolean
+  output understandsPermanentRestrictionPossible : Boolean
+  output understandsRestrictionAffectsAllServices : Boolean
+  output understandsRestrictionNotLimitedToWebpage : Boolean
+
+  definition understandsTemporaryRestrictionPossible equals true
+  definition understandsPermanentRestrictionPossible equals true
+  definition understandsRestrictionAffectsAllServices equals true
+  definition understandsRestrictionNotLimitedToWebpage equals true
+
+# --- Report Sharing with Account Holder ---
+
+scope InfringementReportSharing =
+  output understandsReportMayBeSharedWithAccountHolder : Boolean
+
+  definition understandsReportMayBeSharedWithAccountHolder equals true
+
+# --- Indemnification ---
+
+scope InfringementReportIndemnification =
+  output agreesToIndemnifyPayPal : Boolean
+  output indemnityCoversClaimsLossesLiabilities : Boolean
+  output indemnityCoversCostsAndAttorneysFees : Boolean
+  output indemnityRelatesToAccountRestriction : Boolean
+  output indemnityRelatesToContentRemoval : Boolean
+
+  definition agreesToIndemnifyPayPal equals true
+  definition indemnityCoversClaimsLossesLiabilities equals true
+  definition indemnityCoversCostsAndAttorneysFees equals true
+  definition indemnityRelatesToAccountRestriction equals true
+  definition indemnityRelatesToContentRemoval equals true
+
+# --- Truth and Accuracy ---
+
+scope InfringementReportTruthAccuracy =
+  output informationIsTrueAndAccurate : Boolean
+
+  definition informationIsTrueAndAccurate equals true
+
+# --- Report Completeness ---
+
+scope InfringementReportCompleteness =
+  output mustBeCompletedInItsEntirety : Boolean
+
+  definition mustBeCompletedInItsEntirety equals true
+
+# --- Required Contact Information ---
+
+scope InfringementReportContactNameOfIPOwner =
+  output required : Boolean
+
+  definition required equals true
+
+scope InfringementReportContactNameAndTitle =
+  output required : Boolean
+
+  definition required equals true
+
+scope InfringementReportContactCompany =
+  output optional : Boolean
+
+  definition optional equals true
+
+scope InfringementReportContactAddress =
+  output required : Boolean
+
+  definition required equals true
+
+scope InfringementReportContactCityStateZip =
+  output required : Boolean
+
+  definition required equals true
+
+scope InfringementReportContactEmail =
+  output optional : Boolean
+
+  definition optional equals true
+
+scope InfringementReportContactTelephone =
+  output required : Boolean
+
+  definition required equals true
+
+scope InfringementReportContactFax =
+  output optional : Boolean
+
+  definition optional equals true
+
+# --- URL Identification ---
+
+scope InfringementReportURLIdentification =
+  output mustProvideURLs : Boolean
+  output mayAttachScreenshot : Boolean
+
+  definition mustProvideURLs equals true
+  definition mayAttachScreenshot equals true

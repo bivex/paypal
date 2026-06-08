@@ -524,3 +524,12 @@ declaration enumeration DPACardServiceType =
   -- CardProcessing
   -- Gateway
   -- FraudProtection
+
+# --- Infringement Report Policy ---
+
+declaration enumeration InfringementReportIPRightType =
+  -- Copyright
+  -- Trademark
+  -- Patent
+  -- TradeDress
+  -- Other
