@@ -1,0 +1,669 @@
+# PayPal Cryptocurrency Terms and Conditions
+# Last updated: May 28, 2026
+# Source: https://www.paypal.com/us/webapps/mpp/ua/cryptocurrency-terms
+# Forms part of the PayPal User Agreement
+
+# --- MAS Risk Warning ---
+
+scope MASRiskWarningScope =
+  output paypalLicensedByMAS : Boolean
+  output dptValueMayFluctuateGreatly : Boolean
+  output mayLoseAllMoneyInvested : Boolean
+  output stablecoinMayBeOffered : Boolean
+  output masDoesNotSuperviseUnregulatedServices : Boolean
+
+  definition paypalLicensedByMAS equals true
+  definition dptValueMayFluctuateGreatly equals true
+  definition mayLoseAllMoneyInvested equals true
+  definition stablecoinMayBeOffered equals true
+  definition masDoesNotSuperviseUnregulatedServices equals true
+
+# --- Crypto Hub Eligibility ---
+
+scope CryptoHubEligibility =
+  input hubType : CryptoHubType
+  input isResidentOfSupportedCountry : Boolean
+  input age : Integer
+  input ageOfMajority : Integer
+  input isBusinessEntity : Boolean
+  input isBusinessInSupportedCountry : Boolean
+  output eligibleForHub : Boolean
+
+  definition eligibleForHub equals
+    if hubType equals -- Consumer then
+      isResidentOfSupportedCountry and age >= 18
+    else
+      isBusinessInSupportedCountry
+
+# --- Crypto Hub Identification Requirements ---
+
+scope CryptoHubIdentification =
+  input hubType : CryptoHubType
+  input providedName : Boolean
+  input providedPhysicalAddress : Boolean
+  input providedDateOfBirth : Boolean
+  input providedPersonalIdNumber : Boolean
+  input providedBusinessName : Boolean
+  input providedBusinessAddress : Boolean
+  input providedBusinessRegistrationNumber : Boolean
+  input providedBeneficialOwnerInfo : Boolean
+  input providedProofOfBusinessExistence : Boolean
+  output identificationComplete : Boolean
+
+  definition identificationComplete equals
+    if hubType equals -- Consumer then
+      providedName and providedPhysicalAddress and
+      providedDateOfBirth and providedPersonalIdNumber
+    else
+      providedBusinessName and providedBusinessAddress and
+      providedBusinessRegistrationNumber and
+      providedBeneficialOwnerInfo and providedProofOfBusinessExistence
+
+# --- Crypto Hub Closure ---
+
+scope CryptoHubClosure =
+  input closingPersonalPayPalAccount : Boolean
+  input closingBusinessAccount : Boolean
+  input hasCryptoAssets : Boolean
+  input soldOrTransferredAllAssets : Boolean
+  output canCloseHub : Boolean
+  output mustSellOrTransferFirst : Boolean
+
+  definition mustSellOrTransferFirst equals
+    hasCryptoAssets and not soldOrTransferredAllAssets
+
+  definition canCloseHub equals
+    not hasCryptoAssets or soldOrTransferredAllAssets
+
+# --- PYUSD Stablecoin Mechanics ---
+
+scope PYUSDStablecoin =
+  output fixedPricePerToken : Money
+  output issuedByPaxos : Boolean
+  output supportedOnEthereum : Boolean
+  output supportedOnSolana : Boolean
+  output supportedOnArbitrum : Boolean
+
+  definition fixedPricePerToken equals `1.00`
+  definition issuedByPaxos equals true
+  definition supportedOnEthereum equals true
+  definition supportedOnSolana equals true
+  definition supportedOnArbitrum equals true
+
+# --- PYUSD Support Termination ---
+
+scope PYUSDSupportTermination =
+  input payPalStopsSupportingPYUSD : Boolean
+  input daysSinceNotification : Integer
+  output mustSellOrTransferWithin30Days : Boolean
+
+  definition mustSellOrTransferWithin30Days equals
+    payPalStopsSupportingPYUSD and daysSinceNotification <= 30
+
+# --- PYUSD Rewards Eligibility ---
+
+scope PYUSDRewardsEligibility =
+  input accountOpeningLocationIsSingapore : Boolean
+  input hubType : CryptoHubType
+  input hasNegativeBalance : Boolean
+  input hasHolds : Boolean
+  input hasLimitations : Boolean
+  input hasRestrictions : Boolean
+  output eligibleForRewards : Boolean
+
+  definition eligibleForRewards equals
+    not accountOpeningLocationIsSingapore and
+    not hasNegativeBalance and
+    not hasHolds and not hasLimitations and not hasRestrictions
+
+# --- PYUSD Rewards Accrual ---
+
+scope PYUSDRewardsAccrual =
+  input pyusdBalance : Money
+  input annualRewardRate : Rational
+  input averageDailyBalance : Money
+  input daysInMonth : Integer
+  input eligibleForRewards : Boolean
+  output minimumBalanceForAccrual : Money
+  output accruesRewards : Boolean
+  output dailyPeriodicRate : Rational
+  output monthlyReward : Money
+
+  definition minimumBalanceForAccrual equals `1.00`
+
+  definition accruesRewards equals
+    eligibleForRewards and pyusdBalance >= minimumBalanceForAccrual
+
+  definition dailyPeriodicRate equals annualRewardRate / 365
+
+  definition monthlyReward equals
+    if accruesRewards then
+      averageDailyBalance * dailyPeriodicRate * daysInMonth
+    else
+      `0.00`
+
+# --- PYUSD Rewards Crediting ---
+
+scope PYUSDRewardsCrediting =
+  input eligibleAtTimeOfCrediting : Boolean
+  input daysSinceMonthStart : Integer
+  output maxCreditingDaysAfterMonthStart : Integer
+  output rewardsCredited : Boolean
+  output forfeitedOnHubClosure : Boolean
+
+  definition maxCreditingDaysAfterMonthStart equals 30
+
+  definition rewardsCredited equals
+    eligibleAtTimeOfCrediting and daysSinceMonthStart <= maxCreditingDaysAfterMonthStart
+
+  definition forfeitedOnHubClosure equals true
+
+# --- Buying Crypto Assets: Funding Sources ---
+
+scope CryptoBuyingFundingSources =
+  input usingBalanceAccount : Boolean
+  input usingBankAccount : Boolean
+  input usingDebitCard : Boolean
+  input usingCreditCard : Boolean
+  input usingPayPalCredit : Boolean
+  output fundingSourceAllowed : Boolean
+
+  definition fundingSourceAllowed equals
+    usingBalanceAccount or usingBankAccount or usingDebitCard
+
+# --- Buying Crypto Assets: Price Quotes ---
+
+scope CryptoPriceQuotes =
+  input isPYUSD : Boolean
+  output priceFixedAtOneDollar : Boolean
+  output priceExpiresAfterLimitedTime : Boolean
+  output transactionNotReversible : Boolean
+
+  definition priceFixedAtOneDollar equals isPYUSD
+  definition priceExpiresAfterLimitedTime equals not isPYUSD
+  definition transactionNotReversible equals true
+
+# --- Recurring Buys: Eligibility ---
+
+scope RecurringBuyEligibility =
+  input hubType : CryptoHubType
+  output canSetupRecurringBuy : Boolean
+
+  definition canSetupRecurringBuy equals
+    hubType equals -- Consumer
+
+# --- Recurring Buys: Scheduling ---
+
+scope RecurringBuyScheduling =
+  input daysAhead : Integer
+  input isMonthlyFrequency : Boolean
+  input startDateDayOfMonth : Integer
+  input isEndOfMonthDate : Boolean
+  output withinSchedulingWindow : Boolean
+  output maxScheduleAheadDays : Integer
+  output adjustedDayOfMonth : Integer
+
+  definition maxScheduleAheadDays equals 30
+
+  definition withinSchedulingWindow equals
+    daysAhead <= maxScheduleAheadDays
+
+  definition adjustedDayOfMonth equals
+    if isMonthlyFrequency and (startDateDayOfMonth equals 29 or
+      startDateDayOfMonth equals 30 or startDateDayOfMonth equals 31) then
+      28 -- last day of shorter months
+    else
+      startDateDayOfMonth
+
+# --- Recurring Buys: Cancellation ---
+
+scope RecurringBuyCancellation =
+  input hoursBeforeExecution : Integer
+  input cancelledBy11_59PM_EST : Boolean
+  output cancellationEffective : Boolean
+
+  definition cancellationEffective equals
+    cancelledBy11_59PM_EST
+
+# --- Recurring Buys: Funding ---
+
+scope RecurringBuyFunding =
+  input balanceAccountFunds : Money
+  input purchaseAmount : Money
+  input hasDesignatedBankOrDebit : Boolean
+  input balanceAccountIsPrimary : Boolean
+  output useBalanceAccount : Boolean
+  output useDesignatedBackup : Boolean
+
+  definition useBalanceAccount equals
+    balanceAccountFunds >= purchaseAmount
+
+  definition useDesignatedBackup equals
+    balanceAccountFunds < purchaseAmount and hasDesignatedBankOrDebit
+
+# --- Insufficient Payment Actions ---
+
+scope InsufficientPaymentActions =
+  input purchaseFundsCollected : Boolean
+  output mayStopPurchase : Boolean
+  output mayChargeBackupMethod : Boolean
+  output mayDebitOtherBalances : Boolean
+  output mayLiquidateCryptoAssets : Boolean
+  output mayCancelFutureRecurringBuys : Boolean
+
+  definition mayStopPurchase equals not purchaseFundsCollected
+  definition mayChargeBackupMethod equals not purchaseFundsCollected
+  definition mayDebitOtherBalances equals not purchaseFundsCollected
+  definition mayLiquidateCryptoAssets equals not purchaseFundsCollected
+  definition mayCancelFutureRecurringBuys equals not purchaseFundsCollected
+
+# --- Selling Crypto Assets ---
+
+scope CryptoSelling =
+  input hubType : CryptoHubType
+  input isPYUSD : Boolean
+  output proceedsToPersonalAccount : Boolean
+  output proceedsToBusinessAccount : Boolean
+  output fixedPricePYUSD : Boolean
+  output saleNotReversible : Boolean
+
+  definition proceedsToPersonalAccount equals
+    hubType equals -- Consumer
+  definition proceedsToBusinessAccount equals
+    hubType equals -- Business
+  definition fixedPricePYUSD equals isPYUSD
+  definition saleNotReversible equals true
+
+# --- Sending: Internal Transfers ---
+
+scope CryptoInternalTransfer =
+  input senderHubType : CryptoHubType
+  input recipientHubType : CryptoHubType
+  input daysSinceSend : Integer
+  input recipientClaimedAssets : Boolean
+  output internalTransferAllowed : Boolean
+  output assetsReturnToSenderAfter30Days : Boolean
+
+  definition internalTransferAllowed equals
+    senderHubType equals -- Consumer and recipientHubType equals -- Consumer
+
+  definition assetsReturnToSenderAfter30Days equals
+    not recipientClaimedAssets and daysSinceSend >= 30
+
+# --- Sending: External Transfers ---
+
+scope CryptoExternalTransfer =
+  input correctWalletAddressType : Boolean
+  input cryptoBalanceSufficientForNetworkFee : Boolean
+  input selectedBlockchain : PYUSDBlockchain
+  input walletMatchesBlockchain : Boolean
+  output transferWillSucceed : Boolean
+  output requiresNetworkFee : Boolean
+  output irreversiblyLostIfWrongAddress : Boolean
+
+  definition requiresNetworkFee equals true
+  definition irreversiblyLostIfWrongAddress equals true
+
+  definition transferWillSucceed equals
+    correctWalletAddressType and cryptoBalanceSufficientForNetworkFee
+
+# --- Receiving Crypto Assets ---
+
+scope CryptoReceiving =
+  input isSupportedCryptoAsset : Boolean
+  input correctWalletAddressType : Boolean
+  output assetsCredited : Boolean
+  output unsupportedAssetsLost : Boolean
+
+  definition assetsCredited equals
+    isSupportedCryptoAsset and correctWalletAddressType
+
+  definition unsupportedAssetsLost equals
+    not isSupportedCryptoAsset
+
+# --- Network Fees ---
+
+scope CryptoNetworkFees =
+  input isExternalTransfer : Boolean
+  input isInternalTransfer : Boolean
+  input isPayPalToVenmoTransfer : Boolean
+  output chargedNetworkFee : Boolean
+
+  definition chargedNetworkFee equals
+    isExternalTransfer and not isInternalTransfer and not isPayPalToVenmoTransfer
+
+# --- Transaction Limits ---
+
+scope CryptoTransactionLimitsScope =
+  output weeklyPurchaseLimit : Money
+  output weeklySendLimit : Money
+  output minimumPurchaseAmount : Money
+  output minimumSaleAmount : Money
+  output minimumInternalSendAmount : Money
+  output minimumExternalSendPYUSDEthereum : Money
+  output minimumExternalSendPYUSDSolana : Money
+  output minimumExternalSendPYUSDArbitrum : Money
+
+  definition weeklyPurchaseLimit equals `25000.00`
+  definition weeklySendLimit equals `25000.00`
+  definition minimumPurchaseAmount equals `1.00`
+  definition minimumSaleAmount equals `1.00`
+  definition minimumInternalSendAmount equals `0.01`
+  definition minimumExternalSendPYUSDEthereum equals `10.00`
+  definition minimumExternalSendPYUSDSolana equals `1.00`
+  definition minimumExternalSendPYUSDArbitrum equals `1.00`
+
+# --- Unauthorized Transaction Definition ---
+
+scope CryptoUnauthorizedTransactionDefinition =
+  input purchaseNotAuthorized : Boolean
+  input purchaseDoesNotBenefitUser : Boolean
+  input saleNotAuthorized : Boolean
+  input saleDoesNotBenefitUser : Boolean
+  input transferNotAuthorized : Boolean
+  input transferDoesNotBenefitUser : Boolean
+  output isUnauthorizedPurchase : Boolean
+  output isUnauthorizedSaleOrTransfer : Boolean
+
+  definition isUnauthorizedPurchase equals
+    purchaseNotAuthorized and purchaseDoesNotBenefitUser
+
+  definition isUnauthorizedSaleOrTransfer equals
+    (saleNotAuthorized or transferNotAuthorized) and
+    (saleDoesNotBenefitUser or transferDoesNotBenefitUser)
+
+# --- Unauthorized Transaction: Not Unauthorized ---
+
+scope CryptoNotUnauthorizedTransaction =
+  input grantedAuthorityToThirdParty : Boolean
+  input thirdPartyExceededAuthority : Boolean
+  input previouslyNotifiedPayPal : Boolean
+  output userResponsible : Boolean
+
+  definition userResponsible equals
+    grantedAuthorityToThirdParty and thirdPartyExceededAuthority and
+    not previouslyNotifiedPayPal
+
+# --- Unauthorized Transaction Protection ---
+
+scope CryptoUnauthorizedTransactionProtection =
+  input isPurchaseOrSale : Boolean
+  input isTransfer : Boolean
+  input reportedWithin60Days : Boolean
+  input transactionValueUSD : Money
+  input lifetimeUnauthorizedTotal : Money
+  output purchaseOrSaleCovered : Boolean
+  output transferReimbursed : Boolean
+  output lifetimeCap : Money
+
+  definition lifetimeCap equals `50000.00`
+
+  definition purchaseOrSaleCovered equals
+    isPurchaseOrSale and reportedWithin60Days
+
+  definition transferReimbursed equals
+    isTransfer and reportedWithin60Days and
+    lifetimeUnauthorizedTotal <= lifetimeCap
+
+# --- Unauthorized Transaction: Reporting Deadline ---
+
+scope CryptoUnauthorizedReportingDeadline =
+  input daysSinceStatementProvided : Integer
+  output withinReportingDeadline : Boolean
+  output maxReportingDays : Integer
+
+  definition maxReportingDays equals 60
+
+  definition withinReportingDeadline equals
+    daysSinceStatementProvided <= maxReportingDays
+
+# --- Error Definition ---
+
+scope CryptoErrorDefinition =
+  input incorrectCryptoAmount : Boolean
+  input incorrectFiatAmount : Boolean
+  input missingTransaction : Boolean
+  input computationalError : Boolean
+  input requestingAdditionalInfo : Boolean
+  output isError : Boolean
+
+  definition isError equals
+    incorrectCryptoAmount or incorrectFiatAmount or
+    missingTransaction or computationalError or
+    requestingAdditionalInfo
+
+# --- Error: Not an Error ---
+
+scope CryptoNotAnError =
+  input grantedAuthorityToThirdParty : Boolean
+  input thirdPartyExceededAuthority : Boolean
+  input previouslyNotifiedPayPal : Boolean
+  input enteredIncorrectRecipientInfo : Boolean
+  input networkFailureOrDelay : Boolean
+  input disputePYUSDRewardsCalculation : Boolean
+  output notConsideredError : Boolean
+
+  definition notConsideredError equals
+    (grantedAuthorityToThirdParty and thirdPartyExceededAuthority and
+     not previouslyNotifiedPayPal) or
+    enteredIncorrectRecipientInfo or
+    networkFailureOrDelay or
+    disputePYUSDRewardsCalculation
+
+# --- Error Resolution Timeline ---
+
+scope CryptoErrorResolutionTimeline =
+  input isNewPersonalAccount : Boolean
+  output maxInvestigationDays : Integer
+  output oralComplaintWrittenFollowUpDays : Integer
+  output notificationAfterInvestigationDays : Integer
+  output maxReportingDaysAfterStatement : Integer
+
+  definition maxInvestigationDays equals
+    if isNewPersonalAccount then 90 else 45
+
+  definition oralComplaintWrittenFollowUpDays equals 10
+  definition notificationAfterInvestigationDays equals 3
+  definition maxReportingDaysAfterStatement equals 60
+
+# --- Processing Error Rectification ---
+
+scope CryptoProcessingErrorRectification =
+  input receivedLessThanEntitled : Boolean
+  input receivedMoreThanEntitled : Boolean
+  input transactionNotCompletedOnTime : Boolean
+  input shortfallAmount : Money
+  input overageAmount : Money
+  output creditDifference : Boolean
+  output debitDifference : Boolean
+
+  definition creditDifference equals receivedLessThanEntitled
+  definition debitDifference equals receivedMoreThanEntitled
+
+# --- Processing Error Exemptions ---
+
+scope CryptoProcessingErrorExemptions =
+  input insufficientFundsUserFault : Boolean
+  input systemBreakdownKnownToUser : Boolean
+  input cryptoNetworkFailure : Boolean
+  input extraordinaryCircumstances : Boolean
+  output payPalNotResponsible : Boolean
+
+  definition payPalNotResponsible equals
+    insufficientFundsUserFault or systemBreakdownKnownToUser or
+    cryptoNetworkFailure or extraordinaryCircumstances
+
+# --- Restricted Activities: Crypto-Specific ---
+
+scope CryptoRestrictedActivities =
+  input breachesCryptoTerms : Boolean
+  input usesFraudulentFunds : Boolean
+  input initiatesNonBonaFideTransaction : Boolean
+  input sendsReceivesForUnlawfulPurpose : Boolean
+  input engagesInFraud : Boolean
+  input controlsLinkedRestrictedAccount : Boolean
+  output engagedInRestrictedActivity : Boolean
+
+  definition engagedInRestrictedActivity equals
+    breachesCryptoTerms or usesFraudulentFunds or
+    initiatesNonBonaFideTransaction or sendsReceivesForUnlawfulPurpose or
+    engagesInFraud or controlsLinkedRestrictedAccount
+
+# --- Suspension and Closure ---
+
+scope CryptoHubSuspensionClosure =
+  input unableToVerifyIdentity : Boolean
+  input engagedInRestrictedActivities : Boolean
+  input courtOrderReceived : Boolean
+  input violatedCryptoTerms : Boolean
+  input noLongerOfferedInTerritory : Boolean
+  input serviceProviderNoLongerSupporting : Boolean
+  output maySuspendOrClose : Boolean
+
+  definition maySuspendOrClose equals
+    unableToVerifyIdentity or engagedInRestrictedActivities or
+    courtOrderReceived or violatedCryptoTerms or
+    noLongerOfferedInTerritory or serviceProviderNoLongerSupporting
+
+# --- Forced Liquidation on Closure ---
+
+scope CryptoForcedLiquidation =
+  input hubClosed : Boolean
+  input holdsCryptoAssets : Boolean
+  input payPalAccountInGoodStanding : Boolean
+  output authorizedToLiquidate : Boolean
+  output proceedsCreditedToPayPalAccount : Boolean
+
+  definition authorizedToLiquidate equals
+    hubClosed and holdsCryptoAssets
+
+  definition proceedsCreditedToPayPalAccount equals
+    authorizedToLiquidate and payPalAccountInGoodStanding
+
+# --- Security Interest ---
+
+scope CryptoSecurityInterest =
+  output payPalHasLienOnCryptoAssets : Boolean
+  output willNotPledgeOrHypothecateOther : Boolean
+
+  definition payPalHasLienOnCryptoAssets equals true
+  definition willNotPledgeOrHypothecateOther equals true
+
+# --- Negative Balance Recovery ---
+
+scope CryptoNegativeBalanceRecovery =
+  input hasNegativePayPalBalance : Boolean
+  input hasCryptoAssets : Boolean
+  output authorizedToSellCrypto : Boolean
+
+  definition authorizedToSellCrypto equals
+    hasNegativePayPalBalance and hasCryptoAssets
+
+# --- Fork Policy ---
+
+scope CryptoForkPolicy =
+  input forkOccurred : Boolean
+  output maySuspendTrading : Boolean
+  output mayOrMayNotSupportFork : Boolean
+  output notLiableForForkLosses : Boolean
+
+  definition maySuspendTrading equals forkOccurred
+  definition mayOrMayNotSupportFork equals forkOccurred
+  definition notLiableForForkLosses equals true
+
+# --- Delisting Framework ---
+
+scope CryptoDelistingFramework =
+  input decisionToDelist : Boolean
+  input daysOfNotice : Integer
+  output minimumNoticeDays : Integer
+  output noticeProvided : Boolean
+
+  definition minimumNoticeDays equals 30
+
+  definition noticeProvided equals
+    decisionToDelist and daysOfNotice >= minimumNoticeDays
+
+# --- Terms Change Notice ---
+
+scope CryptoTermsChangeNotice =
+  input changesReduceUserRights : Boolean
+  input daysOfAdvanceNotice : Integer
+  output minimumAdvanceNoticeDays : Integer
+  output adequateNoticeProvided : Boolean
+
+  definition minimumAdvanceNoticeDays equals 14
+
+  definition adequateNoticeProvided equals
+    changesReduceUserRights implies daysOfAdvanceNotice >= minimumAdvanceNoticeDays
+
+# --- Crypto Received in Error ---
+
+scope CryptoReceivedInError =
+  input receivedInError : Boolean
+  input soldOrTransferredErroredAssets : Boolean
+  output mayRemoveAssets : Boolean
+  output mayRecoverFromUser : Boolean
+
+  definition mayRemoveAssets equals
+    receivedInError and not soldOrTransferredErroredAssets
+
+  definition mayRecoverFromUser equals
+    receivedInError and soldOrTransferredErroredAssets
+
+# --- Custody and Safeguarding ---
+
+scope CryptoCustodySafeguarding =
+  output heldInOmnibusAccounts : Boolean
+  output separateFromCorporateAssets : Boolean
+  output notUsedForOperatingExpenses : Boolean
+  output notVoluntarilyAvailableToCreditors : Boolean
+  output paypalLiableForServiceProvideFraud : Boolean
+
+  definition heldInOmnibusAccounts equals true
+  definition separateFromCorporateAssets equals true
+  definition notUsedForOperatingExpenses equals true
+  definition notVoluntarilyAvailableToCreditors equals true
+  definition paypalLiableForServiceProvideFraud equals true
+
+# --- Dormant Account Crypto ---
+
+scope CryptoDormantAccount =
+  input yearsOfInactivity : Integer
+  input hubClosed : Boolean
+  output mayLiquidateUnclaimedAssets : Boolean
+
+  definition mayLiquidateUnclaimedAssets equals
+    yearsOfInactivity >= 2 or hubClosed
+
+# --- Conflict of Interest Disclosure ---
+
+scope CryptoConflictOfInterest =
+  output mustInformOfConflicts : Boolean
+  output mustDescribeMitigationMeasures : Boolean
+  output fourteenDayNoticeForMaterialChanges : Boolean
+
+  definition mustInformOfConflicts equals true
+  definition mustDescribeMitigationMeasures equals true
+  definition fourteenDayNoticeForMaterialChanges equals true
+
+# --- Market Data and Educational Content Disclaimer ---
+
+scope CryptoMarketDataDisclaimer =
+  output providedAsIs : Boolean
+  output noRepresentationOrWarranty : Boolean
+  output notInvestmentOrTaxAdvice : Boolean
+  output notTailoredToIndividual : Boolean
+
+  definition providedAsIs equals true
+  definition noRepresentationOrWarranty equals true
+  definition notInvestmentOrTaxAdvice equals true
+  definition notTailoredToIndividual equals true
+
+# --- Force Majeure ---
+
+scope CryptoForceMajeure =
+  input isForceMajeureEvent : Boolean
+  output payPalNotLiable : Boolean
+
+  definition payPalNotLiable equals isForceMajeureEvent

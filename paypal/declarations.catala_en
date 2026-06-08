@@ -271,3 +271,53 @@ declaration enumeration AUPViolationAction =
   -- AccountClosure
   -- FundsHold
   -- Fine
+
+# --- Cryptocurrency Terms ---
+
+declaration enumeration CryptoHubType =
+  -- Consumer
+  -- Business
+
+declaration enumeration PYUSDBlockchain =
+  -- Ethereum
+  -- Solana
+  -- Arbitrum
+
+declaration enumeration CryptoFundingSource =
+  -- BalanceAccount
+  -- BankAccount
+  -- DebitCard
+
+declaration enumeration CryptoTransferType =
+  -- InternalTransfer
+  -- ExternalTransfer
+
+declaration enumeration CryptoErrorCategory =
+  -- IncorrectCryptoAmount
+  -- IncorrectFiatAmount
+  -- MissingTransaction
+  -- ComputationalError
+  -- AdditionalInfoRequest
+
+declaration enumeration ProcessingErrorExemption =
+  -- InsufficientFunds
+  -- SystemBreakdownKnown
+  -- NetworkFailure
+  -- ExtraordinaryCircumstances
+
+declaration structure PYUSDRewardsTerms =
+  data minimumBalance : Money
+  data creditingWindowDays : Integer
+  data roundingDecimalPlaces : Integer
+
+declaration structure CryptoTransactionLimits =
+  data weeklyPurchaseLimit : Money
+  data weeklySendLimit : Money
+  data minimumPurchaseAmount : Money
+  data minimumSaleAmount : Money
+  data minimumInternalSendAmount : Money
+
+declaration structure RecurringBuyTerms =
+  data maxScheduleAheadDays : Integer
+  data cancellationDeadlineHour : Integer
+  data cancellationDeadlineMinute : Integer
