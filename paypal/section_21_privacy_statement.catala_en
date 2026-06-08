@@ -1,0 +1,1355 @@
+# PayPal Privacy Statement
+# Last updated: May 6, 2026
+# Source: https://www.paypal.com/us/webapps/mpp/ua/privacy-full
+# Forms part of the PayPal User Agreement
+
+# --- Overview ---
+
+scope PrivacyOverview =
+  output appliesToAccountHolders : Boolean
+  output appliesToSites : Boolean
+  output appliesToServices : Boolean
+  output doesNotApplyToExcludedServices : Boolean
+  output doesNotApplyToThirdPartyProcessing : Boolean
+  output jurisdictionSpecificInformationProvided : Boolean
+  output changeNoticePeriodDays : Integer
+  output changePostedOnPolicyUpdatesPage : Boolean
+
+  definition appliesToAccountHolders equals true
+  definition appliesToSites equals true
+  definition appliesToServices equals true
+  definition doesNotApplyToExcludedServices equals true
+  definition doesNotApplyToThirdPartyProcessing equals true
+  definition jurisdictionSpecificInformationProvided equals true
+  definition changeNoticePeriodDays equals 30
+  definition changePostedOnPolicyUpdatesPage equals true
+
+# --- Non-Account Holders ---
+
+scope PrivacyNonAccountHolders =
+  output collectsPIFromNonAccountHolders : Boolean
+  output includesPayWithoutAccount : Boolean
+  output includesUnbrandedPaymentServices : Boolean
+  output includesFastlaneProfile : Boolean
+  output includesVisaPlus : Boolean
+  output includesHyperwallet : Boolean
+  output mayLinkTransactionToFutureAccount : Boolean
+
+  definition collectsPIFromNonAccountHolders equals true
+  definition includesPayWithoutAccount equals true
+  definition includesUnbrandedPaymentServices equals true
+  definition includesFastlaneProfile equals true
+  definition includesVisaPlus equals true
+  definition includesHyperwallet equals true
+  definition mayLinkTransactionToFutureAccount equals true
+
+# --- Personal Information Categories ---
+
+scope PrivacyPICategoryPersonalIdentifiers =
+  output collected : Boolean
+
+  definition collected equals true
+
+scope PrivacyPICategoryRecordsAndFinancial =
+  output collected : Boolean
+
+  definition collected equals true
+
+scope PrivacyPICategoryTransactionAndExperience =
+  output collected : Boolean
+
+  definition collected equals true
+
+scope PrivacyPICategoryCommercialInfo =
+  output collected : Boolean
+
+  definition collected equals true
+
+scope PrivacyPICategoryGeolocation =
+  output gpsCollectedWithConsent : Boolean
+  output ipBasedGeolocationCollected : Boolean
+
+  definition gpsCollectedWithConsent equals true
+  definition ipBasedGeolocationCollected equals true
+
+scope PrivacyPICategoryInternetActivity =
+  output collected : Boolean
+
+  definition collected equals true
+
+scope PrivacyPICategoryBiometric =
+  output collected : Boolean
+  output requiresConsent : Boolean
+  output usedForAuthentication : Boolean
+  output usedForPasswordRecovery : Boolean
+  output usedForProfileUpdate : Boolean
+  output usedForPaymentManagement : Boolean
+  output usedForLimitationLift : Boolean
+  output usedForCryptoTransfers : Boolean
+
+  definition collected equals true
+  definition requiresConsent equals true
+  definition usedForAuthentication equals true
+  definition usedForPasswordRecovery equals true
+  definition usedForProfileUpdate equals true
+  definition usedForPaymentManagement equals true
+  definition usedForLimitationLift equals true
+  definition usedForCryptoTransfers equals true
+
+scope PrivacyPICategoryAudioVisual =
+  output collected : Boolean
+
+  definition collected equals true
+
+scope PrivacyPICategoryProfessionalEmployment =
+  output collected : Boolean
+
+  definition collected equals true
+
+scope PrivacyPICategoryImportedContacts =
+  output collected : Boolean
+
+  definition collected equals true
+
+scope PrivacyPICategoryAccountProfile =
+  output collected : Boolean
+  output mayIncludeSensitivePI : Boolean
+  output canSetProfileToPrivate : Boolean
+
+  definition collected equals true
+  definition mayIncludeSensitivePI equals true
+  definition canSetProfileToPrivate equals true
+
+scope PrivacyPICategoryContactUsInfo =
+  output collected : Boolean
+
+  definition collected equals true
+
+scope PrivacyPICategoryInferredData =
+  output collected : Boolean
+  output includesGenderInference : Boolean
+  output includesIncomeInference : Boolean
+  output includesCreditworthiness : Boolean
+  output includesFraudRiskAssessment : Boolean
+
+  definition collected equals true
+  definition includesGenderInference equals true
+  definition includesIncomeInference equals true
+  definition includesCreditworthiness equals true
+  definition includesFraudRiskAssessment equals true
+
+scope PrivacyPICategoryLegalRequirements =
+  output collected : Boolean
+  output includesExternalSanctionLists : Boolean
+
+  definition collected equals true
+  definition includesExternalSanctionLists equals true
+
+scope PrivacyPICategoryProtectedClassifications =
+  output collected : Boolean
+
+  definition collected equals true
+
+scope PrivacyPICategorySensitivePI =
+  output collected : Boolean
+  output includesSSNAndTaxID : Boolean
+  output includesGovernmentID : Boolean
+  output includesBankAccountInfo : Boolean
+  output includesCardInfo : Boolean
+  output includesFinancialInfo : Boolean
+  output includesBiometricData : Boolean
+  output includesPreciseGeolocation : Boolean
+  output mayBeCalledSpecialCategoryUnderGDPR : Boolean
+
+  definition collected equals true
+  definition includesSSNAndTaxID equals true
+  definition includesGovernmentID equals true
+  definition includesBankAccountInfo equals true
+  definition includesCardInfo equals true
+  definition includesFinancialInfo equals true
+  definition includesBiometricData equals true
+  definition includesPreciseGeolocation equals true
+  definition mayBeCalledSpecialCategoryUnderGDPR equals true
+
+scope PrivacyPICategoryDeviceInfo =
+  output collected : Boolean
+
+  definition collected equals true
+
+# --- PI Sources ---
+
+scope PrivacyPISources =
+  output fromExcludedServices : Boolean
+  output fromThirdParties : Boolean
+  output fromLinkedAccounts : Boolean
+  output fromThirdPartyApplications : Boolean
+  output fromPayPalCorporateGroup : Boolean
+  output fromPartnersAndMerchants : Boolean
+
+  definition fromExcludedServices equals true
+  definition fromThirdParties equals true
+  definition fromLinkedAccounts equals true
+  definition fromThirdPartyApplications equals true
+  definition fromPayPalCorporateGroup equals true
+  definition fromPartnersAndMerchants equals true
+
+scope PrivacyLinkedAccountsCollection =
+  output collectedPeriodicallyUntilUnlinked : Boolean
+  output mayUnlinkAtAnyTime : Boolean
+
+  definition collectedPeriodicallyUntilUnlinked equals true
+  definition mayUnlinkAtAnyTime equals true
+
+# --- How We Use Personal Information ---
+
+scope PrivacyUseProvideServices =
+  output used : Boolean
+
+  definition used equals true
+
+scope PrivacyUseVisaPlus =
+  output receivesRecipientNameAndPaymentInfo : Boolean
+  output purposeIsProcessingAndMatching : Boolean
+
+  definition receivesRecipientNameAndPaymentInfo equals true
+  definition purposeIsProcessingAndMatching equals true
+
+scope PrivacyUseFastlane =
+  output mayRecognizeFastlaneUser : Boolean
+  output usedForAuthorizationCheck : Boolean
+
+  definition mayRecognizeFastlaneUser equals true
+  definition usedForAuthorizationCheck equals true
+
+scope PrivacyUsePointOfSaleReceipts =
+  output maySendDigitalReceipts : Boolean
+  output mayRememberDetailsForNextPurchase : Boolean
+
+  definition maySendDigitalReceipts equals true
+  definition mayRememberDetailsForNextPurchase equals true
+
+scope PrivacyUseManageImprove =
+  output used : Boolean
+  output includesNewProductDevelopment : Boolean
+  output includesDataAnalysis : Boolean
+  output sharesAggregatedInsightsWithThirdParties : Boolean
+
+  definition used equals true
+  definition includesNewProductDevelopment equals true
+  definition includesDataAnalysis equals true
+  definition sharesAggregatedInsightsWithThirdParties equals true
+
+scope PrivacyUseAIAndAutomatedDecisions =
+  output usedForAITraining : Boolean
+  output usedForRiskAnalysis : Boolean
+  output usedForFraudPrevention : Boolean
+
+  definition usedForAITraining equals true
+  definition usedForRiskAnalysis equals true
+  definition usedForFraudPrevention equals true
+
+scope PrivacyUseCreditworthiness =
+  output used : Boolean
+  output exchangesWithCRAs : Boolean
+
+  definition used equals true
+  definition exchangesWithCRAs equals true
+
+scope PrivacyUseAssociateInfo =
+  output associatesTransactionsWithFutureAccount : Boolean
+  output associatesFastlaneVenmoHoneyInfo : Boolean
+
+  definition associatesTransactionsWithFutureAccount equals true
+  definition associatesFastlaneVenmoHoneyInfo equals true
+
+scope PrivacyUseMarketing =
+  output used : Boolean
+  output includesPartnerMarketing : Boolean
+
+  definition used equals true
+  definition includesPartnerMarketing equals true
+
+scope PrivacyUseCompetitionsOfferings =
+  output used : Boolean
+
+  definition used equals true
+
+scope PrivacyUseCommunication =
+  output used : Boolean
+
+  definition used equals true
+
+scope PrivacyUseComplyWithLaws =
+  output used : Boolean
+  output includesAML : Boolean
+  output includesKYC : Boolean
+  output includesSanctionScreening : Boolean
+  output includesTaxReporting : Boolean
+  output includesFraudPrevention : Boolean
+
+  definition used equals true
+  definition includesAML equals true
+  definition includesKYC equals true
+  definition includesSanctionScreening equals true
+  definition includesTaxReporting equals true
+  definition includesFraudPrevention equals true
+
+scope PrivacyUseProcessContacts =
+  output used : Boolean
+  output userMustHavePermissionToProvide : Boolean
+
+  definition used equals true
+  definition userMustHavePermissionToProvide equals true
+
+scope PrivacyUseAccountConnection =
+  output used : Boolean
+  output includesSocialNetworkConnection : Boolean
+  output includesFinancialInstitutionConnection : Boolean
+
+  definition used equals true
+  definition includesSocialNetworkConnection equals true
+  definition includesFinancialInstitutionConnection equals true
+
+scope PrivacyUseLocationServices =
+  output preciseGeolocationRequiresConsent : Boolean
+  output usedForPersonalization : Boolean
+  output usedForSecurity : Boolean
+  output addressUsedIfNoPreciseLocation : Boolean
+
+  definition preciseGeolocationRequiresConsent equals true
+  definition usedForPersonalization equals true
+  definition usedForSecurity equals true
+  definition addressUsedIfNoPreciseLocation equals true
+
+scope PrivacyUsePersonalization =
+  output used : Boolean
+  output includesProductRecommendations : Boolean
+
+  definition used equals true
+  definition includesProductRecommendations equals true
+
+scope PrivacyUseRememberPreferences =
+  output used : Boolean
+
+  definition used equals true
+
+scope PrivacyUseCookies =
+  output used : Boolean
+
+  definition used equals true
+
+# --- When We Share Personal Information ---
+
+scope PrivacyShareServiceProviders =
+  output shared : Boolean
+  output includesAIProviders : Boolean
+  output includesFraudPrevention : Boolean
+  output includesPaymentProcessing : Boolean
+  output includesMarketing : Boolean
+  output includesCompliance : Boolean
+  output includesCustomerService : Boolean
+  output contractLimitsUseToPayPalPurpose : Boolean
+
+  definition shared equals true
+  definition includesAIProviders equals true
+  definition includesFraudPrevention equals true
+  definition includesPaymentProcessing equals true
+  definition includesMarketing equals true
+  definition includesCompliance equals true
+  definition includesCustomerService equals true
+  definition contractLimitsUseToPayPalPurpose equals true
+
+scope PrivacySharePayPalCorporateGroup =
+  output shared : Boolean
+  output purposeProvidingServices : Boolean
+  output purposeRiskManagement : Boolean
+  output purposeFraudPrevention : Boolean
+  output purposeProductConnectivity : Boolean
+
+  definition shared equals true
+  definition purposeProvidingServices equals true
+  definition purposeRiskManagement equals true
+  definition purposeFraudPrevention equals true
+  definition purposeProductConnectivity equals true
+
+scope PrivacyShareExcludedServices =
+  output shared : Boolean
+  output includesVenmo : Boolean
+  output includesPayPalHoney : Boolean
+
+  definition shared equals true
+  definition includesVenmo equals true
+  definition includesPayPalHoney equals true
+
+scope PrivacyShareAuthorities =
+  output shared : Boolean
+  output requiresSubpoenaOrCourtOrder : Boolean
+  output sharedToPreventHarmOrFraud : Boolean
+  output includesCourts : Boolean
+  output includesLawEnforcement : Boolean
+  output includesRegulators : Boolean
+
+  definition shared equals true
+  definition requiresSubpoenaOrCourtOrder equals true
+  definition sharedToPreventHarmOrFraud equals true
+  definition includesCourts equals true
+  definition includesLawEnforcement equals true
+  definition includesRegulators equals true
+
+scope PrivacyShareOtherFinancialInstitutions =
+  output shared : Boolean
+  output forJointProductOffering : Boolean
+
+  definition shared equals true
+  definition forJointProductOffering equals true
+
+scope PrivacySharePaymentNetworks =
+  output shared : Boolean
+  output forPaymentProcessing : Boolean
+
+  definition shared equals true
+  definition forPaymentProcessing equals true
+
+scope PrivacyShareFraudPreventionAgencies =
+  output shared : Boolean
+
+  definition shared equals true
+
+scope PrivacyShareCreditReportingDebtCollection =
+  output shared : Boolean
+  output mayAffectCreditworthiness : Boolean
+
+  definition shared equals true
+  definition mayAffectCreditworthiness equals true
+
+scope PrivacyShareOtherAccountHolders =
+  output shared : Boolean
+  output includesUsername : Boolean
+  output includesProfilePhoto : Boolean
+  output includesName : Boolean
+  output includesEmail : Boolean
+  output includesCity : Boolean
+  output includesPhone : Boolean
+  output inAccordanceWithAccountSettings : Boolean
+
+  definition shared equals true
+  definition includesUsername equals true
+  definition includesProfilePhoto equals true
+  definition includesName equals true
+  definition includesEmail equals true
+  definition includesCity equals true
+  definition includesPhone equals true
+  definition inAccordanceWithAccountSettings equals true
+
+scope PrivacyShareOtherUsersAccountSettings =
+  output shared : Boolean
+  output includesAccountCreationDate : Boolean
+  output governedByAccountSettings : Boolean
+
+  definition shared equals true
+  definition includesAccountCreationDate equals true
+  definition governedByAccountSettings equals true
+
+scope PrivacyShareBusinessProfile =
+  output shared : Boolean
+  output includesBusinessName : Boolean
+  output includesLogo : Boolean
+  output includesCity : Boolean
+  output includesSellingStats : Boolean
+  output mayIncludeAdditionalInfo : Boolean
+
+  definition shared equals true
+  definition includesBusinessName equals true
+  definition includesLogo equals true
+  definition includesCity equals true
+  definition includesSellingStats equals true
+  definition mayIncludeAdditionalInfo equals true
+
+scope PrivacyShareAgentOrRepresentative =
+  output shared : Boolean
+
+  definition shared equals true
+
+scope PrivacyShareLinkedAccounts =
+  output shared : Boolean
+
+  definition shared equals true
+
+scope PrivacySharePartnersAndMerchants =
+  output shared : Boolean
+  output forTransactionProcessing : Boolean
+  output forPersonalizedShopping : Boolean
+  output governedByPartnerMerchantPrivacyPolicy : Boolean
+
+  definition shared equals true
+  definition forTransactionProcessing equals true
+  definition forPersonalizedShopping equals true
+  definition governedByPartnerMerchantPrivacyPolicy equals true
+
+scope PrivacySharePersonalizedShoppingOptOut =
+  input hasOptedOut : Boolean
+  output sharesForTransactionCompletionOnly : Boolean
+  output doesNotShareForPersonalizedShopping : Boolean
+
+  definition sharesForTransactionCompletionOnly equals hasOptedOut
+  definition doesNotShareForPersonalizedShopping equals hasOptedOut
+
+scope PrivacyShareOtherThirdParties =
+  output shared : Boolean
+  output includesAdvertisingPlatforms : Boolean
+  output includesSecurityServiceProviders : Boolean
+  output includesMarketingPartners : Boolean
+
+  definition shared equals true
+  definition includesAdvertisingPlatforms equals true
+  definition includesSecurityServiceProviders equals true
+  definition includesMarketingPartners equals true
+
+scope PrivacyShareBusinessTransfer =
+  output shared : Boolean
+  output includesMergersAndAcquisitions : Boolean
+  output underAppropriateDataProtectionTerms : Boolean
+
+  definition shared equals true
+  definition includesMergersAndAcquisitions equals true
+  definition underAppropriateDataProtectionTerms equals true
+
+scope PrivacyShareSensitivePI =
+  output sharedAsAppropriateForLegitimateBusiness : Boolean
+  output sharedWithConsent : Boolean
+  output sharedAsAllowedByLaw : Boolean
+
+  definition sharedAsAppropriateForLegitimateBusiness equals true
+  definition sharedWithConsent equals true
+  definition sharedAsAllowedByLaw equals true
+
+# --- Retention ---
+
+scope PrivacyRetention =
+  output relationshipDurationPlusYears : Integer
+  output biometricRetentionPostClosureYears : Integer
+  output retainedForLegalObligations : Boolean
+  output retainedForLitigation : Boolean
+  output retainedMinimumNecessary : Boolean
+
+  definition relationshipDurationPlusYears equals 10
+  definition biometricRetentionPostClosureYears equals 3
+  definition retainedForLegalObligations equals true
+  definition retainedForLitigation equals true
+  definition retainedMinimumNecessary equals true
+
+# --- AI and Automated Decision Making ---
+
+scope PrivacyAutomatedDecisionMaking =
+  output usesAutomatedDecisionMaking : Boolean
+  output includesRiskAssessment : Boolean
+  output includesFraudDetection : Boolean
+  output includesCreditworthinessAssessment : Boolean
+  output usesProfilingTechniques : Boolean
+  output mayRefuseServicesBasedOnRisk : Boolean
+  output mayPlaceLimitsOrRestrictions : Boolean
+
+  definition usesAutomatedDecisionMaking equals true
+  definition includesRiskAssessment equals true
+  definition includesFraudDetection equals true
+  definition includesCreditworthinessAssessment equals true
+  definition usesProfilingTechniques equals true
+  definition mayRefuseServicesBasedOnRisk equals true
+  definition mayPlaceLimitsOrRestrictions equals true
+
+scope PrivacyAgenticAI =
+  output mayOfferAgenticAITools : Boolean
+  output notForLegalOrSignificantDecisions : Boolean
+  output requiresAccessToPersonalInformation : Boolean
+  output userMustNotRelyOnForLegalMedicalFinancial : Boolean
+
+  definition mayOfferAgenticAITools equals true
+  definition notForLegalOrSignificantDecisions equals true
+  definition requiresAccessToPersonalInformation equals true
+  definition userMustNotRelyOnForLegalMedicalFinancial equals true
+
+# --- Cookies and Tracking ---
+
+scope PrivacyCookies =
+  output usesCookies : Boolean
+  output usedForAccess : Boolean
+  output usedForRecognition : Boolean
+  output usedForPersonalization : Boolean
+  output usedForAdvertising : Boolean
+  output usedForAnalytics : Boolean
+  output usedForFraudPrevention : Boolean
+  output securityMeasuresInPlace : Boolean
+  output disablingCookiesMayLimitFunctionality : Boolean
+
+  definition usesCookies equals true
+  definition usedForAccess equals true
+  definition usedForRecognition equals true
+  definition usedForPersonalization equals true
+  definition usedForAdvertising equals true
+  definition usedForAnalytics equals true
+  definition usedForFraudPrevention equals true
+  definition securityMeasuresInPlace equals true
+  definition disablingCookiesMayLimitFunctionality equals true
+
+scope PrivacyDoNotTrack =
+  output doesNotRespondToDNT : Boolean
+  output reasonServicesRequireTracking : Boolean
+
+  definition doesNotRespondToDNT equals true
+  definition reasonServicesRequireTracking equals true
+
+# --- Data Protection Rights ---
+
+scope PrivacyRightToKnowAndCopy =
+  output available : Boolean
+  output viaAccountLogin : Boolean
+  output viaPhoneOrContact : Boolean
+
+  definition available equals true
+  definition viaAccountLogin equals true
+  definition viaPhoneOrContact equals true
+
+scope PrivacyRightToCorrect =
+  output available : Boolean
+  output viaAccountLogin : Boolean
+  output viaPhoneOrContact : Boolean
+
+  definition available equals true
+  definition viaAccountLogin equals true
+  definition viaPhoneOrContact equals true
+
+scope PrivacyRightToDelete =
+  output available : Boolean
+  output viaAccountLogin : Boolean
+  output viaAccountClosure : Boolean
+  output somePIMustBeRetained : Boolean
+
+  definition available equals true
+  definition viaAccountLogin equals true
+  definition viaAccountClosure equals true
+  definition somePIMustBeRetained equals true
+
+scope PrivacyRightToObject =
+  output available : Boolean
+
+  definition available equals true
+
+scope PrivacyRightToWithdrawConsent =
+  output available : Boolean
+  output doesNotAffectPriorLawfulProcessing : Boolean
+
+  definition available equals true
+  definition doesNotAffectPriorLawfulProcessing equals true
+
+scope PrivacyRightToAutomatedDecisionReview =
+  output available : Boolean
+  output unitedStatesExemptOrNoOptOut : Boolean
+  output otherJurisdictionsMayObject : Boolean
+  output safetyMechanismsInPlace : Boolean
+
+  definition available equals true
+  definition unitedStatesExemptOrNoOptOut equals true
+  definition otherJurisdictionsMayObject equals true
+  definition safetyMechanismsInPlace equals true
+
+scope PrivacyRightToSensitivePI =
+  output consentRequiredBeforeCollection : Boolean
+  output canWithdrawConsent : Boolean
+  output usesPermittedPurposesUnderUSLaw : Boolean
+  output includesProvidingGoodsServices : Boolean
+  output includesSecurityIncidents : Boolean
+  output includesFraudPrevention : Boolean
+  output includesProductSafety : Boolean
+  output includesPhysicalSafety : Boolean
+  output preciseGeolocationExemptionGLBA : Boolean
+
+  definition consentRequiredBeforeCollection equals true
+  definition canWithdrawConsent equals true
+  definition usesPermittedPurposesUnderUSLaw equals true
+  definition includesProvidingGoodsServices equals true
+  definition includesSecurityIncidents equals true
+  definition includesFraudPrevention equals true
+  definition includesProductSafety equals true
+  definition includesPhysicalSafety equals true
+  definition preciseGeolocationExemptionGLBA equals true
+
+scope PrivacyRightToDirectMarketingDisclosure =
+  output available : Boolean
+
+  definition available equals true
+
+scope PrivacyIdentityVerification =
+  output mayNeedToVerifyIdentity : Boolean
+  output mayDenyIfCannotVerify : Boolean
+  output denialIncludesAppealInfo : Boolean
+
+  definition mayNeedToVerifyIdentity equals true
+  definition mayDenyIfCannotVerify equals true
+  definition denialIncludesAppealInfo equals true
+
+scope PrivacyAuthorizedAgents =
+  output maySubmitViaAuthorizedAgent : Boolean
+  output mayRequirePowerOfAttorney : Boolean
+
+  definition maySubmitViaAuthorizedAgent equals true
+  definition mayRequirePowerOfAttorney equals true
+
+scope PrivacyNoDiscriminationForExercisingRights =
+  output willNotDiscriminate : Boolean
+  output personalizationLevelMayChange : Boolean
+
+  definition willNotDiscriminate equals true
+  definition personalizationLevelMayChange equals true
+
+# --- Protection Measures ---
+
+scope PrivacyProtectionMeasures =
+  output technicalSecurityMeasures : Boolean
+  output physicalSecurityMeasures : Boolean
+  output administrativeSecurityMeasures : Boolean
+  output includesFirewalls : Boolean
+  output includesDataEncryption : Boolean
+  output includesPhysicalAccessControls : Boolean
+  output includesAuthorizationControls : Boolean
+  output userResponsibleForPasswordSecurity : Boolean
+  output notResponsibleForThirdPartyLinkedAccountPI : Boolean
+
+  definition technicalSecurityMeasures equals true
+  definition physicalSecurityMeasures equals true
+  definition administrativeSecurityMeasures equals true
+  definition includesFirewalls equals true
+  definition includesDataEncryption equals true
+  definition includesPhysicalAccessControls equals true
+  definition includesAuthorizationControls equals true
+  definition userResponsibleForPasswordSecurity equals true
+  definition notResponsibleForThirdPartyLinkedAccountPI equals true
+
+# --- Children ---
+
+scope PrivacyChildren =
+  output servicesNotDirectedToChildrenUnder18 : Boolean
+  output doesNotKnowinglyCollectFromChildren : Boolean
+  output deletesUponKnowledgeIfNotLegallyRequired : Boolean
+
+  definition servicesNotDirectedToChildrenUnder18 equals true
+  definition doesNotKnowinglyCollectFromChildren equals true
+  definition deletesUponKnowledgeIfNotLegallyRequired equals true
+
+# --- International Transfers ---
+
+scope PrivacyInternationalTransfers =
+  output mayTransferOutsideCountry : Boolean
+  output includesIntraCompanyAgreements : Boolean
+  output includesModelContractualClauses : Boolean
+  output includesDerogations : Boolean
+  output userAgreesByUsingServices : Boolean
+
+  definition mayTransferOutsideCountry equals true
+  definition includesIntraCompanyAgreements equals true
+  definition includesModelContractualClauses equals true
+  definition includesDerogations equals true
+  definition userAgreesByUsingServices equals true
+
+# --- Definitions ---
+
+scope PrivacyDefinitionAutomatedDecision =
+  output defined : Boolean
+
+  definition defined equals true
+
+scope PrivacyDefinitionCookies =
+  output includesPixelTags : Boolean
+  output includesWebBeacons : Boolean
+  output includesWidgets : Boolean
+
+  definition includesPixelTags equals true
+  definition includesWebBeacons equals true
+  definition includesWidgets equals true
+
+scope PrivacyDefinitionDeviceInformation =
+  output defined : Boolean
+
+  definition defined equals true
+
+scope PrivacyDefinitionExcludedServices =
+  output includesVenmo : Boolean
+  output includesHoneyScience : Boolean
+  output includesChargehound : Boolean
+  output includesPaidy : Boolean
+  output includesSimility : Boolean
+  output includesSwiftFinancial : Boolean
+  output includesBillMeLater : Boolean
+
+  definition includesVenmo equals true
+  definition includesHoneyScience equals true
+  definition includesChargehound equals true
+  definition includesPaidy equals true
+  definition includesSimility equals true
+  definition includesSwiftFinancial equals true
+  definition includesBillMeLater equals true
+
+scope PrivacyDefinitionFastlane =
+  output defined : Boolean
+
+  definition defined equals true
+
+scope PrivacyDefinitionHyperwallet =
+  output defined : Boolean
+
+  definition defined equals true
+
+scope PrivacyDefinitionPartnersAndMerchants =
+  output defined : Boolean
+
+  definition defined equals true
+
+scope PrivacyDefinitionPayWithoutAccount =
+  output defined : Boolean
+  output doesNotIncludeVenmo : Boolean
+
+  definition defined equals true
+  definition doesNotIncludeVenmo equals true
+
+scope PrivacyDefinitionPersonalInformation =
+  output includesIdentityInfo : Boolean
+  output includesFinancialInfo : Boolean
+  output includesOnlineBehavior : Boolean
+
+  definition includesIdentityInfo equals true
+  definition includesFinancialInfo equals true
+  definition includesOnlineBehavior equals true
+
+scope PrivacyDefinitionProfiling =
+  output defined : Boolean
+
+  definition defined equals true
+
+scope PrivacyDefinitionServices =
+  output includesPayPalBrandedProducts : Boolean
+  output includesUnbrandedProducts : Boolean
+  output includesFastlane : Boolean
+  output includesXoom : Boolean
+  output includesHyperwallet : Boolean
+  output includesCreditAndFinancing : Boolean
+  output excludesExcludedServices : Boolean
+
+  definition includesPayPalBrandedProducts equals true
+  definition includesUnbrandedProducts equals true
+  definition includesFastlane equals true
+  definition includesXoom equals true
+  definition includesHyperwallet equals true
+  definition includesCreditAndFinancing equals true
+  definition excludesExcludedServices equals true
+
+scope PrivacyDefinitionSites =
+  output includesWebsites : Boolean
+  output includesMobileApps : Boolean
+  output includesSocialNetworkPlatforms : Boolean
+
+  definition includesWebsites equals true
+  definition includesMobileApps equals true
+  definition includesSocialNetworkPlatforms equals true
+
+scope PrivacyDefinitionUnbrandedPaymentServices =
+  output includesCardProcessing : Boolean
+  output includesACHOrigination : Boolean
+  output includesBraintree : Boolean
+
+  definition includesCardProcessing equals true
+  definition includesACHOrigination equals true
+  definition includesBraintree equals true
+
+scope PrivacyDefinitionUsers =
+  output includesAccountHolders : Boolean
+  output includesNonAccountHolders : Boolean
+
+  definition includesAccountHolders equals true
+  definition includesNonAccountHolders equals true
+
+# --- US Disclosures: CCPA Summary ---
+
+scope PrivacyUSCCPASummary =
+  output coversPrior12Months : Boolean
+  output identifiersCollected : Boolean
+  output recordsAndFinancialCollected : Boolean
+  output commercialInfoCollected : Boolean
+  output geolocationCollected : Boolean
+  output internetActivityCollected : Boolean
+  output biometricCollected : Boolean
+  output audioVisualCollected : Boolean
+  output professionalInfoCollected : Boolean
+  output importedContactsCollected : Boolean
+  output accountProfileCollected : Boolean
+  output contactUsInfoCollected : Boolean
+  output inferredDataCollected : Boolean
+  output sensitivePICollected : Boolean
+  output protectedClassificationsCollected : Boolean
+  output deviceInfoCollected : Boolean
+
+  definition coversPrior12Months equals true
+  definition identifiersCollected equals true
+  definition recordsAndFinancialCollected equals true
+  definition commercialInfoCollected equals true
+  definition geolocationCollected equals true
+  definition internetActivityCollected equals true
+  definition biometricCollected equals true
+  definition audioVisualCollected equals true
+  definition professionalInfoCollected equals true
+  definition importedContactsCollected equals true
+  definition accountProfileCollected equals true
+  definition contactUsInfoCollected equals true
+  definition inferredDataCollected equals true
+  definition sensitivePICollected equals true
+  definition protectedClassificationsCollected equals true
+  definition deviceInfoCollected equals true
+
+# --- US: Sale and Sharing ---
+
+scope PrivacyUSSaleAndSharing =
+  output doesNotSellPI : Boolean
+  output doesNotShareForCrossContextBehavioralAds : Boolean
+  output includesChildrenUnder16Protection : Boolean
+  output prior12MonthsNoSale : Boolean
+  output financialDataSubjectToGLBA : Boolean
+
+  definition doesNotSellPI equals true
+  definition doesNotShareForCrossContextBehavioralAds equals true
+  definition includesChildrenUnder16Protection equals true
+  definition prior12MonthsNoSale equals true
+  definition financialDataSubjectToGLBA equals true
+
+# --- US: CCPA Metrics ---
+
+scope PrivacyUSCCPAMetrics =
+  output providesMetricsRequiredUnderCCPA : Boolean
+
+  definition providesMetricsRequiredUnderCCPA equals true
+
+# --- US: GLBA Financial Products Notice ---
+
+scope PrivacyUSGLBAFactWhat =
+  output collectsSocialSecurityNumber : Boolean
+  output collectsAccountBalances : Boolean
+  output collectsPaymentHistory : Boolean
+  output collectsCreditHistory : Boolean
+  output continuesSharingAfterCustomerLeaves : Boolean
+
+  definition collectsSocialSecurityNumber equals true
+  definition collectsAccountBalances equals true
+  definition collectsPaymentHistory equals true
+  definition collectsCreditHistory equals true
+  definition continuesSharingAfterCustomerLeaves equals true
+
+scope PrivacyUSGLBASharingTable =
+  output sharesForEverydayBusinessPurposes : Boolean
+  output canLimitEverydayBusinessSharing : Boolean
+  output sharesForMarketingPurposes : Boolean
+  output canLimitMarketingSharing : Boolean
+  output sharesForJointMarketingWithFinancialCompanies : Boolean
+  output canLimitJointMarketingSharing : Boolean
+  output sharesAffiliatesTransactionsAndExperiences : Boolean
+  output canLimitAffiliatesTransactionsSharing : Boolean
+  output sharesAffiliatesCreditworthiness : Boolean
+  output canLimitAffiliatesCreditworthinessSharing : Boolean
+  output sharesAffiliatesMarketingToYou : Boolean
+  output canLimitAffiliatesMarketingSharing : Boolean
+  output sharesNonaffiliatesMarketingToYou : Boolean
+  output canLimitNonaffiliatesMarketingSharing : Boolean
+
+  definition sharesForEverydayBusinessPurposes equals true
+  definition canLimitEverydayBusinessSharing equals false
+  definition sharesForMarketingPurposes equals true
+  definition canLimitMarketingSharing equals false
+  definition sharesForJointMarketingWithFinancialCompanies equals true
+  definition canLimitJointMarketingSharing equals false
+  definition sharesAffiliatesTransactionsAndExperiences equals true
+  definition canLimitAffiliatesTransactionsSharing equals false
+  definition sharesAffiliatesCreditworthiness equals true
+  definition canLimitAffiliatesCreditworthinessSharing equals true
+  definition sharesAffiliatesMarketingToYou equals true
+  definition canLimitAffiliatesMarketingSharing equals true
+  definition sharesNonaffiliatesMarketingToYou equals true
+  definition canLimitNonaffiliatesMarketingSharing equals true
+
+scope PrivacyUSGLBANewCustomerSharing =
+  output beginsSharingAfterDays : Integer
+  output canContactAtAnyTimeToLimit : Boolean
+
+  definition beginsSharingAfterDays equals 30
+  definition canContactAtAnyTimeToLimit equals true
+
+scope PrivacyUSGLBADefinitions =
+  output affiliatesIncludeBillMeLater : Boolean
+  output nonaffiliatesIncludeServiceProviders : Boolean
+  output jointMarketingPartnersIncludeFinancialCompanies : Boolean
+
+  definition affiliatesIncludeBillMeLater equals true
+  definition nonaffiliatesIncludeServiceProviders equals true
+  definition jointMarketingPartnersIncludeFinancialCompanies equals true
+
+scope PrivacyUSGLBACalifornia =
+  output willNotShareExceptAsPermittedByCaliforniaLaw : Boolean
+  output limitsSharingAmongCompaniesAsRequiredByCaliforniaLaw : Boolean
+
+  definition willNotShareExceptAsPermittedByCaliforniaLaw equals true
+  definition limitsSharingAmongCompaniesAsRequiredByCaliforniaLaw equals true
+
+scope PrivacyUSGLBAVermont =
+  output willNotDiscloseCreditworthinessToAffiliates : Boolean
+  output willNotDiscloseToNonaffiliatesForMarketingUnlessAuthorized : Boolean
+
+  definition willNotDiscloseCreditworthinessToAffiliates equals true
+  definition willNotDiscloseToNonaffiliatesForMarketingUnlessAuthorized equals true
+
+scope PrivacyUSGLBANevada =
+  output providesNoticePursuantToNevadaLaw : Boolean
+  output mayBePlacedOnDoNotCallList : Boolean
+
+  definition providesNoticePursuantToNevadaLaw equals true
+  definition mayBePlacedOnDoNotCallList equals true
+
+# --- UK/EEA Disclosures ---
+
+scope PrivacyEEADataController =
+  output dataControllerIsLocalPayPalEntity : Boolean
+
+  definition dataControllerIsLocalPayPalEntity equals true
+
+scope PrivacyEEALawfulBasisContractual =
+  output applies : Boolean
+  output includesServiceProvision : Boolean
+  output includesPaymentAdministration : Boolean
+  output includesCreditworthiness : Boolean
+  output includesIdentityConfirmation : Boolean
+  output includesTransactionProof : Boolean
+  output includesLegalClaims : Boolean
+  output includesCompliance : Boolean
+
+  definition applies equals true
+  definition includesServiceProvision equals true
+  definition includesPaymentAdministration equals true
+  definition includesCreditworthiness equals true
+  definition includesIdentityConfirmation equals true
+  definition includesTransactionProof equals true
+  definition includesLegalClaims equals true
+  definition includesCompliance equals true
+
+scope PrivacyEEALawfulBasisLegitimateInterest =
+  output applies : Boolean
+  output includesContentOptimization : Boolean
+  output includesFraudPrevention : Boolean
+  output includesServiceEligibility : Boolean
+  output includesRiskAnalysis : Boolean
+  output includesServiceImprovement : Boolean
+  output includesMarketingAnalysis : Boolean
+  output includesLegalCompliance : Boolean
+  output includesCompetitionsAndEvents : Boolean
+  output includesContactProcessing : Boolean
+  output includesMarketingCommunications : Boolean
+  output includesInfoAssociation : Boolean
+  output includesPreferenceMemory : Boolean
+  output includesLocationSecurity : Boolean
+  output legitimateInterestNotOverridden : Boolean
+
+  definition applies equals true
+  definition includesContentOptimization equals true
+  definition includesFraudPrevention equals true
+  definition includesServiceEligibility equals true
+  definition includesRiskAnalysis equals true
+  definition includesServiceImprovement equals true
+  definition includesMarketingAnalysis equals true
+  definition includesLegalCompliance equals true
+  definition includesCompetitionsAndEvents equals true
+  definition includesContactProcessing equals true
+  definition includesMarketingCommunications equals true
+  definition includesInfoAssociation equals true
+  definition includesPreferenceMemory equals true
+  definition includesLocationSecurity equals true
+  definition legitimateInterestNotOverridden equals true
+
+scope PrivacyEEALawfulBasisLegalObligation =
+  output applies : Boolean
+  output includesAMLCompliance : Boolean
+  output includesKYCRequirements : Boolean
+  output includesSanctionScreening : Boolean
+
+  definition applies equals true
+  definition includesAMLCompliance equals true
+  definition includesKYCRequirements equals true
+  definition includesSanctionScreening equals true
+
+scope PrivacyEEALawfulBasisConsent =
+  output applies : Boolean
+  output includesContactListSyncing : Boolean
+  output includesBiometricData : Boolean
+  output includesTargetedAdvertising : Boolean
+  output includesAccountLinking : Boolean
+  output includesPreciseGeolocation : Boolean
+
+  definition applies equals true
+  definition includesContactListSyncing equals true
+  definition includesBiometricData equals true
+  definition includesTargetedAdvertising equals true
+  definition includesAccountLinking equals true
+  definition includesPreciseGeolocation equals true
+
+# --- UK/EEA International Transfers ---
+
+scope PrivacyEEAInternationalTransfers =
+  output usesBindingCorporateRules : Boolean
+  output usesStandardContractualClauses : Boolean
+  output usesAdequacyDecisions : Boolean
+  output usesDataTransferDerogations : Boolean
+
+  definition usesBindingCorporateRules equals true
+  definition usesStandardContractualClauses equals true
+  definition usesAdequacyDecisions equals true
+  definition usesDataTransferDerogations equals true
+
+# --- UK/EEA Data Protection Rights ---
+
+scope PrivacyEEADataProtectionRights =
+  output rightToBeInformed : Boolean
+  output rightToAccess : Boolean
+  output rightToCorrect : Boolean
+  output rightToErase : Boolean
+  output rightToObject : Boolean
+  output rightToWithdrawConsent : Boolean
+  output rightToAutomatedDecisionReview : Boolean
+  output rightToRestrictProcessing : Boolean
+  output rightToDataPortability : Boolean
+  output rightToComplainToSupervisoryAuthority : Boolean
+
+  definition rightToBeInformed equals true
+  definition rightToAccess equals true
+  definition rightToCorrect equals true
+  definition rightToErase equals true
+  definition rightToObject equals true
+  definition rightToWithdrawConsent equals true
+  definition rightToAutomatedDecisionReview equals true
+  definition rightToRestrictProcessing equals true
+  definition rightToDataPortability equals true
+  definition rightToComplainToSupervisoryAuthority equals true
+
+scope PrivacyEEALeadSupervisoryAuthority =
+  output isLuxembourgCNPD : Boolean
+
+  definition isLuxembourgCNPD equals true
+
+scope PrivacyUKSupervisoryAuthority =
+  output isICO : Boolean
+
+  definition isICO equals true
+
+# --- EEA Banking Regulations ---
+
+scope PrivacyEEABankingRegulations =
+  output luxembourgTransparencyRequirements : Boolean
+  output listsThirdPartyProviders : Boolean
+  output updatesQuarterly : Boolean
+  output newTransfersBeginAfterDays : Integer
+  output objectionPeriodDays : Integer
+
+  definition luxembourgTransparencyRequirements equals true
+  definition listsThirdPartyProviders equals true
+  definition updatesQuarterly equals true
+  definition newTransfersBeginAfterDays equals 30
+  definition objectionPeriodDays equals 30
+
+scope PrivacyEEABankingFATCA =
+  output subjectToFATCALaw : Boolean
+  output subjectToCRSLaw : Boolean
+  output disclosesToLawEnforcement : Boolean
+  output disclosesToGovernmentBodies : Boolean
+
+  definition subjectToFATCALaw equals true
+  definition subjectToCRSLaw equals true
+  definition disclosesToLawEnforcement equals true
+  definition disclosesToGovernmentBodies equals true
+
+scope PrivacyEEABankingIPDisclosure =
+  output disclosesToIPRightOwners : Boolean
+  output requiresClaimUnderNationalLaw : Boolean
+
+  definition disclosesToIPRightOwners equals true
+  definition requiresClaimUnderNationalLaw equals true
+
+scope PrivacyEEABankingUnaffiliatedSharing =
+  output sharesForFraudPrevention : Boolean
+  output sharesForCustomerService : Boolean
+  output sharesForShipping : Boolean
+  output sharesForLegalCompliance : Boolean
+  output sharesForServiceProviderOperations : Boolean
+
+  definition sharesForFraudPrevention equals true
+  definition sharesForCustomerService equals true
+  definition sharesForShipping equals true
+  definition sharesForLegalCompliance equals true
+  definition sharesForServiceProviderOperations equals true
+
+# --- UK Notice ---
+
+scope PrivacyUKNotice =
+  output acknowledgesFATCA : Boolean
+  output acknowledgesCRS : Boolean
+  output disclosesToPoliceAndLawEnforcement : Boolean
+  output disclosesToIPRightOwners : Boolean
+  output disclosesToCreditCardAssociations : Boolean
+  output mayDisclosePayPalDirectoryName : Boolean
+  output directoryFeatureCanBeTurnedOff : Boolean
+
+  definition acknowledgesFATCA equals true
+  definition acknowledgesCRS equals true
+  definition disclosesToPoliceAndLawEnforcement equals true
+  definition disclosesToIPRightOwners equals true
+  definition disclosesToCreditCardAssociations equals true
+  definition mayDisclosePayPalDirectoryName equals true
+  definition directoryFeatureCanBeTurnedOff equals true
+
+scope PrivacyUKUnaffiliatedSharing =
+  output sharesForFraudPrevention : Boolean
+  output sharesForCustomerService : Boolean
+  output sharesForShipping : Boolean
+  output sharesForLegalCompliance : Boolean
+  output sharesForServiceProviderOperations : Boolean
+
+  definition sharesForFraudPrevention equals true
+  definition sharesForCustomerService equals true
+  definition sharesForShipping equals true
+  definition sharesForLegalCompliance equals true
+  definition sharesForServiceProviderOperations equals true
+
+# --- Mexico Disclosures ---
+
+scope PrivacyMexicoPrimaryPurpose =
+  output includesServiceProvision : Boolean
+  output includesPaymentAdministration : Boolean
+  output includesCreditworthiness : Boolean
+  output includesIdentityConfirmation : Boolean
+  output includesTransactionProof : Boolean
+  output includesLegalClaims : Boolean
+  output includesInternalProcedures : Boolean
+  output includesServiceEligibility : Boolean
+  output includesCustomerAnalysis : Boolean
+  output includesCommunication : Boolean
+  output includesContentOptimization : Boolean
+  output includesRiskAnalysis : Boolean
+  output includesServiceImprovement : Boolean
+  output includesAccountInfoUpdate : Boolean
+  output includesMarketingAnalysis : Boolean
+  output includesLegalCompliance : Boolean
+  output includesCompetitionsAndEvents : Boolean
+  output includesFinancialRiskManagement : Boolean
+  output includesContactProcessing : Boolean
+
+  definition includesServiceProvision equals true
+  definition includesPaymentAdministration equals true
+  definition includesCreditworthiness equals true
+  definition includesIdentityConfirmation equals true
+  definition includesTransactionProof equals true
+  definition includesLegalClaims equals true
+  definition includesInternalProcedures equals true
+  definition includesServiceEligibility equals true
+  definition includesCustomerAnalysis equals true
+  definition includesCommunication equals true
+  definition includesContentOptimization equals true
+  definition includesRiskAnalysis equals true
+  definition includesServiceImprovement equals true
+  definition includesAccountInfoUpdate equals true
+  definition includesMarketingAnalysis equals true
+  definition includesLegalCompliance equals true
+  definition includesCompetitionsAndEvents equals true
+  definition includesFinancialRiskManagement equals true
+  definition includesContactProcessing equals true
+
+scope PrivacyMexicoConsentBasedProcessing =
+  output includesContactListSyncing : Boolean
+  output includesBiometricData : Boolean
+  output includesTargetedAdvertising : Boolean
+  output includesThirdPartyPlatformConnection : Boolean
+  output mayWithdrawConsentAtAnyTime : Boolean
+
+  definition includesContactListSyncing equals true
+  definition includesBiometricData equals true
+  definition includesTargetedAdvertising equals true
+  definition includesThirdPartyPlatformConnection equals true
+  definition mayWithdrawConsentAtAnyTime equals true
+
+scope PrivacyMexicoARCORights =
+  output rightToAccess : Boolean
+  output rightToRectification : Boolean
+  output rightToDelete : Boolean
+  output rightToObject : Boolean
+  output rightToPortability : Boolean
+  output rightToRestrictProcessing : Boolean
+  output responseTimeBusinessDays : Integer
+  output canExerciseViaAccountSettings : Boolean
+  output canExerciseViaPhone : Boolean
+  output agentMaySubmitOnBehalf : Boolean
+  output oneRightDoesNotPreventOthers : Boolean
+
+  definition rightToAccess equals true
+  definition rightToRectification equals true
+  definition rightToDelete equals true
+  definition rightToObject equals true
+  definition rightToPortability equals true
+  definition rightToRestrictProcessing equals true
+  definition responseTimeBusinessDays equals 20
+  definition canExerciseViaAccountSettings equals true
+  definition canExerciseViaPhone equals true
+  definition agentMaySubmitOnBehalf equals true
+  definition oneRightDoesNotPreventOthers equals true
+
+# --- Singapore Disclosures ---
+
+scope PrivacySingaporeLegitimateInterest =
+  output applies : Boolean
+  output includesServiceProvision : Boolean
+  output includesIdentityVerification : Boolean
+  output includesLegalClaims : Boolean
+  output includesContentOptimization : Boolean
+  output includesFraudPrevention : Boolean
+  output includesServiceEligibility : Boolean
+  output includesRiskAnalysis : Boolean
+  output includesServiceImprovement : Boolean
+  output includesAccountInfoUpdate : Boolean
+  output includesMarketingAnalysis : Boolean
+  output includesLegalCompliance : Boolean
+  output includesCompetitionsAndEvents : Boolean
+  output includesFinancialRiskManagement : Boolean
+  output includesContactProcessing : Boolean
+  output includesMarketingCommunications : Boolean
+  output includesInfoAssociation : Boolean
+  output includesPreferenceMemory : Boolean
+
+  definition applies equals true
+  definition includesServiceProvision equals true
+  definition includesIdentityVerification equals true
+  definition includesLegalClaims equals true
+  definition includesContentOptimization equals true
+  definition includesFraudPrevention equals true
+  definition includesServiceEligibility equals true
+  definition includesRiskAnalysis equals true
+  definition includesServiceImprovement equals true
+  definition includesAccountInfoUpdate equals true
+  definition includesMarketingAnalysis equals true
+  definition includesLegalCompliance equals true
+  definition includesCompetitionsAndEvents equals true
+  definition includesFinancialRiskManagement equals true
+  definition includesContactProcessing equals true
+  definition includesMarketingCommunications equals true
+  definition includesInfoAssociation equals true
+  definition includesPreferenceMemory equals true
+
+scope PrivacySingaporeConsentBasedProcessing =
+  output includesContactListSyncing : Boolean
+  output includesBiometricData : Boolean
+  output includesTargetedAdvertising : Boolean
+  output includesThirdPartyPlatformConnection : Boolean
+  output mayWithdrawConsentAtAnyTime : Boolean
+
+  definition includesContactListSyncing equals true
+  definition includesBiometricData equals true
+  definition includesTargetedAdvertising equals true
+  definition includesThirdPartyPlatformConnection equals true
+  definition mayWithdrawConsentAtAnyTime equals true
