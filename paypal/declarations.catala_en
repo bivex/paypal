@@ -405,3 +405,38 @@ declaration enumeration ShopTerminationReason =
   -- AUPViolation
   -- EndorsementClaim
   -- PayPalDiscretion
+
+# --- Online Card Payment Services ---
+
+declaration enumeration CardPaymentServiceType =
+  -- AdvancedCreditDebitCard
+  -- FraudProtection
+  -- PaymentsPro
+  -- VirtualTerminal
+
+declaration enumeration CardAssociation =
+  -- Visa
+  -- MasterCard
+  -- AmericanExpress
+
+declaration enumeration CardMerchantTerminationOption =
+  -- ThirtyDaysNotice
+  -- AccountClosure
+
+declaration enumeration CardPayPalTerminationOption =
+  -- ThirtyDaysNotice
+  -- UserAgreementTermination
+
+declaration enumeration CardImmediateTerminationReason =
+  -- BreachOfCardAgreement
+  -- BreachOfUserAgreement
+  -- UnableToPayObligations
+  -- Insolvency
+  -- ExecutionAction
+  -- LiquidationOrDissolution
+  -- LostControlOfAssets
+  -- CompositionWithCreditors
+  -- MaterialAdverseChange
+  -- InaccurateInformation
+  -- HighRiskAccount
+  -- AssociationRuleViolation

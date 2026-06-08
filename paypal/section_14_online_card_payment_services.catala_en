@@ -1,0 +1,799 @@
+# PayPal Online Card Payment Services Agreement
+# Last updated: September 26, 2022
+# Source: https://www.paypal.com/sg/webapps/mpp/ua/cardagreement-full
+# Forms part of the PayPal User Agreement
+
+# --- Card Agreement Incorporation ---
+
+scope CardAgreementIncorporation =
+  output cardAgreementFormsPartOfPayPalAgreements : Boolean
+  output appliesToOnlineCardPaymentServices : Boolean
+  output userAgreementIncorporated : Boolean
+  output cardAgreementSupersedesOnConflict : Boolean
+
+  definition cardAgreementFormsPartOfPayPalAgreements equals true
+  definition appliesToOnlineCardPaymentServices equals true
+  definition userAgreementIncorporated equals true
+  definition cardAgreementSupersedesOnConflict equals true
+
+# --- Card Agreement Amendments ---
+
+scope CardAgreementAmendments =
+  input changeReducesRights : Boolean
+  input changeIncreasesResponsibilities : Boolean
+  input changeAddsNewService : Boolean
+  input changeAddsExtraFunctionality : Boolean
+  input changeNeutral : Boolean
+  output advanceNoticeRequired : Boolean
+  output changeEffectiveImmediately : Boolean
+  output mayTerminateBeforeEffectiveDate : Boolean
+
+  definition advanceNoticeRequired equals
+    changeReducesRights or changeIncreasesResponsibilities
+
+  definition changeEffectiveImmediately equals
+    changeAddsNewService or changeAddsExtraFunctionality or changeNeutral
+
+  definition mayTerminateBeforeEffectiveDate equals advanceNoticeRequired
+
+# --- Online Card Payment Services Definition ---
+
+scope CardPaymentServiceDefinition =
+  output serviceIncludesAdvancedCreditDebit : Boolean
+  output serviceIncludesFraudProtection : Boolean
+  output serviceIncludesPaymentsPro : Boolean
+  output serviceIncludesVirtualTerminal : Boolean
+  output servicesIncludeAPIsAndSDKs : Boolean
+
+  definition serviceIncludesAdvancedCreditDebit equals true
+  definition serviceIncludesFraudProtection equals true
+  definition serviceIncludesPaymentsPro equals true
+  definition serviceIncludesVirtualTerminal equals true
+  definition servicesIncludeAPIsAndSDKs equals true
+
+# --- Service Sub-types ---
+
+scope CardServiceSubTypes =
+  output advancedCreditDebitIncludesAPI : Boolean
+  output advancedCreditDebitIncludesFraudProtectionOptional : Boolean
+  output paymentsProIncludesPaymentButton : Boolean
+  output paymentsProIncludesDirectPayments : Boolean
+  output paymentsProIncludesVirtualTerminal : Boolean
+  output paymentsProIncludesFraudProtectionOptional : Boolean
+  output paymentsProIncludesRecurringPaymentsOptional : Boolean
+  output virtualTerminalManualEntry : Boolean
+
+  definition advancedCreditDebitIncludesAPI equals true
+  definition advancedCreditDebitIncludesFraudProtectionOptional equals true
+  definition paymentsProIncludesPaymentButton equals true
+  definition paymentsProIncludesDirectPayments equals true
+  definition paymentsProIncludesVirtualTerminal equals true
+  definition paymentsProIncludesFraudProtectionOptional equals true
+  definition paymentsProIncludesRecurringPaymentsOptional equals true
+  definition virtualTerminalManualEntry equals true
+
+# --- Setup and Activation ---
+
+scope CardServiceSetupActivation =
+  input applicationCompleted : Boolean
+  input businessAccountOpen : Boolean
+  input serviceIntegratedIntoWebsite : Boolean
+  input usingVirtualTerminalOnly : Boolean
+  input activatedWithLiveTransaction : Boolean
+  output readyToUse : Boolean
+  output integrationRequired : Boolean
+  output payPalNotResponsibleForIntegration : Boolean
+
+  definition readyToUse equals
+    applicationCompleted and businessAccountOpen and activatedWithLiveTransaction
+
+  definition integrationRequired equals
+    not usingVirtualTerminalOnly
+
+  definition payPalNotResponsibleForIntegration equals true
+
+# --- Payment Method Parity ---
+
+scope CardPaymentMethodParity =
+  input displayPayPalLogo : Boolean
+  input displayCardAssociationLogos : Boolean
+  input logosEqualSizeAndProminence : Boolean
+  input noPreferenceForAnyMethod : Boolean
+  input noDiscriminationAgainstAnyMethod : Boolean
+  output parityRequirementMet : Boolean
+
+  definition parityRequirementMet equals
+    displayPayPalLogo and displayCardAssociationLogos and
+    logosEqualSizeAndProminence and noPreferenceForAnyMethod and
+    noDiscriminationAgainstAnyMethod
+
+# --- Credit Report Authorization ---
+
+scope CardCreditReportAuthorization =
+  output merchantAuthorizesCreditReport : Boolean
+  output payPalMayObtainCreditHistory : Boolean
+  output payPalMayReviewOnOngoingBasis : Boolean
+  output informationHandledPerPrivacyStatement : Boolean
+
+  definition merchantAuthorizesCreditReport equals true
+  definition payPalMayObtainCreditHistory equals true
+  definition payPalMayReviewOnOngoingBasis equals true
+  definition informationHandledPerPrivacyStatement equals true
+
+# --- Pre-Activation Cancellation ---
+
+scope CardPreActivationCancellation =
+  input activationDatePassed : Boolean
+  output payPalMayTerminateBeforeActivation : Boolean
+
+  definition payPalMayTerminateBeforeActivation equals not activationDatePassed
+
+# --- Fees ---
+
+scope CardServiceFees =
+  output feesPayableAsAgreedDuringApplication : Boolean
+  output monthlyFeeApplicable : Boolean
+
+  definition feesPayableAsAgreedDuringApplication equals true
+  definition monthlyFeeApplicable equals true
+
+# --- Dynamic Currency Conversion Prohibition ---
+
+scope CardCurrencyConversionProhibition =
+  input priceInOneCurrency : Boolean
+  input acceptPaymentInDifferentCurrency : Boolean
+  output dynamicCurrencyConversionProhibited : Boolean
+
+  definition dynamicCurrencyConversionProhibited equals
+    priceInOneCurrency and acceptPaymentInDifferentCurrency
+
+# --- Data Protection Addendum Compliance ---
+
+scope CardDataProtectionAddendum =
+  output merchantAndPayPalComplyWithDPA : Boolean
+  output dpaPrevailsOnConflict : Boolean
+
+  definition merchantAndPayPalComplyWithDPA equals true
+  definition dpaPrevailsOnConflict equals true
+
+# --- Data Portability ---
+
+scope CardDataPortability =
+  input merchantWrittenRequest : Boolean
+  input dataRecipientPCICompliant : Boolean
+  input dataRecipientLevel1PCI : Boolean
+  input transferCompliantWithPCIDSS : Boolean
+  input transferAllowedByAssociationRules : Boolean
+  input transferAllowedByApplicableLaws : Boolean
+  output payPalMustTransferCardInformation : Boolean
+
+  definition payPalMustTransferCardInformation equals
+    merchantWrittenRequest and dataRecipientPCICompliant and
+    dataRecipientLevel1PCI and transferCompliantWithPCIDSS and
+    transferAllowedByAssociationRules and transferAllowedByApplicableLaws
+
+# --- User Agreement Application ---
+
+scope CardUserAgreementApplication =
+  output userAgreementAppliesToCardServices : Boolean
+  output reserveMayBeTakenForChargebacks : Boolean
+  output acceptableUsePolicyApplies : Boolean
+  output privacyStatementGovernsInfoUse : Boolean
+  output payPalMayRestrictPayments : Boolean
+
+  definition userAgreementAppliesToCardServices equals true
+  definition reserveMayBeTakenForChargebacks equals true
+  definition acceptableUsePolicyApplies equals true
+  definition privacyStatementGovernsInfoUse equals true
+  definition payPalMayRestrictPayments equals true
+
+# --- Failed Payments Responsibility ---
+
+scope CardFailedPaymentsResponsibility =
+  output merchantResponsibleForChargebacks : Boolean
+  output fraudToolsDoNotAffectLiability : Boolean
+  output fraudProtectionDoesNotAffectLiability : Boolean
+
+  definition merchantResponsibleForChargebacks equals true
+  definition fraudToolsDoNotAffectLiability equals true
+  definition fraudProtectionDoesNotAffectLiability equals true
+
+# --- PayPal Payment Button Requirements ---
+
+scope CardPaymentButtonRequirements =
+  input buttonBeforeOrSamePageAsInfoCollection : Boolean
+  input payPalOfferedAsPaymentOption : Boolean
+  input payPalLogoEqualProminence : Boolean
+  input noDiscriminationAgainstPayPal : Boolean
+  input customerOptionNotToStoreInfo : Boolean
+  output paymentButtonRequirementsMet : Boolean
+
+  definition paymentButtonRequirementsMet equals
+    buttonBeforeOrSamePageAsInfoCollection and payPalOfferedAsPaymentOption and
+    payPalLogoEqualProminence and noDiscriminationAgainstPayPal and
+    customerOptionNotToStoreInfo
+
+# --- Recurring Billing Consent ---
+
+scope CardRecurringBillingConsent =
+  input usingRecurringBilling : Boolean
+  input capturedCustomerAgreement : Boolean
+  output merchantMustComplyWithAssociationRules : Boolean
+  output merchantMustComplyWithApplicableLaw : Boolean
+  output recurringBillingConsentMet : Boolean
+
+  definition merchantMustComplyWithAssociationRules equals usingRecurringBilling
+  definition merchantMustComplyWithApplicableLaw equals usingRecurringBilling
+  definition recurringBillingConsentMet equals
+    usingRecurringBilling implies capturedCustomerAgreement
+
+# --- Intellectual Property Ownership ---
+
+scope CardIntellectualProperty =
+  output payPalRetainsAllIPRights : Boolean
+  output noImpliedLicenses : Boolean
+  output merchantShallNotReverseEngineer : Boolean
+  output merchantShallNotDecompile : Boolean
+  output merchantShallNotCreateDerivativeWorks : Boolean
+
+  definition payPalRetainsAllIPRights equals true
+  definition noImpliedLicenses equals true
+  definition merchantShallNotReverseEngineer equals true
+  definition merchantShallNotDecompile equals true
+  definition merchantShallNotCreateDerivativeWorks equals true
+
+# --- Ownership of Materials ---
+
+scope CardMaterialsOwnership =
+  output materialsIPRemainsWithPayPal : Boolean
+  output merchantShallNotTransferMaterials : Boolean
+  output merchantShallNotSellMaterials : Boolean
+
+  definition materialsIPRemainsWithPayPal equals true
+  definition merchantShallNotTransferMaterials equals true
+  definition merchantShallNotSellMaterials equals true
+
+# --- License Grant ---
+
+scope CardLicenseGrant =
+  output nonExclusiveLicense : Boolean
+  output nonTransferableLicense : Boolean
+  output revocableLicense : Boolean
+  output nonSublicenseableLicense : Boolean
+  output limitedToServiceUse : Boolean
+  output documentationForInternalUseOnly : Boolean
+
+  definition nonExclusiveLicense equals true
+  definition nonTransferableLicense equals true
+  definition revocableLicense equals true
+  definition nonSublicenseableLicense equals true
+  definition limitedToServiceUse equals true
+  definition documentationForInternalUseOnly equals true
+
+# --- ID Codes ---
+
+scope CardIDCodes =
+  input codesCompromised : Boolean
+  input failedToProtectCodes : Boolean
+  output mustKeepCodesSafe : Boolean
+  output mustNotifyPayPalIfCompromised : Boolean
+  output payPalMayCancelAndReissueCodes : Boolean
+
+  definition mustKeepCodesSafe equals true
+  definition mustNotifyPayPalIfCompromised equals codesCompromised or failedToProtectCodes
+  definition payPalMayCancelAndReissueCodes equals codesCompromised
+
+# --- API License Terms ---
+
+scope CardAPILicenseTerms =
+  output mustComplyWithDocumentation : Boolean
+  output mustKeepCredentialsConfidential : Boolean
+  output mustTerminateFormerUserAccess : Boolean
+  output mustNotifyUnauthorizedUse : Boolean
+  output mustUpdatePasswordsPeriodically : Boolean
+  output mustCreateStrongPasswords : Boolean
+  output userIDIsPayPalProperty : Boolean
+
+  definition mustComplyWithDocumentation equals true
+  definition mustKeepCredentialsConfidential equals true
+  definition mustTerminateFormerUserAccess equals true
+  definition mustNotifyUnauthorizedUse equals true
+  definition mustUpdatePasswordsPeriodically equals true
+  definition mustCreateStrongPasswords equals true
+  definition userIDIsPayPalProperty equals true
+
+# --- API Prohibited Activities ---
+
+scope CardAPIProhibitedActivities =
+  input sellingTransferringUserID : Boolean
+  input sellingPayPalConfidentialInfo : Boolean
+  input collectingPIIWithoutConsent : Boolean
+  input providingTimeshareServices : Boolean
+  input interfacingWithoutApproval : Boolean
+  output engagedInProhibitedAPIActivity : Boolean
+
+  definition engagedInProhibitedAPIActivity equals
+    sellingTransferringUserID or sellingPayPalConfidentialInfo or
+    collectingPIIWithoutConsent or providingTimeshareServices or
+    interfacingWithoutApproval
+
+# --- No Warranty ---
+
+scope CardNoWarranty =
+  output servicesProvidedAsIs : Boolean
+  output noWarrantyOfMerchantability : Boolean
+  output noWarrantyOfFitnessForPurpose : Boolean
+  output noWarrantyOfNonInfringement : Boolean
+  output noWarrantyOfContinuousOrErrorFree : Boolean
+  output noGuaranteeFraudDetection : Boolean
+  output notResponsibleForFraudulentTransactions : Boolean
+
+  definition servicesProvidedAsIs equals true
+  definition noWarrantyOfMerchantability equals true
+  definition noWarrantyOfFitnessForPurpose equals true
+  definition noWarrantyOfNonInfringement equals true
+  definition noWarrantyOfContinuousOrErrorFree equals true
+  definition noGuaranteeFraudDetection equals true
+  definition notResponsibleForFraudulentTransactions equals true
+
+# --- Hosted Integrations License ---
+
+scope CardHostedIntegrationsLicense =
+  output merchantGrantsRoyaltyFreeLicense : Boolean
+  output worldwideLicense : Boolean
+  output nonExclusiveLicense : Boolean
+  output forPurposeOfEnablingServiceUse : Boolean
+  output titleAndOwnershipRemainWithMerchant : Boolean
+  output merchantIndemnifiesPayPal : Boolean
+
+  definition merchantGrantsRoyaltyFreeLicense equals true
+  definition worldwideLicense equals true
+  definition nonExclusiveLicense equals true
+  definition forPurposeOfEnablingServiceUse equals true
+  definition titleAndOwnershipRemainWithMerchant equals true
+  definition merchantIndemnifiesPayPal equals true
+
+# --- Banking Terms ---
+
+scope CardBankingTerms =
+  output schedule2Applies : Boolean
+  output merchantAcceptsBankingTerms : Boolean
+
+  definition schedule2Applies equals true
+  definition merchantAcceptsBankingTerms equals true
+
+# --- Termination by Merchant ---
+
+scope CardTerminationByMerchant =
+  input givenThirtyDaysNotice : Boolean
+  input closedPayPalAccount : Boolean
+  output merchantMayTerminate : Boolean
+  output terminationOption : CardMerchantTerminationOption
+
+  definition merchantMayTerminate equals givenThirtyDaysNotice or closedPayPalAccount
+  definition terminationOption equals
+    if givenThirtyDaysNotice then -- ThirtyDaysNotice
+    else -- AccountClosure
+
+# --- Termination by PayPal ---
+
+scope CardTerminationByPayPal =
+  input givenThirtyDaysNotice : Boolean
+  input terminatedUserAgreement : Boolean
+  output payPalMayTerminate : Boolean
+  output terminationOption : CardPayPalTerminationOption
+
+  definition payPalMayTerminate equals givenThirtyDaysNotice or terminatedUserAgreement
+  definition terminationOption equals
+    if givenThirtyDaysNotice then -- ThirtyDaysNotice
+    else -- UserAgreementTermination
+
+# --- Termination by Events (Immediate) ---
+
+scope CardTerminationByEvents =
+  input breachedCardAgreement : Boolean
+  input breachedUserAgreement : Boolean
+  input unableToPayObligations : Boolean
+  input insolvent : Boolean
+  input executionActionTaken : Boolean
+  input liquidationOrDissolution : Boolean
+  input lostControlOfAssets : Boolean
+  input compositionWithCreditors : Boolean
+  input materialAdverseChange : Boolean
+  input providedInaccurateInfo : Boolean
+  input highRiskAccount : Boolean
+  input violatedAssociationRules : Boolean
+  output payPalMayTerminateImmediately : Boolean
+
+  definition payPalMayTerminateImmediately equals
+    breachedCardAgreement or breachedUserAgreement or
+    unableToPayObligations or insolvent or executionActionTaken or
+    liquidationOrDissolution or lostControlOfAssets or
+    compositionWithCreditors or materialAdverseChange or
+    providedInaccurateInfo or highRiskAccount or violatedAssociationRules
+
+# --- Effect of Termination ---
+
+scope CardEffectOfTermination =
+  output mustCompletePendingTransactions : Boolean
+  output mustRemoveCardLogos : Boolean
+  output mustStopAcceptingNewTransactions : Boolean
+  output continuedUseMeansAgreementApplies : Boolean
+  output feesClauseSurvives : Boolean
+  output paymentButtonClauseSurvives : Boolean
+  output terminationEffectClauseSurvives : Boolean
+  output accruedRightsNotAffected : Boolean
+  output noRefundOfMonthlyFee : Boolean
+
+  definition mustCompletePendingTransactions equals true
+  definition mustRemoveCardLogos equals true
+  definition mustStopAcceptingNewTransactions equals true
+  definition continuedUseMeansAgreementApplies equals true
+  definition feesClauseSurvives equals true
+  definition paymentButtonClauseSurvives equals true
+  definition terminationEffectClauseSurvives equals true
+  definition accruedRightsNotAffected equals true
+  definition noRefundOfMonthlyFee equals true
+
+# --- Breach and Suspension ---
+
+scope CardBreachAndSuspension =
+  input breachedCardAgreement : Boolean
+  input breachedUserAgreement : Boolean
+  input breachedPCIDSS : Boolean
+  input suspectedBreach : Boolean
+  output payPalMayImmediatelySuspend : Boolean
+  output mayRequireCorrectiveAction : Boolean
+  output maySuspendPendingInvestigation : Boolean
+
+  definition payPalMayImmediatelySuspend equals
+    breachedCardAgreement or breachedUserAgreement or breachedPCIDSS
+
+  definition mayRequireCorrectiveAction equals payPalMayImmediatelySuspend
+  definition maySuspendPendingInvestigation equals suspectedBreach
+
+# --- Security Codes Obligations ---
+
+scope CardSecurityCodesObligations =
+  output merchantResponsibleForSecurityCodes : Boolean
+  output mustRestrictAccessToNecessaryPersonnel : Boolean
+  output personnelMustComplyWithSchedule : Boolean
+
+  definition merchantResponsibleForSecurityCodes equals true
+  definition mustRestrictAccessToNecessaryPersonnel equals true
+  definition personnelMustComplyWithSchedule equals true
+
+# --- PCI DSS Compliance ---
+
+scope CardPCIDSSCompliance =
+  input compliedWithApplicableLaws : Boolean
+  input compliedWithAssociationRules : Boolean
+  input compliedWithPCIDSS : Boolean
+  input compliedWithPADSS : Boolean
+  output pciComplianceMet : Boolean
+
+  definition pciComplianceMet equals
+    compliedWithApplicableLaws and compliedWithAssociationRules and
+    compliedWithPCIDSS and compliedWithPADSS
+
+# --- PCI DSS 12 Requirements ---
+
+scope CardPCIDSSRequirements =
+  output installAndMaintainFirewall : Boolean
+  output noVendorDefaultPasswords : Boolean
+  output protectStoredData : Boolean
+  output encryptTransmission : Boolean
+  output useAndUpdateAntiVirus : Boolean
+  output developSecureSystems : Boolean
+  output restrictAccessByNeedToKnow : Boolean
+  output assignUniqueID : Boolean
+  output restrictPhysicalAccess : Boolean
+  output trackAndMonitorAccess : Boolean
+  output testSecuritySystems : Boolean
+  output maintainInfoSecPolicy : Boolean
+
+  definition installAndMaintainFirewall equals true
+  definition noVendorDefaultPasswords equals true
+  definition protectStoredData equals true
+  definition encryptTransmission equals true
+  definition useAndUpdateAntiVirus equals true
+  definition developSecureSystems equals true
+  definition restrictAccessByNeedToKnow equals true
+  definition assignUniqueID equals true
+  definition restrictPhysicalAccess equals true
+  definition trackAndMonitorAccess equals true
+  definition testSecuritySystems equals true
+  definition maintainInfoSecPolicy equals true
+
+# --- PCI Audit Requirements ---
+
+scope CardPCIAuditRequirements =
+  input payPalRequestedEvidence : Boolean
+  input daysSinceAuditRequest : Integer
+  input merchantInitiatedAudit : Boolean
+  output mustProvidePCIEvidence : Boolean
+  output payPalNotResponsibleForPCICosts : Boolean
+  output merchantMustArrangeOwnAudit : Boolean
+  output payPalMayConductAuditAtMerchantExpense : Boolean
+
+  definition mustProvidePCIEvidence equals payPalRequestedEvidence
+  definition payPalNotResponsibleForPCICosts equals true
+  definition merchantMustArrangeOwnAudit equals true
+  definition payPalMayConductAuditAtMerchantExpense equals
+    payPalRequestedEvidence and not merchantInitiatedAudit and daysSinceAuditRequest > 10
+
+# --- PCI Scanning Requirements ---
+
+scope CardPCIScanningRequirements =
+  input annualTransactionVolume : Integer
+  output nonPenetrativeScansRequired : Boolean
+  output onsiteAuditIfSixMillionPlus : Boolean
+
+  definition nonPenetrativeScansRequired equals true
+  definition onsiteAuditIfSixMillionPlus equals annualTransactionVolume >= 6000000
+
+# --- Privacy Policy Requirement ---
+
+scope CardPrivacyPolicyRequirement =
+  output mustPostPrivacyPolicy : Boolean
+  output mustComplyWithLawsAndAssociationRules : Boolean
+
+  definition mustPostPrivacyPolicy equals true
+  definition mustComplyWithLawsAndAssociationRules equals true
+
+# --- Third-Party Agent Notification ---
+
+scope CardThirdPartyAgentNotification =
+  output mustNotifyPayPalOfAgents : Boolean
+  output agentMustBePCICompliant : Boolean
+  output merchantLiableForAgentBreach : Boolean
+
+  definition mustNotifyPayPalOfAgents equals true
+  definition agentMustBePCICompliant equals true
+  definition merchantLiableForAgentBreach equals true
+
+# --- Cardholder Data Storage Prohibitions ---
+
+scope CardDataStorageProhibitions =
+  output mustNotStorePINData : Boolean
+  output mustNotStoreAVSData : Boolean
+  output mustNotStoreCVV2Data : Boolean
+  output mustNotStoreMagneticStripeData : Boolean
+  output mustNotRetainHardcopies : Boolean
+  output liableForAssociationFines : Boolean
+
+  definition mustNotStorePINData equals true
+  definition mustNotStoreAVSData equals true
+  definition mustNotStoreCVV2Data equals true
+  definition mustNotStoreMagneticStripeData equals true
+  definition mustNotRetainHardcopies equals true
+  definition liableForAssociationFines equals true
+
+# --- Forensic Audit Requirement ---
+
+scope CardForensicAuditRequirement =
+  input securityBreachNoticed : Boolean
+  input merchantInitiatedForensicAudit : Boolean
+  output mustAllowForensicAudit : Boolean
+  output payPalMayInitiateAtMerchantExpense : Boolean
+
+  definition mustAllowForensicAudit equals securityBreachNoticed
+  definition payPalMayInitiateAtMerchantExpense equals
+    securityBreachNoticed and not merchantInitiatedForensicAudit
+
+# --- PCI Breach Suspension ---
+
+scope CardPCIBreachSuspension =
+  input breachedSecurityProvision : Boolean
+  input potentiallyBreached : Boolean
+  output payPalMaySuspendOrTerminate : Boolean
+  output suspensionRemainsUntilRemedied : Boolean
+  output mustExplainBasisAndMeasures : Boolean
+
+  definition payPalMaySuspendOrTerminate equals breachedSecurityProvision or potentiallyBreached
+  definition suspensionRemainsUntilRemedied equals true
+  definition mustExplainBasisAndMeasures equals true
+
+# --- PayPal Data Security Obligations ---
+
+scope CardPayPalDataSecurity =
+  output payPalCompliesWithLaws : Boolean
+  output payPalUsesIndustryStandardEncryption : Boolean
+
+  definition payPalCompliesWithLaws equals true
+  definition payPalUsesIndustryStandardEncryption equals true
+
+# --- Cardholder Information Use Restrictions ---
+
+scope CardCardholderInfoUseRestrictions =
+  output mayOnlyUseForTransactionProcessing : Boolean
+  output requiresPriorWrittenConsentForOtherUse : Boolean
+  output mustEstablishSufficientControls : Boolean
+  output mustRenderUnreadableBeforeDiscarding : Boolean
+  output mustNotSellCardholderInfo : Boolean
+  output mustNotRetainMagneticStripePostAuth : Boolean
+  output mustNotReproduceElectronicSignatures : Boolean
+
+  definition mayOnlyUseForTransactionProcessing equals true
+  definition requiresPriorWrittenConsentForOtherUse equals true
+  definition mustEstablishSufficientControls equals true
+  definition mustRenderUnreadableBeforeDiscarding equals true
+  definition mustNotSellCardholderInfo equals true
+  definition mustNotRetainMagneticStripePostAuth equals true
+  definition mustNotReproduceElectronicSignatures equals true
+
+# --- Failed Business Data Prohibition ---
+
+scope CardFailedBusinessDataProhibition =
+  output prohibitedFromSellingCardholderDatabases : Boolean
+  output mustReturnDataOrProvideDestructionProof : Boolean
+
+  definition prohibitedFromSellingCardholderDatabases equals true
+  definition mustReturnDataOrProvideDestructionProof equals true
+
+# --- Third-Party Processor Liability ---
+
+scope CardThirdPartyProcessorLiability =
+  output merchantResponsibleForThirdPartyCompliance : Boolean
+  output mustNotifyPayPalOfThirdPartyEngagement : Boolean
+  output mustNotifyUnauthorizedAccess : Boolean
+
+  definition merchantResponsibleForThirdPartyCompliance equals true
+  definition mustNotifyPayPalOfThirdPartyEngagement equals true
+  definition mustNotifyUnauthorizedAccess equals true
+
+# --- Card Data Retention Without Consent ---
+
+scope CardDataRetentionWithoutConsent =
+  input cardholderExpressConsent : Boolean
+  input hoursSinceAuthorization : Integer
+  output mustRemoveCardDataWithin24Hours : Boolean
+  output mayNotRetainWithoutConsent : Boolean
+
+  definition mustRemoveCardDataWithin24Hours equals
+    not cardholderExpressConsent and hoursSinceAuthorization > 24
+
+  definition mayNotRetainWithoutConsent equals not cardholderExpressConsent
+
+# --- Card Data Retention With Consent ---
+
+scope CardDataRetentionWithConsent =
+  input cardholderExpressConsent : Boolean
+  output mayRetainOnlyForPaymentProcessing : Boolean
+  output mustNeverDiscloseRetainedData : Boolean
+  output mustNeverRetainCVV2 : Boolean
+
+  definition mayRetainOnlyForPaymentProcessing equals cardholderExpressConsent
+  definition mustNeverDiscloseRetainedData equals true
+  definition mustNeverRetainCVV2 equals true
+
+# --- Technical Service Provider Requirements ---
+
+scope CardTechnicalServiceProvider =
+  input payPalWrittenConsent : Boolean
+  input tspRegisteredWithCardAssociation : Boolean
+  output mayUseTSP : Boolean
+  output tspMustComplyWithPCI : Boolean
+  output mustNotifyPayPalOfTSP : Boolean
+  output mustProvideTSPComplianceEvidence : Boolean
+  output merchantResponsibleForTSPRelationship : Boolean
+  output merchantLiableForTSPFines : Boolean
+  output payPalMayTerminateForTSPBreach : Boolean
+
+  definition mayUseTSP equals payPalWrittenConsent and tspRegisteredWithCardAssociation
+  definition tspMustComplyWithPCI equals true
+  definition mustNotifyPayPalOfTSP equals true
+  definition mustProvideTSPComplianceEvidence equals true
+  definition merchantResponsibleForTSPRelationship equals true
+  definition merchantLiableForTSPFines equals true
+  definition payPalMayTerminateForTSPBreach equals true
+
+# --- Fraud Protection: How It Works ---
+
+scope CardFraudProtectionHowItWorks =
+  input fraudProtectionActivated : Boolean
+  output toolForScreeningPotentiallyFraudulent : Boolean
+  output merchantDeterminesFinalFilterRules : Boolean
+  output payPalMayProvideTips : Boolean
+
+  definition toolForScreeningPotentiallyFraudulent equals fraudProtectionActivated
+  definition merchantDeterminesFinalFilterRules equals fraudProtectionActivated
+  definition payPalMayProvideTips equals fraudProtectionActivated
+
+# --- Fraud Protection: No Warranty ---
+
+scope CardFraudProtectionNoWarranty =
+  output noWarrantyOfErrorFree : Boolean
+  output noGuaranteeAllFraudDetected : Boolean
+  output notLiableForLossesFromUse : Boolean
+  output userAgreementLimitationApplies : Boolean
+
+  definition noWarrantyOfErrorFree equals true
+  definition noGuaranteeAllFraudDetected equals true
+  definition notLiableForLossesFromUse equals true
+  definition userAgreementLimitationApplies equals true
+
+# --- Fraud Protection: Data Protection ---
+
+scope CardFraudProtectionDataProtection =
+  output mayOnlyUseForFraudRiskManagement : Boolean
+  output mayNotShareWithOthers : Boolean
+  output mayNotDiscloseCategoriesOrResults : Boolean
+
+  definition mayOnlyUseForFraudRiskManagement equals true
+  definition mayNotShareWithOthers equals true
+  definition mayNotDiscloseCategoriesOrResults equals true
+
+# --- Fraud Protection: Miscellaneous ---
+
+scope CardFraudProtectionMiscellaneous =
+  output payPalRetainsRightToDeclineTransactions : Boolean
+  output termsSupplementUserAgreement : Boolean
+  output payPalMayAmendTerms : Boolean
+  output merchantMayTerminateByRemovingIntegration : Boolean
+  output payPalMayTerminateFraudProtection : Boolean
+  output termsSurviveTermination : Boolean
+
+  definition payPalRetainsRightToDeclineTransactions equals true
+  definition termsSupplementUserAgreement equals true
+  definition payPalMayAmendTerms equals true
+  definition merchantMayTerminateByRemovingIntegration equals true
+  definition payPalMayTerminateFraudProtection equals true
+  definition termsSurviveTermination equals true
+
+# --- Indemnity ---
+
+scope CardIndemnity =
+  output merchantIndemnifiesPayPal : Boolean
+  output coversBreachOfAgreement : Boolean
+  output coversUseOfServices : Boolean
+  output coversFraudulentTransactions : Boolean
+  output coversViolationOfLaw : Boolean
+
+  definition merchantIndemnifiesPayPal equals true
+  definition coversBreachOfAgreement equals true
+  definition coversUseOfServices equals true
+  definition coversFraudulentTransactions equals true
+  definition coversViolationOfLaw equals true
+
+# --- Assignment ---
+
+scope CardAssignment =
+  output merchantMayNotAssignWithoutConsent : Boolean
+  output payPalMayAssignWithoutConsent : Boolean
+  output amendmentRequiresWrittenDocument : Boolean
+  output failureToActNotWaiver : Boolean
+
+  definition merchantMayNotAssignWithoutConsent equals true
+  definition payPalMayAssignWithoutConsent equals true
+  definition amendmentRequiresWrittenDocument equals true
+  definition failureToActNotWaiver equals true
+
+# --- Compliance with Laws ---
+
+scope CardComplianceWithLaws =
+  output merchantMustComplyWithAllLaws : Boolean
+  output merchantMustComplyWithAssociationRules : Boolean
+
+  definition merchantMustComplyWithAllLaws equals true
+  definition merchantMustComplyWithAssociationRules equals true
+
+# --- Governing Law ---
+
+scope CardGoverningLaw =
+  output governedBySingaporeLaw : Boolean
+  output jurisdictionSingapore : Boolean
+
+  definition governedBySingaporeLaw equals true
+  definition jurisdictionSingapore equals true
+
+# --- Future of Services ---
+
+scope CardFutureOfServices =
+  output payPalRetainsSoleDiscretion : Boolean
+  output notRequiredToActOnFeedback : Boolean
+  output noIPClaimOnFeedback : Boolean
+
+  definition payPalRetainsSoleDiscretion equals true
+  definition notRequiredToActOnFeedback equals true
+  definition noIPClaimOnFeedback equals true
