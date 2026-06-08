@@ -1,0 +1,22 @@
+# PayPal Notice for Non-Singapore Residents
+# Last updated: June 27, 2023
+# Source: PayPal Notice for Non-Singapore Residents
+# Forms part of the PayPal User Agreement
+
+# --- PayPal Pte Ltd Licensing ---
+
+scope NonSingaporePayPalLicensing =
+  output payPalPteLtdLicensedByMAS : Boolean
+  output licensedForEMoneyIssuance : Boolean
+
+  definition payPalPteLtdLicensedByMAS equals true
+  definition licensedForEMoneyIssuance equals true
+
+# --- No Full Recovery Guarantee ---
+
+scope NonSingaporeRecoveryRisk =
+  output noGuaranteeOfFullRecovery : Boolean
+  output appliesIfBusinessFails : Boolean
+
+  definition noGuaranteeOfFullRecovery equals true
+  definition appliesIfBusinessFails equals true
