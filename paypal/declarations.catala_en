@@ -385,3 +385,23 @@ declaration enumeration TechnicalMeasureType =
   -- Accountability
   -- DataSubjectRights
   -- ProcessorManagement
+
+# --- Shops Policy ---
+
+declaration enumeration ShopAccountType =
+  -- VerifiedPremier
+  -- VerifiedBusiness
+
+declaration enumeration ShopUserRegion =
+  -- UnitedStates
+  -- Canada
+  -- Other
+
+declaration enumeration ShopTerminationReason =
+  -- Ineligibility
+  -- DeceptiveInformation
+  -- NoPayPalPayments
+  -- IllegalWebsite
+  -- AUPViolation
+  -- EndorsementClaim
+  -- PayPalDiscretion

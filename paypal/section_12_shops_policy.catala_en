@@ -1,0 +1,188 @@
+# PayPal Shops Policy
+# Last updated: March 8, 2007
+# Source: https://www.paypal.com/us/webapps/mpp/ua/shops-policy
+# Forms part of the PayPal User Agreement
+
+# --- Registration Accuracy ---
+
+scope ShopsRegistrationAccuracy =
+  input titleAccurate : Boolean
+  input descriptionAccurate : Boolean
+  input categoryAccurate : Boolean
+  input allInformationTruthful : Boolean
+  input updatedAfterChange : Boolean
+  output registrationAccurate : Boolean
+  output payPalMayAccessSite : Boolean
+  output payPalNotObligatedToMonitor : Boolean
+
+  definition registrationAccurate equals
+    allInformationTruthful and updatedAfterChange
+
+  definition payPalMayAccessSite equals true
+  definition payPalNotObligatedToMonitor equals true
+
+# --- Inaccurate Registration Consequences ---
+
+scope ShopsInaccurateRegistrationConsequences =
+  input failedToUpdateInfo : Boolean
+  input providedDeceptiveInfo : Boolean
+  output websiteRemovedFromDirectory : Boolean
+  output mayBePermanentlyIneligible : Boolean
+  output accountMayBeLockedOrClosed : Boolean
+
+  definition websiteRemovedFromDirectory equals failedToUpdateInfo
+  definition mayBePermanentlyIneligible equals failedToUpdateInfo
+  definition accountMayBeLockedOrClosed equals providedDeceptiveInfo
+
+# --- US User Eligibility ---
+
+scope ShopsUSEligibility =
+  input hasVerifiedPremierOrBusinessAccount : Boolean
+  input maintainsRegisteredCreditCard : Boolean
+  input hasMoneyMarketFundAccount : Boolean
+  output eligibleForPayPalShops : Boolean
+
+  definition eligibleForPayPalShops equals
+    hasVerifiedPremierOrBusinessAccount and
+    maintainsRegisteredCreditCard and
+    hasMoneyMarketFundAccount
+
+# --- Canadian User Eligibility ---
+
+scope ShopsCanadianEligibility =
+  input hasVerifiedPremierOrBusinessAccount : Boolean
+  input daysInPayPalSystem : Integer
+  input sellerReputationNumber : Integer
+  output eligibleForPayPalShops : Boolean
+
+  definition eligibleForPayPalShops equals
+    hasVerifiedPremierOrBusinessAccount and
+    daysInPayPalSystem >= 90 and
+    sellerReputationNumber >= 10
+
+# --- Non-US/Canadian User Eligibility ---
+
+scope ShopsOtherRegionEligibility =
+  input userRegion : ShopUserRegion
+  input hasExistingShop : Boolean
+  output mayRegisterNewShop : Boolean
+  output mayContinueExistingShop : Boolean
+
+  definition mayRegisterNewShop equals
+    userRegion equals -- UnitedStates or userRegion equals -- Canada
+
+  definition mayContinueExistingShop equals
+    hasExistingShop
+
+# --- Ongoing Eligibility Maintenance ---
+
+scope ShopsOngoingEligibility =
+  input stillMeetsAllRequirements : Boolean
+  output remainsListedInDirectory : Boolean
+
+  definition remainsListedInDirectory equals stillMeetsAllRequirements
+
+# --- PayPal Payments Requirement ---
+
+scope ShopsPayPalPaymentsRequirement =
+  input websiteAcceptsPayPalPayments : Boolean
+  output remainsInDirectory : Boolean
+  output mayReRegisterAfterFix : Boolean
+
+  definition remainsInDirectory equals websiteAcceptsPayPalPayments
+  definition mayReRegisterAfterFix equals not websiteAcceptsPayPalPayments
+
+# --- Credit Check Authorization ---
+
+scope ShopsCreditCheckAuthorization =
+  output payPalMayRunCreditCheck : Boolean
+  output mayRunAtAnyTime : Boolean
+
+  definition payPalMayRunCreditCheck equals true
+  definition mayRunAtAnyTime equals true
+
+# --- Removal at PayPal Discretion ---
+
+scope ShopsPayPalDiscretionaryRemoval =
+  output payPalMayRemoveAnyListingAtAnyTime : Boolean
+  output removalForAnyReason : Boolean
+
+  definition payPalMayRemoveAnyListingAtAnyTime equals true
+  definition removalForAnyReason equals true
+
+# --- License to Use Registration Information ---
+
+scope ShopsLicenseToUseInfo =
+  output nonExclusiveLicense : Boolean
+  output worldwideLicense : Boolean
+  output perpetualLicense : Boolean
+  output royaltyFreeLicense : Boolean
+  output mayCopyPublishDisplay : Boolean
+  output onPayPalWebsiteAndEmails : Boolean
+  output subjectToPrivacyPolicy : Boolean
+  input membershipTerminated : Boolean
+  output licenseTerminatesOnMembershipEnd : Boolean
+
+  definition nonExclusiveLicense equals true
+  definition worldwideLicense equals true
+  definition perpetualLicense equals true
+  definition royaltyFreeLicense equals true
+  definition mayCopyPublishDisplay equals true
+  definition onPayPalWebsiteAndEmails equals true
+  definition subjectToPrivacyPolicy equals true
+  definition licenseTerminatesOnMembershipEnd equals membershipTerminated
+
+# --- No Endorsement ---
+
+scope ShopsNoEndorsement =
+  output presentationNotEndorsement : Boolean
+  output impliedEndorsementGroundsForTermination : Boolean
+
+  definition presentationNotEndorsement equals true
+  definition impliedEndorsementGroundsForTermination equals true
+
+# --- Prohibited Websites: Illegal and AUP Violations ---
+
+scope ShopsProhibitedWebsites =
+  input promotesIllegalActions : Boolean
+  input facilitatesIllegalActions : Boolean
+  input infringesThirdPartyIP : Boolean
+  input violatesAcceptableUsePolicy : Boolean
+  output registrationProhibited : Boolean
+  output groundsForImmediateTermination : Boolean
+  output groundsForAccountClosure : Boolean
+
+  definition registrationProhibited equals
+    promotesIllegalActions or facilitatesIllegalActions or
+    infringesThirdPartyIP or violatesAcceptableUsePolicy
+
+  definition groundsForImmediateTermination equals registrationProhibited
+  definition groundsForAccountClosure equals registrationProhibited
+
+# --- Shopping Disclaimer ---
+
+scope ShopsShoppingDisclaimer =
+  output payPalNotResponsibleForErrors : Boolean
+  output disclaimsAllWarranties : Boolean
+  output disclaimsMerchantability : Boolean
+  output disclaimsAccuracyOfContent : Boolean
+  output doesNotGuaranteeSecurity : Boolean
+  output doesNotGuaranteeQuality : Boolean
+
+  definition payPalNotResponsibleForErrors equals true
+  definition disclaimsAllWarranties equals true
+  definition disclaimsMerchantability equals true
+  definition disclaimsAccuracyOfContent equals true
+  definition doesNotGuaranteeSecurity equals true
+  definition doesNotGuaranteeQuality equals true
+
+# --- Fees ---
+
+scope ShopsFees =
+  output currentlyFree : Boolean
+  output feesMayBeIntroduced : Boolean
+  output changesRequireNotification : Boolean
+
+  definition currentlyFree equals true
+  definition feesMayBeIntroduced equals true
+  definition changesRequireNotification equals true
