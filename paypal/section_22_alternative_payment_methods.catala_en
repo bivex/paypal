@@ -1,0 +1,1168 @@
+# PayPal Alternative Payment Methods Agreement
+# Last updated: February 9, 2026
+# Source: https://www.paypal.com/us/webapps/mpp/ua/apm-full
+# Forms part of the PayPal User Agreement
+
+# --- Section 1: About These Terms ---
+
+scope APMAboutTerms =
+  output appliesToAPMFunctionality : Boolean
+  output apmFunctionalityDefinition : Boolean
+  output apmIsPaymentMethodInAnnex1 : Boolean
+  output payerDoesNotNeedAccount : Boolean
+  output userAgreementFormsPart : Boolean
+  output theseTermsOverrideOnConflict : Boolean
+  output apmIncludedInServicesDefinition : Boolean
+
+  definition appliesToAPMFunctionality equals true
+  definition apmFunctionalityDefinition equals true
+  definition apmIsPaymentMethodInAnnex1 equals true
+  definition payerDoesNotNeedAccount equals true
+  definition userAgreementFormsPart equals true
+  definition theseTermsOverrideOnConflict equals true
+  definition apmIncludedInServicesDefinition equals true
+
+# --- Section 2: APM Prohibited Activities ---
+
+scope APMProhibitedActivitiesGeneral =
+  output mayNotAcceptForGoodsNotOnOwnAccount : Boolean
+  output mayNotAcceptOutsideNormalBusinessScope : Boolean
+  output mayNotAcceptProhibitedByTheseTerms : Boolean
+
+  definition mayNotAcceptForGoodsNotOnOwnAccount equals true
+  definition mayNotAcceptOutsideNormalBusinessScope equals true
+  definition mayNotAcceptProhibitedByTheseTerms equals true
+
+scope APMProhibitedCategoriesIllegal =
+  output illegalProductsAndServices : Boolean
+  output violenceAgainstGroups : Boolean
+  output counterfeitUnauthorizedGoods : Boolean
+  output drugsAndNarcotics : Boolean
+  output getRichQuickPyramidSchemes : Boolean
+  output humanOrAnimalBodiesOrgans : Boolean
+  output intellectualPropertyInfringement : Boolean
+  output naziBrandedProducts : Boolean
+  output noValueAddedWebsites : Boolean
+  output payToRemoveDefamatory : Boolean
+  output racistSexistAbusiveContent : Boolean
+  output hazardousMaterials : Boolean
+
+  definition illegalProductsAndServices equals true
+  definition violenceAgainstGroups equals true
+  definition counterfeitUnauthorizedGoods equals true
+  definition drugsAndNarcotics equals true
+  definition getRichQuickPyramidSchemes equals true
+  definition humanOrAnimalBodiesOrgans equals true
+  definition intellectualPropertyInfringement equals true
+  definition naziBrandedProducts equals true
+  definition noValueAddedWebsites equals true
+  definition payToRemoveDefamatory equals true
+  definition racistSexistAbusiveContent equals true
+  definition hazardousMaterials equals true
+
+scope APMProhibitedCategoriesRegulated =
+  output alcoholAndBeverages : Boolean
+  output archaeologicalFindings : Boolean
+  output cbdAndHempProducts : Boolean
+  output onlinePharmaciesPrescriptionDrugs : Boolean
+  output fireworksAndRelated : Boolean
+  output liveAnimals : Boolean
+  output pornographyAndSexualServices : Boolean
+  output preciousMetalsAndStones : Boolean
+  output substancesMimickingIllegalDrugs : Boolean
+  output tobaccoE cigarettes : Boolean
+  output weaponsAmmunition : Boolean
+
+  definition alcoholAndBeverages equals true
+  definition archaeologicalFindings equals true
+  definition cbdAndHempProducts equals true
+  definition onlinePharmaciesPrescriptionDrugs equals true
+  definition fireworksAndRelated equals true
+  definition liveAnimals equals true
+  definition pornographyAndSexualServices equals true
+  definition preciousMetalsAndStones equals true
+  definition substancesMimickingIllegalDrugs equals true
+  definition tobaccoE cigarettes equals true
+  definition weaponsAmmunition equals true
+
+scope APMProhibitedCategoriesFinancial =
+  output bailBonds : Boolean
+  output bankruptcyLawyers : Boolean
+  output binaryOptions : Boolean
+  output creditLoansShortTermLending : Boolean
+  output debtCollection : Boolean
+  output lawFirmsCollectingForNonFeePurposes : Boolean
+  output wealthManagement : Boolean
+
+  definition bailBonds equals true
+  definition bankruptcyLawyers equals true
+  definition binaryOptions equals true
+  definition creditLoansShortTermLending equals true
+  definition debtCollection equals true
+  definition lawFirmsCollectingForNonFeePurposes equals true
+  definition wealthManagement equals true
+
+scope APMProhibitedCategoriesMiscellaneous =
+  output psychicFortuneTeller : Boolean
+  output pyrotechnicDevices : Boolean
+  output telemarketing : Boolean
+  output saleOfSocialMediaActivity : Boolean
+
+  definition psychicFortuneTeller equals true
+  definition pyrotechnicDevices equals true
+  definition telemarketing equals true
+  definition saleOfSocialMediaActivity equals true
+
+# --- Section 3: Accepting These Terms ---
+
+scope APTAcceptingTerms =
+  output acceptedByIntegrationOrInvoice : Boolean
+  output integratorMustHavePermissionToBind : Boolean
+  output boundEntityIsTheAccountHolder : Boolean
+  output feesPerMerchantFeesPage : Boolean
+
+  definition acceptedByIntegrationOrInvoice equals true
+  definition integratorMustHavePermissionToBind equals true
+  definition boundEntityIsTheAccountHolder equals true
+  definition feesPerMerchantFeesPage equals true
+
+# --- Section 4: Using APM Functionality ---
+
+scope APMUsageRules =
+  input accountType : AccountType
+  input currencyMatchRequired : Boolean
+  output payPalMayAllowAPMPayment : Boolean
+  output notObligedToAllowAPMPayment : Boolean
+  output mustComplyWithAnnex1Provisions : Boolean
+  output mayNotProactivelyRefundAPM : Boolean
+  output refundOnlyIfStatedInAnnex1 : Boolean
+  output mayNotReceiveInOtherCurrencies : Boolean
+  output businessAccountRequired : Boolean
+  output personalAccountInvoiceOnly : Boolean
+
+  definition payPalMayAllowAPMPayment equals true
+  definition notObligedToAllowAPMPayment equals true
+  definition mustComplyWithAnnex1Provisions equals true
+  definition mayNotProactivelyRefundAPM equals true
+  definition refundOnlyIfStatedInAnnex1 equals true
+  definition mayNotReceiveInOtherCurrencies equals true
+  definition businessAccountRequired equals
+    accountType equals AccountType.Business
+  definition personalAccountInvoiceOnly equals
+    accountType equals AccountType.Personal
+
+# --- Section 5: Your Liability to Us ---
+
+scope APMLiability =
+  output apmProvidersTreatedAsAcquirers : Boolean
+  output apmPaymentsAtRiskOfReversal : Boolean
+  output reversalLiabilitySameAsUserAgreement : Boolean
+  output sellerProtectionDoesNotApply : Boolean
+  output liabilitySurvivesTermination : Boolean
+
+  definition apmProvidersTreatedAsAcquirers equals true
+  definition apmPaymentsAtRiskOfReversal equals true
+  definition reversalLiabilitySameAsUserAgreement equals true
+  definition sellerProtectionDoesNotApply equals true
+  definition liabilitySurvivesTermination equals true
+
+# --- Section 6: Changes and Termination ---
+
+scope APMChangesAndTermination =
+  input disagreesWithChange : Boolean
+  output payPalMayAddRemoveAPMsAnyTime : Boolean
+  output amendmentsFollowUserAgreementChangeProcess : Boolean
+  output merchantMayTerminateIfDisagrees : Boolean
+  output merchantTerminatesByRemovingIntegration : Boolean
+  output terminationDoesNotCloseAccount : Boolean
+  output userAgreementRemainsInEffect : Boolean
+  output payPalMayTerminateForAnyReason : Boolean
+  output payPalMustGiveReasonableNotice : Boolean
+  output termsSurviveTermination : Boolean
+
+  definition payPalMayAddRemoveAPMsAnyTime equals true
+  definition amendmentsFollowUserAgreementChangeProcess equals true
+  definition merchantMayTerminateIfDisagrees equals disagreesWithChange
+  definition merchantTerminatesByRemovingIntegration equals true
+  definition terminationDoesNotCloseAccount equals true
+  definition userAgreementRemainsInEffect equals true
+  definition payPalMayTerminateForAnyReason equals true
+  definition payPalMustGiveReasonableNotice equals true
+  definition termsSurviveTermination equals true
+
+# ============================================================
+# Annex 1: APM Details
+# Each APM scope encodes: paymentType, chargebackRisk,
+# reversalsMissingFundsRisk, paymentGuarantee, refundPossible,
+# hasTransactionMinimum, hasTransactionMaximum,
+# hasSpecificProhibitedGoods, hasSupplementalTerms
+# ============================================================
+
+# --- A-B ---
+
+scope APM_Alfamart =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.Cash
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals false
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals true
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+
+scope APM_AliPay =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.Wallet
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals false
+  definition hasTransactionMaximum equals true
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+
+scope APM_ApplePayWeb =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.ApplePayWallet
+  definition chargebackRisk equals true
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals false
+  definition hasTransactionMaximum equals false
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+
+scope APM_Bancontact =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.DebitCard
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals false
+  definition hasSpecificProhibitedGoods equals false
+  definition hasSupplementalTerms equals false
+
+scope APM_BancomatPay =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.RealTimeBankTransfer
+  definition chargebackRisk equals true
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals false
+  definition hasSpecificProhibitedGoods equals false
+  definition hasSupplementalTerms equals true
+
+scope APM_BIZUM =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.BankTransfer
+  definition chargebackRisk equals true
+  definition reversalsMissingFundsRisk equals true
+  definition paymentGuarantee equals true
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals true
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals false
+
+scope APM_BLIK =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.RealTimeBankTransfer
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals true
+  definition hasSpecificProhibitedGoods equals false
+  definition hasSupplementalTerms equals true
+
+scope APM_BoletoBancario =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.CashPayment
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals false
+  definition hasTransactionMinimum equals false
+  definition hasTransactionMaximum equals false
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals false
+
+# --- C-F ---
+
+scope APM_DokuWallet =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.Wallet
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals false
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals true
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+
+scope APM_Dragonpay =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.RealTimeBankTransfer
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals false
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals false
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+
+scope APM_EPS =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.RealTimeBankTransfer
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals true
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals false
+  definition hasSpecificProhibitedGoods equals false
+  definition hasSupplementalTerms equals true
+
+scope APM_EstonianOnlineBankTransfer =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.RealTimeBankTransfer
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals false
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals false
+
+scope APM_FinnishOnlineBankTransfer =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.RealTimeBankTransfer
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals true
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+
+scope APM_Fiuu =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.CashPayment
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals false
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals true
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+
+scope APM_FPXOnlineBanking =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.RealTimeBankTransfer
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals true
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+
+# --- G-J ---
+
+scope APM_GooglePay =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.GooglePayWallet
+  definition chargebackRisk equals true
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals false
+  definition hasTransactionMaximum equals false
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+
+scope APM_GoPay =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.RealTimeBankTransfer
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals false
+  definition hasTransactionMaximum equals true
+  definition hasSpecificProhibitedGoods equals false
+  definition hasSupplementalTerms equals true
+
+scope APM_GrabPay =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.Wallet
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals true
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals true
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+
+scope APM_iDEAL =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.RealTimeBankTransfer
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals true
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals false
+  definition hasTransactionMaximum equals false
+  definition hasSpecificProhibitedGoods equals false
+  definition hasSupplementalTerms equals true
+
+scope APM_Indomaret =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.Cash
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals false
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals true
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+
+scope APM_IndonesianBanks =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.BankTransfer
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals false
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals true
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+
+scope APM_JeniusPay =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.Wallet
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals false
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals true
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+
+# --- K-M ---
+
+scope APM_LatvianOnlineBankTransfer =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.RealTimeBankTransfer
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals false
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals false
+
+scope APM_LinkAja =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.Wallet
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals false
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals true
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+
+scope APM_LithuanianOnlineBankTransfer =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.RealTimeBankTransfer
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals false
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals false
+
+scope APM_MBWay =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.Wallet
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals false
+  definition hasTransactionMaximum equals false
+  definition hasSpecificProhibitedGoods equals false
+  definition hasSupplementalTerms equals false
+
+scope APM_Multibanco =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.RealTimeBankTransfer
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals false
+  definition hasTransactionMinimum equals false
+  definition hasTransactionMaximum equals true
+  definition hasSpecificProhibitedGoods equals false
+  definition hasSupplementalTerms equals false
+
+scope APM_MyBank =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.RealTimeBankTransfer
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals true
+  definition paymentGuarantee equals false
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals false
+  definition hasTransactionMaximum equals false
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+
+# --- N-P ---
+
+scope APM_OVO =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.Wallet
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals false
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals true
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals false
+
+scope APM_OxxoPay =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.CashPayment
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals false
+  definition hasTransactionMinimum equals false
+  definition hasTransactionMaximum equals true
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+
+scope APM_PaysafeCard =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.PrepaidVoucher
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals false
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals true
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+
+scope APM_Paysera =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.Wallet
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals false
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals false
+
+scope APM_PayU =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.RealTimeBankTransfer
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals false
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+
+scope APM_PIX =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output refundAutomatic : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.RealTimeBankTransfer
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals true
+  definition refundAutomatic equals true
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals false
+  definition hasSpecificProhibitedGoods equals false
+  definition hasSupplementalTerms equals false
+
+scope APM_Przelewy24 =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.RealTimeBankTransfer
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals false
+  definition hasSpecificProhibitedGoods equals false
+  definition hasSupplementalTerms equals true
+
+# --- Q-Z ---
+
+scope APM_Safetypay =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.RealTimeBankTransfer
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals true
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals false
+  definition hasTransactionMaximum equals true
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals false
+
+scope APM_Satispay =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.Wallet
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals true
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals false
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+
+scope APM_Skrill =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.Wallet
+  definition chargebackRisk equals true
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals true
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+
+scope APM_Swish =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.RealTimeBankTransfer
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals true
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals false
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+
+scope APM_ThailandBanks =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.RealTimeBankTransfer
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals false
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals false
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+
+scope APM_Trustly =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+
+  definition paymentType equals APMPaymentType.RealTimeBankTransfer
+  definition chargebackRisk equals false
+  definition reversalsMissingFundsRisk equals true
+  definition paymentGuarantee equals false
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals false
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+
+scope APM_Twint =
+  output paymentType : APMPaymentType
+  output chargebackRisk : Boolean
+  output reversalsMissingFundsRisk : Boolean
+  output paymentGuarantee : Boolean
+  output refundPossible : Boolean
+  output hasTransactionMinimum : Boolean
+  output hasTransactionMaximum : Boolean
+  output hasSpecificProhibitedGoods : Boolean
+  output hasSupplementalTerms : Boolean
+  output chargebackPlusCreditVolumeLimitPercent : Rational
+  output chargebackPlusCreditCountLimitPercent : Rational
+  output deferredPaymentMaxDays : Integer
+
+  definition paymentType equals APMPaymentType.MobileWallet
+  definition chargebackRisk equals true
+  definition reversalsMissingFundsRisk equals false
+  definition paymentGuarantee equals false
+  definition refundPossible equals true
+  definition hasTransactionMinimum equals true
+  definition hasTransactionMaximum equals true
+  definition hasSpecificProhibitedGoods equals true
+  definition hasSupplementalTerms equals true
+  definition chargebackPlusCreditVolumeLimitPercent equals 2 / 100
+  definition chargebackPlusCreditCountLimitPercent equals 1 / 100
+  definition deferredPaymentMaxDays equals 540
+
+# --- APM Risk Summary ---
+
+scope APMChargebackRiskSummary =
+  output apmsWithChargebackRisk : APMName list
+  output apmsWithoutChargebackRisk : APMName list
+
+  definition apmsWithChargebackRisk equals
+    [ APMName.ApplePayWeb
+    , APMName.BancomatPay
+    , APMName.BIZUM
+    , APMName.GooglePay
+    , APMName.Skrill
+    , APMName.Twint
+    ]
+
+  definition apmsWithoutChargebackRisk equals
+    [ APMName.Alfamart
+    , APMName.AliPay
+    , APMName.Bancontact
+    , APMName.BLIK
+    , APMName.BoletoBancario
+    , APMName.DokuWallet
+    , APMName.Dragonpay
+    , APMName.EPS
+    , APMName.EstonianOnlineBankTransfer
+    , APMName.FinnishOnlineBankTransfer
+    , APMName.Fiuu
+    , APMName.FPXOnlineBanking
+    , APMName.GoPay
+    , APMName.GrabPay
+    , APMName.iDEAL
+    , APMName.Indomaret
+    , APMName.IndonesianBanks
+    , APMName.JeniusPay
+    , APMName.LatvianOnlineBankTransfer
+    , APMName.LinkAja
+    , APMName.LithuanianOnlineBankTransfer
+    , APMName.MBWay
+    , APMName.Multibanco
+    , APMName.MyBank
+    , APMName.OVO
+    , APMName.OxxoPay
+    , APMName.PaysafeCard
+    , APMName.Paysera
+    , APMName.PayU
+    , APMName.PIX
+    , APMName.Przelewy24
+    , APMName.Safetypay
+    , APMName.Satispay
+    , APMName.Swish
+    , APMName.ThailandBanks
+    , APMName.Trustly
+    ]
+
+scope APMPaymentGuaranteeSummary =
+  output apmsWithPaymentGuarantee : APMName list
+
+  definition apmsWithPaymentGuarantee equals
+    [ APMName.BIZUM
+    , APMName.EPS
+    , APMName.GrabPay
+    , APMName.iDEAL
+    , APMName.Safetypay
+    , APMName.Satispay
+    , APMName.Swish
+    ]

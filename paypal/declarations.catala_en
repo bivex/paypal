@@ -533,3 +533,61 @@ declaration enumeration InfringementReportIPRightType =
   -- Patent
   -- TradeDress
   -- Other
+
+# --- Alternative Payment Methods ---
+
+declaration enumeration APMPaymentType =
+  -- Cash
+  -- Wallet
+  -- DebitCard
+  -- RealTimeBankTransfer
+  -- BankTransfer
+  -- CashPayment
+  -- PrepaidVoucher
+  -- MobileWallet
+  -- ApplePayWallet
+  -- GooglePayWallet
+
+declaration enumeration APMName =
+  -- Alfamart
+  -- AliPay
+  -- ApplePayWeb
+  -- Bancontact
+  -- BancomatPay
+  -- BIZUM
+  -- BLIK
+  -- BoletoBancario
+  -- DokuWallet
+  -- Dragonpay
+  -- EPS
+  -- EstonianOnlineBankTransfer
+  -- FinnishOnlineBankTransfer
+  -- Fiuu
+  -- FPXOnlineBanking
+  -- GooglePay
+  -- GoPay
+  -- GrabPay
+  -- iDEAL
+  -- Indomaret
+  -- IndonesianBanks
+  -- JeniusPay
+  -- LatvianOnlineBankTransfer
+  -- LinkAja
+  -- LithuanianOnlineBankTransfer
+  -- MBWay
+  -- Multibanco
+  -- MyBank
+  -- OVO
+  -- OxxoPay
+  -- PaysafeCard
+  -- Paysera
+  -- PayU
+  -- PIX
+  -- Przelewy24
+  -- Safetypay
+  -- Satispay
+  -- Skrill
+  -- Swish
+  -- ThailandBanks
+  -- Trustly
+  -- Twint
