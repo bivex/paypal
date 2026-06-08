@@ -1,0 +1,491 @@
+# PayPal Data Protection Addendum for Card Processing Products
+# Last updated: December 1, 2021
+# Source: PayPal Card Processing Products
+# Forms part of the PayPal User Agreement
+
+# --- Addendum Application ---
+
+scope DPACardAddendumApplication =
+  input serviceType : DPACardServiceType
+  output appliesToPaymentServices : Boolean
+  output doesNotApplyToWalletServices : Boolean
+  output formsPartOfAgreement : Boolean
+  output controlsOnConflict : Boolean
+
+  definition appliesToPaymentServices equals
+    serviceType equals -- CardProcessing or
+    serviceType equals -- Gateway or
+    serviceType equals -- FraudProtection
+
+  definition doesNotApplyToWalletServices equals true
+  definition formsPartOfAgreement equals true
+  definition controlsOnConflict equals true
+
+# --- Addendum Effective Date ---
+
+scope DPACardEffectiveDate =
+  input agreementEffectiveDate : Boolean
+  input noticeEffectiveDate : Boolean
+  output effectiveDateIsLaterOf : Boolean
+
+  definition effectiveDateIsLaterOf equals
+    agreementEffectiveDate or noticeEffectiveDate
+
+# --- Addendum Amendments ---
+
+scope DPACardAmendments =
+  input reducesRightsOrIncreasesResponsibilities : Boolean
+  output revisedVersionEffectiveWhenPosted : Boolean
+  output substantialChangePostedOnPolicyUpdates : Boolean
+  output mayDiscontinueIfDisagree : Boolean
+
+  definition revisedVersionEffectiveWhenPosted equals true
+  definition substantialChangePostedOnPolicyUpdates equals
+    reducesRightsOrIncreasesResponsibilities
+  definition mayDiscontinueIfDisagree equals true
+
+# --- PayPal As Controller ---
+
+scope DPACardPayPalAsController =
+  output complyWithDataProtectionLaws : Boolean
+  output implementAndMaintainSecurityMeasures : Boolean
+  output notCauseMerchantBreach : Boolean
+  output transferToThirdPartiesWithWrittenAgreements : Boolean
+  output thirdPartyAgreementsNoLessProtective : Boolean
+
+  definition complyWithDataProtectionLaws equals true
+  definition implementAndMaintainSecurityMeasures equals true
+  definition notCauseMerchantBreach equals true
+  definition transferToThirdPartiesWithWrittenAgreements equals true
+  definition thirdPartyAgreementsNoLessProtective equals true
+
+# --- Independent Controllers ---
+
+scope DPACardIndependentControllers =
+  output merchantIsIndependentController : Boolean
+  output payPalIsIndependentController : Boolean
+  output notJointControllers : Boolean
+  output payPalIndependentlyDeterminesPurposeAndMeans : Boolean
+
+  definition merchantIsIndependentController equals true
+  definition payPalIsIndependentController equals true
+  definition notJointControllers equals true
+  definition payPalIndependentlyDeterminesPurposeAndMeans equals true
+
+# --- Permitted Processing Purposes ---
+
+scope DPACardPermittedProcessing =
+  output purposeProvideAndImproveServices : Boolean
+  output purposeFraudPreventionAndDetection : Boolean
+  output purposeLegalRegulatoryCompliance : Boolean
+  output purposeProductAnalysisAndDevelopment : Boolean
+  output purposeInternalUsageAnalytics : Boolean
+  output purposeAggregateDisclosure : Boolean
+  output purposeLawEnforcementAssistance : Boolean
+  output purposeOtherAsNotified : Boolean
+
+  definition purposeProvideAndImproveServices equals true
+  definition purposeFraudPreventionAndDetection equals true
+  definition purposeLegalRegulatoryCompliance equals true
+  definition purposeProductAnalysisAndDevelopment equals true
+  definition purposeInternalUsageAnalytics equals true
+  definition purposeAggregateDisclosure equals true
+  definition purposeLawEnforcementAssistance equals true
+  definition purposeOtherAsNotified equals true
+
+# --- Merchant Notice to Customers ---
+
+scope DPACardMerchantNotice =
+  output mustNotifyCustomersPayPalIsController : Boolean
+  output mustIncludeLinkToPayPalPrivacyStatement : Boolean
+  output commerciallyReasonableEffortsRequired : Boolean
+
+  definition mustNotifyCustomersPayPalIsController equals true
+  definition mustIncludeLinkToPayPalPrivacyStatement equals true
+  definition commerciallyReasonableEffortsRequired equals true
+
+# --- Mutual Assistance ---
+
+scope DPACardMutualAssistance =
+  output partiesShallCooperate : Boolean
+  output merchantRespondsToSubjectAccessRequests : Boolean
+  output merchantInformsCustomerOfPayPalRights : Boolean
+
+  definition partiesShallCooperate equals true
+  definition merchantRespondsToSubjectAccessRequests equals true
+  definition merchantInformsCustomerOfPayPalRights equals true
+
+# --- Security Incident Notification ---
+
+scope DPACardSecurityIncidentNotification =
+  input payPalMustNotifyCustomers : Boolean
+  input payPalLacksContactInfo : Boolean
+  output merchantShallProvideContactInfo : Boolean
+  output commerciallyReasonableEffortsRequired : Boolean
+
+  definition merchantShallProvideContactInfo equals
+    payPalMustNotifyCustomers and payPalLacksContactInfo
+  definition commerciallyReasonableEffortsRequired equals true
+
+# --- Cross Border Data Transfers ---
+
+scope DPACardCrossBorderTransfers =
+  input transferOutsideCountryNecessary : Boolean
+  input noAdequacyDecision : Boolean
+  output payPalMayTransfer : Boolean
+  output mustEnsureAppropriateSafeguards : Boolean
+  output reliesOnBindingCorporateRules : Boolean
+
+  definition payPalMayTransfer equals transferOutsideCountryNecessary
+  definition mustEnsureAppropriateSafeguards equals noAdequacyDecision
+  definition reliesOnBindingCorporateRules equals true
+
+# --- EU Transfer Clauses Acceptance ---
+
+scope DPACardEUTransferClausesAcceptance =
+  input customerInEU : Boolean
+  input customerInSwitzerland : Boolean
+  input customerInEEA : Boolean
+  input customerInUK : Boolean
+  output agreementSignatureDeemedAcceptance : Boolean
+  output merchantIsDataExporter : Boolean
+  output payPalIsDataImporter : Boolean
+  output module1ControllerToControllerApplies : Boolean
+
+  definition agreementSignatureDeemedAcceptance equals
+    customerInEU or customerInSwitzerland or customerInEEA or customerInUK
+
+  definition merchantIsDataExporter equals agreementSignatureDeemedAcceptance
+  definition payPalIsDataImporter equals agreementSignatureDeemedAcceptance
+  definition module1ControllerToControllerApplies equals
+    agreementSignatureDeemedAcceptance
+
+# --- EU Transfer Clauses Specifics ---
+
+scope DPACardEUTransferClausesDetails =
+  output clause17Option1Applies : Boolean
+  output governingLawLuxembourg : Boolean
+  output jurisdictionLuxembourg : Boolean
+  output appendixPerAttachment1 : Boolean
+
+  definition clause17Option1Applies equals true
+  definition governingLawLuxembourg equals true
+  definition jurisdictionLuxembourg equals true
+  definition appendixPerAttachment1 equals true
+
+# --- UK Transfer Clauses Specifics ---
+
+scope DPACardUKTransferClausesDetails =
+  output clauseIIhiiiIncorporated : Boolean
+  output payPalSignatureDeemedInitials : Boolean
+  output annexBPerAttachment1 : Boolean
+
+  definition clauseIIhiiiIncorporated equals true
+  definition payPalSignatureDeemedInitials equals true
+  definition annexBPerAttachment1 equals true
+
+# --- Transfer Clauses Update Mechanism ---
+
+scope DPACardTransferClausesUpdate =
+  output newClausesSupersedeOld : Boolean
+  output partiesAgreeToExecuteNewClauses : Boolean
+
+  definition newClausesSupersedeOld equals true
+  definition partiesAgreeToExecuteNewClauses equals true
+
+# --- Attachment 1: Data Exporter Details ---
+
+scope DPACardAttachmentDataExporter =
+  output exporterIsMerchant : Boolean
+  output addressAsProvidedInAgreement : Boolean
+  output contactAsProvidedInAgreement : Boolean
+  output activitiesAsProvidedInAgreement : Boolean
+  output roleController : Boolean
+
+  definition exporterIsMerchant equals true
+  definition addressAsProvidedInAgreement equals true
+  definition contactAsProvidedInAgreement equals true
+  definition activitiesAsProvidedInAgreement equals true
+  definition roleController equals true
+
+# --- Attachment 1: Data Importer Details ---
+
+scope DPACardAttachmentDataImporter =
+  output importerIsPayPalGroupMember : Boolean
+  output addressAsProvidedInAgreement : Boolean
+  output contactAsProvidedInAgreement : Boolean
+  output activitiesAsProvidedInAgreement : Boolean
+  output roleController : Boolean
+
+  definition importerIsPayPalGroupMember equals true
+  definition addressAsProvidedInAgreement equals true
+  definition contactAsProvidedInAgreement equals true
+  definition activitiesAsProvidedInAgreement equals true
+  definition roleController equals true
+
+# --- Attachment 1: Data Subject Categories ---
+
+scope DPACardAttachmentDataSubjects =
+  output includesCustomers : Boolean
+  output includesEmployees : Boolean
+  output includesBusinessContacts : Boolean
+
+  definition includesCustomers equals true
+  definition includesEmployees equals true
+  definition includesBusinessContacts equals true
+
+# --- Attachment 1: Personal Data Categories ---
+
+scope DPACardAttachmentPersonalDataCategories =
+  output includesName : Boolean
+  output includesAmountCharged : Boolean
+  output includesDateTime : Boolean
+  output includesBankAccountDetails : Boolean
+  output includesPaymentCardDetails : Boolean
+  output includesCVCCode : Boolean
+  output includesPostCode : Boolean
+  output includesCountryCode : Boolean
+  output includesAddress : Boolean
+  output includesEmailAddress : Boolean
+  output includesFax : Boolean
+  output includesPhone : Boolean
+  output includesWebsite : Boolean
+  output includesExpiryData : Boolean
+  output includesShippingDetails : Boolean
+  output includesTaxStatus : Boolean
+  output includesUniqueCustomerIdentifier : Boolean
+  output includesIPAddress : Boolean
+  output includesLocation : Boolean
+  output includesOtherDataUnderAgreement : Boolean
+
+  definition includesName equals true
+  definition includesAmountCharged equals true
+  definition includesDateTime equals true
+  definition includesBankAccountDetails equals true
+  definition includesPaymentCardDetails equals true
+  definition includesCVCCode equals true
+  definition includesPostCode equals true
+  definition includesCountryCode equals true
+  definition includesAddress equals true
+  definition includesEmailAddress equals true
+  definition includesFax equals true
+  definition includesPhone equals true
+  definition includesWebsite equals true
+  definition includesExpiryData equals true
+  definition includesShippingDetails equals true
+  definition includesTaxStatus equals true
+  definition includesUniqueCustomerIdentifier equals true
+  definition includesIPAddress equals true
+  definition includesLocation equals true
+  definition includesOtherDataUnderAgreement equals true
+
+# --- Attachment 1: Sensitive Data ---
+
+scope DPACardAttachmentSensitiveData =
+  input merchantConfiguredSensitiveData : Boolean
+  output sensitiveDataApplicable : Boolean
+  output restrictionsAndSafeguardsApply : Boolean
+
+  definition sensitiveDataApplicable equals merchantConfiguredSensitiveData
+  definition restrictionsAndSafeguardsApply equals merchantConfiguredSensitiveData
+
+# --- Attachment 1: Nature of Processing ---
+
+scope DPACardAttachmentNatureOfProcessing =
+  output asSetForthInAgreement : Boolean
+
+  definition asSetForthInAgreement equals true
+
+# --- Attachment 1: Transfer Purposes ---
+
+scope DPACardAttachmentTransferPurposes =
+  output purposeServicePerformance : Boolean
+  output purposeFraudIdentification : Boolean
+  output purposeLegalCompliance : Boolean
+  output purposeAsSetForthInAddendum : Boolean
+
+  definition purposeServicePerformance equals true
+  definition purposeFraudIdentification equals true
+  definition purposeLegalCompliance equals true
+  definition purposeAsSetForthInAddendum equals true
+
+# --- Attachment 1: Retention Period ---
+
+scope DPACardAttachmentRetentionPeriod =
+  output retainedOnlyAsLongAsNecessary : Boolean
+  output considersAmountNatureSensitivity : Boolean
+  output considersRiskOfHarm : Boolean
+  output considersPurposesAndAlternatives : Boolean
+  output considersLegalRequirements : Boolean
+
+  definition retainedOnlyAsLongAsNecessary equals true
+  definition considersAmountNatureSensitivity equals true
+  definition considersRiskOfHarm equals true
+  definition considersPurposesAndAlternatives equals true
+  definition considersLegalRequirements equals true
+
+# --- Attachment 1: Sub-processors ---
+
+scope DPACardAttachmentSubprocessors =
+  output mayShareWithThirdPartyProviders : Boolean
+  output thirdPartiesActAtPayPalDirection : Boolean
+  output subprocessorDurationSameCriteria : Boolean
+
+  definition mayShareWithThirdPartyProviders equals true
+  definition thirdPartiesActAtPayPalDirection equals true
+  definition subprocessorDurationSameCriteria equals true
+
+# --- Attachment 1: Supervisory Authority ---
+
+scope DPACardAttachmentSupervisoryAuthority =
+  output asPerClause13a : Boolean
+
+  definition asPerClause13a equals true
+
+# --- Attachment 1: Technical and Organizational Measures ---
+
+scope DPACardTechnicalMeasuresPseudonymization =
+  output pseudonymizationAndEncryption : Boolean
+  output encryptionInTransitAndAtRest : Boolean
+  output tokenizationUsed : Boolean
+
+  definition pseudonymizationAndEncryption equals true
+  definition encryptionInTransitAndAtRest equals true
+  definition tokenizationUsed equals true
+
+scope DPACardTechnicalMeasuresChangeManagement =
+  output changeManagementProcess : Boolean
+  output businessContinuityFramework : Boolean
+
+  definition changeManagementProcess equals true
+  definition businessContinuityFramework equals true
+
+scope DPACardTechnicalMeasuresDisasterRecovery =
+  output disasterRecoveryProgram : Boolean
+  output multipleSecureDataCenters : Boolean
+  output primaryAndSecondaryCapability : Boolean
+
+  definition disasterRecoveryProgram equals true
+  definition multipleSecureDataCenters equals true
+  definition primaryAndSecondaryCapability equals true
+
+scope DPACardTechnicalMeasuresTesting =
+  output regularTestingProgram : Boolean
+  output enterpriseRiskAndComplianceManaged : Boolean
+
+  definition regularTestingProgram equals true
+  definition enterpriseRiskAndComplianceManaged equals true
+
+scope DPACardTechnicalMeasuresUserAccess =
+  output uniqueCorporateAccountId : Boolean
+  output roleBasedAccess : Boolean
+  output quarterlyAccessCertification : Boolean
+  output leastPrivilegePrinciple : Boolean
+
+  definition uniqueCorporateAccountId equals true
+  definition roleBasedAccess equals true
+  definition quarterlyAccessCertification equals true
+  definition leastPrivilegePrinciple equals true
+
+scope DPACardTechnicalMeasuresPhysicalSecurity =
+  output globalSafetyAndSecurityPolicies : Boolean
+  output specialAreasProtected : Boolean
+
+  definition globalSafetyAndSecurityPolicies equals true
+  definition specialAreasProtected equals true
+
+scope DPACardTechnicalMeasuresLogging =
+  output eventLoggingAndMonitoring : Boolean
+  output centralizedSecurityMonitoringSystem : Boolean
+  output configurationManagementControl : Boolean
+  output systemHardeningBaselines : Boolean
+
+  definition eventLoggingAndMonitoring equals true
+  definition centralizedSecurityMonitoringSystem equals true
+  definition configurationManagementControl equals true
+  definition systemHardeningBaselines equals true
+
+scope DPACardTechnicalMeasuresGovernance =
+  output chiefInformationSecurityOfficer : Boolean
+  output technologyOversightProgram : Boolean
+  output iso27001Certification : Boolean
+  output pciDSSCompliance : Boolean
+  output soc1AndSOC2Assurance : Boolean
+  output riskControlIdentificationProcess : Boolean
+  output privacyImpactAssessments : Boolean
+  output thirdPartyManagementProgram : Boolean
+
+  definition chiefInformationSecurityOfficer equals true
+  definition technologyOversightProgram equals true
+  definition iso27001Certification equals true
+  definition pciDSSCompliance equals true
+  definition soc1AndSOC2Assurance equals true
+  definition riskControlIdentificationProcess equals true
+  definition privacyImpactAssessments equals true
+  definition thirdPartyManagementProgram equals true
+
+scope DPACardTechnicalMeasuresDataMinimization =
+  output dataElementsLimitedToNecessary : Boolean
+  output privacyImpactAssessmentEnsures : Boolean
+
+  definition dataElementsLimitedToNecessary equals true
+  definition privacyImpactAssessmentEnsures equals true
+
+scope DPACardTechnicalMeasuresDataQuality =
+  output dataCorrectCompleteUpToDate : Boolean
+  output dataClassifiedWithRetentionPeriods : Boolean
+  output dataDisposedAfterRetention : Boolean
+
+  definition dataCorrectCompleteUpToDate equals true
+  definition dataClassifiedWithRetentionPeriods equals true
+  definition dataDisposedAfterRetention equals true
+
+scope DPACardTechnicalMeasuresAccountability =
+  output informationSecurityPoliciesAlignedToStandards : Boolean
+  output privacyProgramPolicy : Boolean
+  output enterpriseRiskAndComplianceGovernance : Boolean
+  output globalPrivacyDepartment : Boolean
+  output privacyTrainingAndAwareness : Boolean
+  output privacyMonitoringAndTesting : Boolean
+  output reportingToManagementCommittees : Boolean
+
+  definition informationSecurityPoliciesAlignedToStandards equals true
+  definition privacyProgramPolicy equals true
+  definition enterpriseRiskAndComplianceGovernance equals true
+  definition globalPrivacyDepartment equals true
+  definition privacyTrainingAndAwareness equals true
+  definition privacyMonitoringAndTesting equals true
+  definition reportingToManagementCommittees equals true
+
+scope DPACardTechnicalMeasuresDataSubjectRights =
+  output dataSubjectRightsProgram : Boolean
+  output accessCorrectionErasure : Boolean
+  output erasureUnlessLegalObligation : Boolean
+  output erasureThroughoutCustomerLifecycle : Boolean
+
+  definition dataSubjectRightsProgram equals true
+  definition accessCorrectionErasure equals true
+  definition erasureUnlessLegalObligation equals true
+  definition erasureThroughoutCustomerLifecycle equals true
+
+scope DPACardTechnicalMeasuresProcessorManagement =
+  output comprehensiveThirdPartyProgram : Boolean
+  output contractualControlsForProcessors : Boolean
+  output advanceApprovalForSubprocessors : Boolean
+
+  definition comprehensiveThirdPartyProgram equals true
+  definition contractualControlsForProcessors equals true
+  definition advanceApprovalForSubprocessors equals true
+
+# --- UK Transfer: Recipients ---
+
+scope DPACardUKTransferRecipients =
+  output mayDiscloseToServiceProviders : Boolean
+  output mayDiscloseToAffiliates : Boolean
+  output mayDiscloseToPersonnel : Boolean
+  output asPerAgreementServices : Boolean
+
+  definition mayDiscloseToServiceProviders equals true
+  definition mayDiscloseToAffiliates equals true
+  definition mayDiscloseToPersonnel equals true
+  definition asPerAgreementServices equals true

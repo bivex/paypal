@@ -517,3 +517,10 @@ declaration enumeration CEAWorldpayAcquirerEntity =
   -- WorldpayHK
   -- CitizensBankNA
   -- WorldpayPTY
+
+# --- Data Protection Addendum for Card Processing ---
+
+declaration enumeration DPACardServiceType =
+  -- CardProcessing
+  -- Gateway
+  -- FraudProtection
