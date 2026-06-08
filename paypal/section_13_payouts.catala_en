@@ -1,0 +1,229 @@
+# PayPal Payouts Terms and Conditions
+# Last updated: February 8, 2024
+# Source: https://www.paypal.com/us/webapps/mpp/ua/payouts-full
+# Forms part of the PayPal User Agreement
+
+# --- Payouts Eligibility ---
+
+scope PayoutsEligibility =
+  input hasBusinessAccount : Boolean
+  input accountInGoodStanding : Boolean
+  input receivedPermission : Boolean
+  output eligibleForPayouts : Boolean
+
+  definition eligibleForPayouts equals
+    hasBusinessAccount and accountInGoodStanding and receivedPermission
+
+# --- Payouts Service Scope ---
+
+scope PayoutsServiceScope =
+  output intendedForBulkRecurringPayments : Boolean
+  output notForOneOffPayments : Boolean
+  output maySendToMultipleRecipients : Boolean
+
+  definition intendedForBulkRecurringPayments equals true
+  definition notForOneOffPayments equals true
+  definition maySendToMultipleRecipients equals true
+
+# --- Recipient Eligible Account Requirements ---
+
+scope PayoutsRecipientEligibleAccount =
+  input locatedInEligibleJurisdiction : Boolean
+  input canReceivePayments : Boolean
+  input meetsVerificationRequirements : Boolean
+  input emailConfirmed : Boolean
+  input mobilePhoneVerified : Boolean
+  input accountInGoodStanding : Boolean
+  input notRestrictedOrLimited : Boolean
+  output isEligibleAccount : Boolean
+
+  definition isEligibleAccount equals
+    locatedInEligibleJurisdiction and canReceivePayments and
+    meetsVerificationRequirements and accountInGoodStanding and
+    notRestrictedOrLimited
+
+# --- Recipient Termination/Suspension Reasons ---
+
+scope PayoutsRecipientSuspension =
+  input recipientNotEligible : Boolean
+  input failedToComplyWithLaws : Boolean
+  input failedToComplyWithTerms : Boolean
+  input posesUnacceptableRisk : Boolean
+  input indicatedBySecurityPolicies : Boolean
+  input emailNotValidated : Boolean
+  input phoneNotEnabledForPayments : Boolean
+  input serviceWoundDown : Boolean
+  output mayTerminateOrSuspend : Boolean
+
+  definition mayTerminateOrSuspend equals
+    recipientNotEligible or failedToComplyWithLaws or
+    failedToComplyWithTerms or posesUnacceptableRisk or
+    indicatedBySecurityPolicies or emailNotValidated or
+    phoneNotEnabledForPayments or serviceWoundDown
+
+# --- Unclaimed Payouts: 30-Day Window ---
+
+scope PayoutsUnclaimedPayouts =
+  input recipientHasEligibleAccount : Boolean
+  input daysSincePayoutSent : Integer
+  input recipientClaimedPayout : Boolean
+  output recipientMayClaimByOpeningAccount : Boolean
+  output unclaimedReturnWindowDays : Integer
+  output payoutReturnedToSender : Boolean
+
+  definition unclaimedReturnWindowDays equals 30
+
+  definition recipientMayClaimByOpeningAccount equals
+    not recipientHasEligibleAccount and daysSincePayoutSent <= unclaimedReturnWindowDays
+
+  definition payoutReturnedToSender equals
+    not recipientClaimedPayout and daysSincePayoutSent > unclaimedReturnWindowDays
+
+# --- Unclaimed Payouts: Cancellation ---
+
+scope PayoutsCancellation =
+  input payoutNotYetClaimed : Boolean
+  input daysSincePayoutSent : Integer
+  output senderMayInstructCancellation : Boolean
+  output payPalNotResponsibleForReversal : Boolean
+  output payPalNotLiableForFailureToCancel : Boolean
+
+  definition senderMayInstructCancellation equals
+    payoutNotYetClaimed
+
+  definition payPalNotResponsibleForReversal equals true
+  definition payPalNotLiableForFailureToCancel equals
+    daysSincePayoutSent <= 30
+
+# --- Payout Instructions Responsibility ---
+
+scope PayoutsInstructionsResponsibility =
+  input instructionsAccurate : Boolean
+  input recipientIdCorrect : Boolean
+  output senderResponsibleForAccuracy : Boolean
+  output payPalNotResponsibleForMisdirection : Boolean
+
+  definition senderResponsibleForAccuracy equals true
+  definition payPalNotResponsibleForMisdirection equals
+    not instructionsAccurate or not recipientIdCorrect
+
+# --- PayPal Reliance on Instructions ---
+
+scope PayoutsPayPalReliance =
+  output mayRelySolelyOnUserIdentifiers : Boolean
+  output noObligationToValidateInfo : Boolean
+  output notLiableForPayoutsPerInstructions : Boolean
+
+  definition mayRelySolelyOnUserIdentifiers equals true
+  definition noObligationToValidateInfo equals true
+  definition notLiableForPayoutsPerInstructions equals true
+
+# --- PayPal Error: Reimbursement ---
+
+scope PayoutsPayPalError =
+  input misdirectionDueToPayPalError : Boolean
+  output payPalReimbursesMisdirectedAmount : Boolean
+
+  definition payPalReimbursesMisdirectedAmount equals misdirectionDueToPayPalError
+
+# --- Recipient Consent Requirements ---
+
+scope PayoutsRecipientConsent =
+  input recipientsOptedIn : Boolean
+  input recipientsAgreedToElectronicContact : Boolean
+  input contactInfoProvidedByRecipients : Boolean
+  input useCompliesWithApplicableLaws : Boolean
+  output senderMeetsConsentRequirements : Boolean
+
+  definition senderMeetsConsentRequirements equals
+    recipientsOptedIn and recipientsAgreedToElectronicContact and
+    contactInfoProvidedByRecipients and useCompliesWithApplicableLaws
+
+# --- Recipient Consent: Review and Evidence ---
+
+scope PayoutsConsentReview =
+  output payPalMayReviewUsage : Boolean
+  output payPalMayRequireEvidence : Boolean
+  output sharingNotASale : Boolean
+
+  definition payPalMayReviewUsage equals true
+  definition payPalMayRequireEvidence equals true
+  definition sharingNotASale equals true
+
+# --- No Affiliation or Endorsement ---
+
+scope PayoutsNoEndorsement =
+  output notSponsorOrEndorser : Boolean
+  output mayOnlyDescribeAsMethodOfPayout : Boolean
+  output noPromotionWithoutApproval : Boolean
+  output noEncouragingAccountCreation : Boolean
+
+  definition notSponsorOrEndorser equals true
+  definition mayOnlyDescribeAsMethodOfPayout equals true
+  definition noPromotionWithoutApproval equals true
+  definition noEncouragingAccountCreation equals true
+
+# --- Material Removal ---
+
+scope PayoutsMaterialRemoval =
+  input payPalRequestsRemoval : Boolean
+  input hoursSinceRequest : Integer
+  output mustRemoveWithin48Hours : Boolean
+
+  definition mustRemoveWithin48Hours equals
+    payPalRequestsRemoval and hoursSinceRequest <= 48
+
+# --- Prohibited Solicitation ---
+
+scope PayoutsProhibitedSolicitation =
+  input solicitingPayPalCustomers : Boolean
+  input askingForPasswords : Boolean
+  input creatingAccountsOnBehalfOfCustomers : Boolean
+  output engagedInProhibitedSolicitation : Boolean
+
+  definition engagedInProhibitedSolicitation equals
+    solicitingPayPalCustomers or askingForPasswords or
+    creatingAccountsOnBehalfOfCustomers
+
+# --- Payout Purpose and Tax Reporting ---
+
+scope PayoutsPurposeAndTaxReporting =
+  input indicatedPayoutType : Boolean
+  output usedForTaxReporting : Boolean
+  output payPalMayRelyOnSelection : Boolean
+  output defaultToReportableIfNoType : Boolean
+
+  definition usedForTaxReporting equals true
+  definition payPalMayRelyOnSelection equals true
+  definition defaultToReportableIfNoType equals not indicatedPayoutType
+
+# --- Prohibited Uses of Payouts ---
+
+scope PayoutsProhibitedUses =
+  input usedForPayroll : Boolean
+  input usedForSellingProducts : Boolean
+  input usedForFamilyAndFriends : Boolean
+  input usedForMerchantPurchase : Boolean
+  input usedForUnlockCodes : Boolean
+  input determinedHighRisk : Boolean
+  output useIsProhibited : Boolean
+
+  definition useIsProhibited equals
+    usedForPayroll or usedForSellingProducts or
+    usedForFamilyAndFriends or usedForMerchantPurchase or
+    usedForUnlockCodes or determinedHighRisk
+
+# --- Suspension/Termination for Misuse ---
+
+scope PayoutsSuspensionForMisuse =
+  input misusingPayouts : Boolean
+  input higherThanAcceptableRisk : Boolean
+  input violatedTerms : Boolean
+  output maySuspendOrTerminateAccess : Boolean
+  output maySuspendOrTerminatePayPalAccount : Boolean
+
+  definition maySuspendOrTerminateAccess equals
+    misusingPayouts or higherThanAcceptableRisk or violatedTerms
+
+  definition maySuspendOrTerminatePayPalAccount equals
+    misusingPayouts or higherThanAcceptableRisk or violatedTerms
