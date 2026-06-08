@@ -241,3 +241,33 @@ declaration structure DormantAccountRule =
 declaration structure CheckValidity =
   data validityDays : Integer
   data fee : Money
+
+# --- Acceptable Use Policy ---
+
+declaration enumeration PreApprovalCategory =
+  -- Transportation
+  -- CharitiesNonProfit
+  -- HighValueItems
+  -- PaymentFacilitator
+  -- Investments
+  -- GamblingGamingContests
+  -- Cryptocurrency
+  -- PrescriptionItems
+  -- TelemedicineServices
+  -- MatureAudienceContent
+  -- OnlineDating
+  -- LiveStreamingBroadcasting
+  -- FileSharing
+  -- Alcohol
+  -- Tobacco
+  -- MedicalItemsOrServices
+  -- MultilevelMarketingDirectSelling
+  -- Marketplaces
+
+declaration enumeration AUPViolationAction =
+  -- Warning
+  -- AccountLimitation
+  -- AccountSuspension
+  -- AccountClosure
+  -- FundsHold
+  -- Fine

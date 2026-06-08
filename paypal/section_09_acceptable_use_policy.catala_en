@@ -1,0 +1,419 @@
+# PayPal Acceptable Use Policy
+# Last updated: November 2, 2022
+# Source: https://www.paypal.com/us/webapps/mpp/ua/acceptableuse-full
+# Forms part of the PayPal User Agreement
+
+# --- Policy Scope ---
+
+scope AcceptableUsePolicyScope =
+  output violationConstitutesUserAgreementViolation : Boolean
+  output userIndependentlyResponsibleForLaws : Boolean
+
+  definition violationConstitutesUserAgreementViolation equals true
+  definition userIndependentlyResponsibleForLaws equals true
+
+# --- Prohibited: Law Violations ---
+
+scope ProhibitedLawViolations =
+  input violatesAnyLaw : Boolean
+  input violatesStatute : Boolean
+  input violatesOrdinance : Boolean
+  input violatesRegulation : Boolean
+  output isProhibited : Boolean
+
+  definition isProhibited equals
+    violatesAnyLaw or violatesStatute or violatesOrdinance or violatesRegulation
+
+# --- Prohibited: Dangerous and Regulated Goods ---
+
+scope ProhibitedDangerousGoods =
+  input involvesNarcotics : Boolean
+  input involvesSteroids : Boolean
+  input involvesControlledSubstances : Boolean
+  input involvesConsumerSafetyRiskProducts : Boolean
+  input involvesDrugParaphernalia : Boolean
+  input involvesCigarettes : Boolean
+  input involvesItemsEncouragingIllegalActivity : Boolean
+  input involvesStolenGoods : Boolean
+  input involvesStolenDigitalGoods : Boolean
+  input involvesStolenVirtualGoods : Boolean
+  input involvesHateViolenceIntolerance : Boolean
+  input involvesFinancialExploitationOfCrime : Boolean
+  input involvesObsceneItems : Boolean
+  input involvesCopyrightInfringement : Boolean
+  input involvesTrademarkInfringement : Boolean
+  input involvesRightOfPublicityViolation : Boolean
+  input involvesRightOfPrivacyViolation : Boolean
+  input involvesProprietaryRightViolation : Boolean
+  input involvesSexuallyOrientedMaterials : Boolean
+  input involvesAmmunition : Boolean
+  input involvesFirearms : Boolean
+  input involvesFirearmPartsOrAccessories : Boolean
+  input involvesRegulatedWeapons : Boolean
+  input involvesRegulatedKnives : Boolean
+  output isProhibited : Boolean
+
+  definition isProhibited equals
+    involvesNarcotics or involvesSteroids or
+    involvesControlledSubstances or involvesConsumerSafetyRiskProducts or
+    involvesDrugParaphernalia or involvesCigarettes or
+    involvesItemsEncouragingIllegalActivity or
+    involvesStolenGoods or involvesStolenDigitalGoods or
+    involvesStolenVirtualGoods or
+    involvesHateViolenceIntolerance or
+    involvesFinancialExploitationOfCrime or
+    involvesObsceneItems or
+    involvesCopyrightInfringement or involvesTrademarkInfringement or
+    involvesRightOfPublicityViolation or involvesRightOfPrivacyViolation or
+    involvesProprietaryRightViolation or
+    involvesSexuallyOrientedMaterials or
+    involvesAmmunition or involvesFirearms or
+    involvesFirearmPartsOrAccessories or
+    involvesRegulatedWeapons or involvesRegulatedKnives
+
+# --- Prohibited: Fraudulent and Scheme Transactions ---
+
+scope ProhibitedSchemeTransactions =
+  input showsThirdPartyPersonalInfoIllegally : Boolean
+  input supportsPyramidSchemes : Boolean
+  input supportsPonziSchemes : Boolean
+  input supportsMatrixPrograms : Boolean
+  input supportsGetRichQuickSchemes : Boolean
+  input supportsCertainMLMPrograms : Boolean
+  input involvesAnnuities : Boolean
+  input involvesLotteryContracts : Boolean
+  input involvesLayAwaySystems : Boolean
+  input involvesOffshoreBanking : Boolean
+  input involvesCreditCardDebtRefinancing : Boolean
+  input sellsBeforePossession : Boolean
+  input isPaymentProcessorCollectingForMerchants : Boolean
+  input involvesTravelersChecks : Boolean
+  input involvesMoneyOrders : Boolean
+  input involvesCurrencyExchanges : Boolean
+  input involvesCheckCashing : Boolean
+  input involvesCreditRepair : Boolean
+  input involvesDebtSettlement : Boolean
+  input involvesCreditTransactions : Boolean
+  input involvesInsuranceActivities : Boolean
+  input involvesBribery : Boolean
+  input involvesCorruption : Boolean
+  output isProhibited : Boolean
+
+  definition isProhibited equals
+    showsThirdPartyPersonalInfoIllegally or
+    supportsPyramidSchemes or supportsPonziSchemes or
+    supportsMatrixPrograms or supportsGetRichQuickSchemes or
+    supportsCertainMLMPrograms or
+    involvesAnnuities or involvesLotteryContracts or
+    involvesLayAwaySystems or involvesOffshoreBanking or
+    involvesCreditCardDebtRefinancing or
+    sellsBeforePossession or
+    isPaymentProcessorCollectingForMerchants or
+    involvesTravelersChecks or involvesMoneyOrders or
+    involvesCurrencyExchanges or involvesCheckCashing or
+    involvesCreditRepair or involvesDebtSettlement or
+    involvesCreditTransactions or involvesInsuranceActivities or
+    involvesBribery or involvesCorruption
+
+# --- Prohibited: Government-Identified Fraud ---
+
+scope ProhibitedGovernmentFraud =
+  input productIdentifiedAsLikelyFraudulent : Boolean
+  output isProhibited : Boolean
+
+  definition isProhibited equals productIdentifiedAsLikelyFraudulent
+
+# --- Prohibited: Unapproved Pre-Approval Activities ---
+
+scope ProhibitedUnapprovedActivity =
+  input activityRequiresPreApproval : Boolean
+  input hasObtainedPreApproval : Boolean
+  output isProhibited : Boolean
+
+  definition isProhibited equals
+    activityRequiresPreApproval and not hasObtainedPreApproval
+
+# --- Comprehensive Prohibition Check ---
+
+scope AcceptableUseProhibitedCheck =
+  input violatesLaw : Boolean
+  input involvesDangerousGoods : Boolean
+  input involvesSchemeTransactions : Boolean
+  input involvesGovernmentFraud : Boolean
+  input involvesUnapprovedActivity : Boolean
+  output violatesAcceptableUsePolicy : Boolean
+
+  definition violatesAcceptableUsePolicy equals
+    violatesLaw or involvesDangerousGoods or
+    involvesSchemeTransactions or involvesGovernmentFraud or
+    involvesUnapprovedActivity
+
+# --- Pre-Approval: Transportation ---
+
+scope PreApprovalTransportation =
+  input isAirline : Boolean
+  input isScheduledCharter : Boolean
+  input isNonScheduledCharter : Boolean
+  input isJetOperator : Boolean
+  input isAirTaxiOperator : Boolean
+  output requiresPreApproval : Boolean
+
+  definition requiresPreApproval equals
+    isAirline or isScheduledCharter or isNonScheduledCharter or
+    isJetOperator or isAirTaxiOperator
+
+# --- Pre-Approval: Charities / Non-Profit ---
+
+scope PreApprovalCharities =
+  input collectsDonationsAsCharity : Boolean
+  input collectsDonationsAsNonProfit : Boolean
+  output requiresPreApproval : Boolean
+
+  definition requiresPreApproval equals
+    collectsDonationsAsCharity or collectsDonationsAsNonProfit
+
+# --- Pre-Approval: High Value Items ---
+
+scope PreApprovalHighValueItems =
+  input isDealerInJewels : Boolean
+  input isDealerInPreciousMetals : Boolean
+  input isDealerInPreciousStones : Boolean
+  output requiresPreApproval : Boolean
+
+  definition requiresPreApproval equals
+    isDealerInJewels or isDealerInPreciousMetals or
+    isDealerInPreciousStones
+
+# --- Pre-Approval: Payment Facilitator ---
+
+scope PreApprovalPaymentFacilitator =
+  input isMoneyServiceBusiness : Boolean
+  input isElectronicMoneyInstitution : Boolean
+  input sellsStoredValueCards : Boolean
+  input providesEscrowServices : Boolean
+  output requiresPreApproval : Boolean
+
+  definition requiresPreApproval equals
+    isMoneyServiceBusiness or isElectronicMoneyInstitution or
+    sellsStoredValueCards or providesEscrowServices
+
+# --- Pre-Approval: Investments ---
+
+scope PreApprovalInvestments =
+  input buysSellsOrBrokersStocks : Boolean
+  input buysSellsOrBrokersBonds : Boolean
+  input buysSellsOrBrokersSecurities : Boolean
+  input buysSellsOrBrokersOptions : Boolean
+  input buysSellsOrBrokersCommodities : Boolean
+  input involvesContractsForDifference : Boolean
+  input involvesForex : Boolean
+  input involvesMutualFunds : Boolean
+  input involvesInvestmentInterest : Boolean
+  output requiresPreApproval : Boolean
+
+  definition requiresPreApproval equals
+    buysSellsOrBrokersStocks or buysSellsOrBrokersBonds or
+    buysSellsOrBrokersSecurities or buysSellsOrBrokersOptions or
+    buysSellsOrBrokersCommodities or involvesContractsForDifference or
+    involvesForex or involvesMutualFunds or involvesInvestmentInterest
+
+# --- Pre-Approval: Gambling, Gaming, Prize Draws and Contests ---
+
+scope PreApprovalGamblingGaming =
+  input involvesGambling : Boolean
+  input involvesGaming : Boolean
+  input hasEntryFeeAndPrize : Boolean
+  input involvesPropertyPrizes : Boolean
+  input involvesCasinoGames : Boolean
+  input involvesSportsBetting : Boolean
+  input involvesHorseRacing : Boolean
+  input involvesGreyhoundRacing : Boolean
+  input involvesFantasySports : Boolean
+  input involvesLotteryTickets : Boolean
+  input facilitatesGambling : Boolean
+  input involvesGamesOfSkill : Boolean
+  input involvesSweepstakes : Boolean
+  input operatorInPermittedJurisdiction : Boolean
+  input customersInPermittedJurisdiction : Boolean
+  output requiresPreApproval : Boolean
+  output permittedIfInLegalJurisdiction : Boolean
+
+  definition requiresPreApproval equals
+    involvesGambling or involvesGaming or hasEntryFeeAndPrize or
+    involvesPropertyPrizes or involvesCasinoGames or
+    involvesSportsBetting or involvesHorseRacing or
+    involvesGreyhoundRacing or involvesFantasySports or
+    involvesLotteryTickets or facilitatesGambling or
+    involvesGamesOfSkill or involvesSweepstakes
+
+  definition permittedIfInLegalJurisdiction equals
+    operatorInPermittedJurisdiction and customersInPermittedJurisdiction
+
+# --- Pre-Approval: Cryptocurrency ---
+
+scope PreApprovalCryptocurrency =
+  input involvesCryptocurrency : Boolean
+  input involvesVirtualInGameCurrency : Boolean
+  input involvesNFTs : Boolean
+  input involvesDigitalValueTrading : Boolean
+  output requiresPreApproval : Boolean
+
+  definition requiresPreApproval equals
+    involvesCryptocurrency or involvesVirtualInGameCurrency or
+    involvesNFTs or involvesDigitalValueTrading
+
+# --- Pre-Approval: Prescription Items ---
+
+scope PreApprovalPrescriptionItems =
+  input sellsProductsRequiringPrescription : Boolean
+  input providesPrescriptionDispensingServices : Boolean
+  output requiresPreApproval : Boolean
+
+  definition requiresPreApproval equals
+    sellsProductsRequiringPrescription or
+    providesPrescriptionDispensingServices
+
+# --- Pre-Approval: Telemedicine Services ---
+
+scope PreApprovalTelemedicine =
+  input providesRemoteMedicalServices : Boolean
+  input providesRemoteMedicalConsultations : Boolean
+  output requiresPreApproval : Boolean
+
+  definition requiresPreApproval equals
+    providesRemoteMedicalServices or providesRemoteMedicalConsultations
+
+# --- Pre-Approval: Mature Audience Content ---
+
+scope PreApprovalMatureAudience =
+  input deliversAdultContentDigitally : Boolean
+  input involvesVideoOnDemand : Boolean
+  input involvesWebcamActivities : Boolean
+  input involvesAdultDVDs : Boolean
+  input involvesAdultMagazines : Boolean
+  input involvesAdultThemedProducts : Boolean
+  output requiresPreApproval : Boolean
+
+  definition requiresPreApproval equals
+    deliversAdultContentDigitally or involvesVideoOnDemand or
+    involvesWebcamActivities or involvesAdultDVDs or
+    involvesAdultMagazines or involvesAdultThemedProducts
+
+# --- Pre-Approval: Online Dating ---
+
+scope PreApprovalOnlineDating =
+  input providesDatingServices : Boolean
+  input enablesPersonalRomanticRelationships : Boolean
+  output requiresPreApproval : Boolean
+
+  definition requiresPreApproval equals
+    providesDatingServices or enablesPersonalRomanticRelationships
+
+# --- Pre-Approval: Live Streaming / Broadcasting ---
+
+scope PreApprovalLiveStreaming =
+  input transmitsLiveVideo : Boolean
+  input transmitsLiveVoice : Boolean
+  input transmitsLiveText : Boolean
+  input hasPotentialUserInteraction : Boolean
+  output requiresPreApproval : Boolean
+
+  definition requiresPreApproval equals
+    (transmitsLiveVideo or transmitsLiveVoice or transmitsLiveText) and
+    hasPotentialUserInteraction
+
+# --- Pre-Approval: File-Sharing ---
+
+scope PreApprovalFileSharing =
+  input providesFileSharingServices : Boolean
+  input operatesCyberlockers : Boolean
+  input providesRemoteDigitalFileSharing : Boolean
+  input uploadedContentPubliclyAccessible : Boolean
+  input paysUploadersForContent : Boolean
+  output requiresPreApproval : Boolean
+
+  definition requiresPreApproval equals
+    providesFileSharingServices or operatesCyberlockers or
+    providesRemoteDigitalFileSharing or
+    uploadedContentPubliclyAccessible or paysUploadersForContent
+
+# --- Pre-Approval: Alcohol ---
+
+scope PreApprovalAlcohol =
+  input sellsAlcoholicBeverages : Boolean
+  output requiresPreApproval : Boolean
+
+  definition requiresPreApproval equals sellsAlcoholicBeverages
+
+# --- Pre-Approval: Tobacco ---
+
+scope PreApprovalTobacco =
+  input sellsNonCigaretteTobacco : Boolean
+  input sellsECigarettes : Boolean
+  input sellsCigars : Boolean
+  output requiresPreApproval : Boolean
+
+  definition requiresPreApproval equals
+    sellsNonCigaretteTobacco or sellsECigarettes or sellsCigars
+
+# --- Pre-Approval: Medical Items or Services ---
+
+scope PreApprovalMedicalItems =
+  input sellsMedicalDevices : Boolean
+  input providesHealthCareServices : Boolean
+  input servicesRequireGovernmentLicensure : Boolean
+  input involvesMedicalTourism : Boolean
+  input providesServicesOutsidePatientHomeCountry : Boolean
+  output requiresPreApproval : Boolean
+
+  definition requiresPreApproval equals
+    sellsMedicalDevices or providesHealthCareServices or
+    servicesRequireGovernmentLicensure or involvesMedicalTourism or
+    providesServicesOutsidePatientHomeCountry
+
+# --- Pre-Approval: Multilevel Marketing / Direct Selling ---
+
+scope PreApprovalMLM =
+  input isDirectSalesOrganization : Boolean
+  input isMultiLevelMarketing : Boolean
+  input usesIndependentDistributors : Boolean
+  input requiresRecruitingNewDistributors : Boolean
+  output requiresPreApproval : Boolean
+
+  definition requiresPreApproval equals
+    isDirectSalesOrganization or isMultiLevelMarketing or
+    usesIndependentDistributors or requiresRecruitingNewDistributors
+
+# --- Pre-Approval: Marketplaces ---
+
+scope PreApprovalMarketplaces =
+  input isECommerceMarketplace : Boolean
+  input enablesThirdPartySellers : Boolean
+  output requiresPreApproval : Boolean
+
+  definition requiresPreApproval equals
+    isECommerceMarketplace and enablesThirdPartySellers
+
+# --- Pre-Approval Category Determination ---
+
+scope PreApprovalCategoryCheck =
+  input category : PreApprovalCategory
+  input hasObtainedApproval : Boolean
+  output requiresPreApproval : Boolean
+  output operatingWithoutApproval : Boolean
+
+  definition requiresPreApproval equals true -- all listed categories require it
+
+  definition operatingWithoutApproval equals
+    requiresPreApproval and not hasObtainedApproval
+
+# --- Violation Reporting ---
+
+scope AUPViolationReporting =
+  output usersEncouragedToReport : Boolean
+  output reportViaContactPage : Boolean
+  output questionsAboutViolationsAccepted : Boolean
+
+  definition usersEncouragedToReport equals true
+  definition reportViaContactPage equals true
+  definition questionsAboutViolationsAccepted equals true
