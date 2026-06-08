@@ -212,94 +212,31 @@ scope ReceiveFundsFeeExemption =
 
 # --- Fixed Fee by Currency ---
 
-scope ReceiveFundsFixedFeeAUD =
+scope ReceiveFundsFixedFee =
+  input paymentCurrency : ReceiveFundsCurrency
   output fixedFee : Money
-  definition fixedFee equals `0.30`
 
-scope ReceiveFundsFixedFeeBRL =
-  output fixedFee : Money
-  definition fixedFee equals `0.60`
-
-scope ReceiveFundsFixedFeeCAD =
-  output fixedFee : Money
-  definition fixedFee equals `0.30`
-
-scope ReceiveFundsFixedFeeCZK =
-  output fixedFee : Money
-  definition fixedFee equals `10.00`
-
-scope ReceiveFundsFixedFeeDKK =
-  output fixedFee : Money
-  definition fixedFee equals `2.60`
-
-scope ReceiveFundsFixedFeeEUR =
-  output fixedFee : Money
-  definition fixedFee equals `0.35`
-
-scope ReceiveFundsFixedFeeHKD =
-  output fixedFee : Money
-  definition fixedFee equals `2.35`
-
-scope ReceiveFundsFixedFeeHUF =
-  output fixedFee : Money
-  definition fixedFee equals `90.00`
-
-scope ReceiveFundsFixedFeeILS =
-  output fixedFee : Money
-  definition fixedFee equals `1.20`
-
-scope ReceiveFundsFixedFeeJPY =
-  output fixedFee : Money
-  definition fixedFee equals `40.00`
-
-scope ReceiveFundsFixedFeeMYR =
-  output fixedFee : Money
-  definition fixedFee equals `2.00`
-
-scope ReceiveFundsFixedFeeMXN =
-  output fixedFee : Money
-  definition fixedFee equals `4.00`
-
-scope ReceiveFundsFixedFeeNZD =
-  output fixedFee : Money
-  definition fixedFee equals `0.45`
-
-scope ReceiveFundsFixedFeeNOK =
-  output fixedFee : Money
-  definition fixedFee equals `2.80`
-
-scope ReceiveFundsFixedFeePHP =
-  output fixedFee : Money
-  definition fixedFee equals `15.00`
-
-scope ReceiveFundsFixedFeePLN =
-  output fixedFee : Money
-  definition fixedFee equals `1.35`
-
-scope ReceiveFundsFixedFeeSGD =
-  output fixedFee : Money
-  definition fixedFee equals `0.50`
-
-scope ReceiveFundsFixedFeeSEK =
-  output fixedFee : Money
-  definition fixedFee equals `3.25`
-
-scope ReceiveFundsFixedFeeCHF =
-  output fixedFee : Money
-  definition fixedFee equals `0.55`
-
-scope ReceiveFundsFixedFeeTWD =
-  output fixedFee : Money
-  definition fixedFee equals `10.00`
-
-scope ReceiveFundsFixedFeeTHB =
-  output fixedFee : Money
-  definition fixedFee equals `11.00`
-
-scope ReceiveFundsFixedFeeGBP =
-  output fixedFee : Money
-  definition fixedFee equals `0.20`
-
-scope ReceiveFundsFixedFeeUSD =
-  output fixedFee : Money
-  definition fixedFee equals `0.30`
+  definition fixedFee equals
+    if paymentCurrency equals -- AUD then `0.30`
+    else if paymentCurrency equals -- BRL then `0.60`
+    else if paymentCurrency equals -- CAD then `0.30`
+    else if paymentCurrency equals -- CZK then `10.00`
+    else if paymentCurrency equals -- DKK then `2.60`
+    else if paymentCurrency equals -- EUR then `0.35`
+    else if paymentCurrency equals -- HKD then `2.35`
+    else if paymentCurrency equals -- HUF then `90.00`
+    else if paymentCurrency equals -- ILS then `1.20`
+    else if paymentCurrency equals -- JPY then `40.00`
+    else if paymentCurrency equals -- MYR then `2.00`
+    else if paymentCurrency equals -- MXN then `4.00`
+    else if paymentCurrency equals -- NZD then `0.45`
+    else if paymentCurrency equals -- NOK then `2.80`
+    else if paymentCurrency equals -- PHP then `15.00`
+    else if paymentCurrency equals -- PLN then `1.35`
+    else if paymentCurrency equals -- SGD then `0.50`
+    else if paymentCurrency equals -- SEK then `3.25`
+    else if paymentCurrency equals -- CHF then `0.55`
+    else if paymentCurrency equals -- TWD then `10.00`
+    else if paymentCurrency equals -- THB then `11.00`
+    else if paymentCurrency equals -- GBP then `0.20`
+    else `0.30`

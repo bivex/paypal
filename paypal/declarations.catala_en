@@ -464,3 +464,28 @@ declaration enumeration ReceiveFundsCountry =
   -- Seychelles
   -- TrinidadAndTobago
   -- TurksAndCaicos
+
+declaration enumeration ReceiveFundsCurrency =
+  -- AUD
+  -- BRL
+  -- CAD
+  -- CZK
+  -- DKK
+  -- EUR
+  -- HKD
+  -- HUF
+  -- ILS
+  -- JPY
+  -- MYR
+  -- MXN
+  -- NZD
+  -- NOK
+  -- PHP
+  -- PLN
+  -- SGD
+  -- SEK
+  -- CHF
+  -- TWD
+  -- THB
+  -- GBP
+  -- USD
