@@ -1,0 +1,332 @@
+# PayPal Seller Protection Program
+# Last updated: January 26, 2026
+# Source: https://www.paypal.com/us/webapps/mpp/ua/seller-protection
+# Forms part of the PayPal User Agreement
+
+# --- Seller Protection Coverage ---
+
+scope SellerProtectionCoverage =
+  output sellerRetainsFullPurchaseAmount : Boolean
+  output payPalDeterminesEligibility : Boolean
+  output noLimitOnEligiblePayments : Boolean
+  output identifiableViaTransactionDetails : Boolean
+
+  definition sellerRetainsFullPurchaseAmount equals true
+  definition payPalDeterminesEligibility equals true
+  definition noLimitOnEligiblePayments equals true
+  definition identifiableViaTransactionDetails equals true
+
+# --- Protected Claim Types ---
+
+scope SellerProtectionClaimTypes =
+  input isUnauthorizedTransaction : Boolean
+  input unauthorizedInPayPalHostedEnv : Boolean
+  input isItemNotReceived : Boolean
+  input isCardFundedChargebackINR : Boolean
+  input isCardChargebackUnauthorized : Boolean
+  input isBankReversal : Boolean
+  output mayApplyForUnauthorized : Boolean
+  output mayApplyForINR : Boolean
+  output mayApplyForCardChargeback : Boolean
+  output mayApplyForBankReversal : Boolean
+  output inrCardChargebackIneligible : Boolean
+
+  definition mayApplyForUnauthorized equals
+    isUnauthorizedTransaction and unauthorizedInPayPalHostedEnv
+
+  definition mayApplyForINR equals
+    isItemNotReceived and not isCardFundedChargebackINR
+
+  definition mayApplyForCardChargeback equals
+    isCardChargebackUnauthorized
+
+  definition mayApplyForBankReversal equals
+    isBankReversal
+
+  definition inrCardChargebackIneligible equals
+    isItemNotReceived and isCardFundedChargebackINR
+
+# --- Basic Eligibility Requirements ---
+
+scope SellerProtectionBasicRequirements =
+  input providedProofOfShipmentOrDelivery : Boolean
+  input itemIsTangible : Boolean
+  input isIntangibleWithAdditionalReqs : Boolean
+  input shippedToTransactionAddress : Boolean
+  input respondedToPayPalRequests : Boolean
+  input shippedWithinListingTimeframe : Boolean
+  input shippedWithin7DaysOfPayment : Boolean
+  input acceptedFullPayPalPayment : Boolean
+  input usingCurrentCheckoutVersion : Boolean
+  input passingRequiredSessionInfo : Boolean
+  input paymentMarkedEligibleOrPartially : Boolean
+  input claimIsUnauthorized : Boolean
+  output meetsBasicRequirements : Boolean
+
+  definition meetsBasicRequirements equals
+    providedProofOfShipmentOrDelivery and
+    (itemIsTangible or isIntangibleWithAdditionalReqs) and
+    shippedToTransactionAddress and
+    respondedToPayPalRequests and
+    (shippedWithinListingTimeframe or shippedWithin7DaysOfPayment) and
+    acceptedFullPayPalPayment and
+    usingCurrentCheckoutVersion and
+    passingRequiredSessionInfo and
+    (if claimIsUnauthorized then paymentMarkedEligibleOrPartially else true)
+
+# --- Unauthorized Transaction: Shipment Timing ---
+
+scope UnauthorizedTransactionShipmentTiming =
+  input daysBetweenNotificationAndShipment : Integer
+  output shipmentTimely : Boolean
+  output maxDaysAfterNotification : Integer
+
+  definition maxDaysAfterNotification equals 2
+
+  definition shipmentTimely equals
+    daysBetweenNotificationAndShipment <= 2
+
+# --- Address Redirect Disqualification ---
+
+scope AddressRedirectRule =
+  input originallyShippedToTransactionAddress : Boolean
+  input laterRedirectedToDifferentAddress : Boolean
+  output remainsEligible : Boolean
+
+  definition remainsEligible equals
+    originallyShippedToTransactionAddress and
+    not laterRedirectedToDifferentAddress
+
+# --- Item Not Received: Additional Requirements ---
+
+scope INRAdditionalRequirements =
+  input meetsBasicReqs : Boolean
+  input providedProofOfDelivery : Boolean
+  output meetsINRRequirements : Boolean
+
+  definition meetsINRRequirements equals
+    meetsBasicReqs and providedProofOfDelivery
+
+# --- Intangible Goods: Additional Requirements ---
+
+scope IntangibleGoodsAdditionalReqs =
+  input meetsBasicReqs : Boolean
+  input claimIsUnauthorized : Boolean
+  input paymentMarkedEligibleForIntangible : Boolean
+  input providedProofOfDeliveryIntangible : Boolean
+  output meetsIntangibleRequirements : Boolean
+
+  definition meetsIntangibleRequirements equals
+    meetsBasicReqs and
+    (if claimIsUnauthorized then paymentMarkedEligibleForIntangible else true) and
+    providedProofOfDeliveryIntangible
+
+# --- Proof of Shipment: Physical Goods ---
+
+scope ProofOfShipmentPhysical =
+  input hasOnlineVerifiableTracking : Boolean
+  input hasShipmentDate : Boolean
+  input recipientAddressMatchesTransaction : Boolean
+  output isValidProofOfShipment : Boolean
+
+  definition isValidProofOfShipment equals
+    hasOnlineVerifiableTracking and hasShipmentDate and
+    recipientAddressMatchesTransaction
+
+# --- Proof of Delivery: Physical Goods ---
+
+scope ProofOfDeliveryPhysical =
+  input hasOnlineVerifiableTracking : Boolean
+  input hasDeliveryDate : Boolean
+  input hasDeliveredStatus : Boolean
+  input recipientAddressShowsCityCountryOrZip : Boolean
+  output isValidProofOfDelivery : Boolean
+
+  definition isValidProofOfDelivery equals
+    hasOnlineVerifiableTracking and hasDeliveryDate and
+    hasDeliveredStatus and recipientAddressShowsCityCountryOrZip
+
+# --- Proof of Delivery: Intangible Goods ---
+
+scope ProofOfDeliveryIntangible =
+  input hasSystemOfRecord : Boolean
+  input showsDateItemSent : Boolean
+  input electronicallySentToRecipient : Boolean
+  input receivedOrAccessedByRecipient : Boolean
+  input includesRecipientAddress : Boolean
+  output isCompellingEvidence : Boolean
+
+  definition isCompellingEvidence equals
+    hasSystemOfRecord and showsDateItemSent and
+    (electronicallySentToRecipient or receivedOrAccessedByRecipient) and
+    includesRecipientAddress
+
+# --- Pre-order / Made-to-order Shipment ---
+
+scope PreOrderShipmentRule =
+  input isPreOrderOrMadeToOrder : Boolean
+  input shippedWithinListingTimeframe : Boolean
+  input shippedWithin7Days : Boolean
+  output shipmentCompliant : Boolean
+
+  definition shipmentCompliant equals
+    if isPreOrderOrMadeToOrder then
+      shippedWithinListingTimeframe
+    else
+      shippedWithin7Days
+
+# --- Ineligible Items and Transactions ---
+
+scope SellerProtectionIneligibleItems =
+  input isRealEstate : Boolean
+  input isVehicle : Boolean
+  input isLightRecreationalVehicle : Boolean
+  input isBusinessPurchase : Boolean
+  input isIndustrialMachinery : Boolean
+  input isCashEquivalent : Boolean
+  input isGoldPayment : Boolean
+  input isFinancialProduct : Boolean
+  input isNFT : Boolean
+  input nftAmountAboveThreshold : Boolean
+  input nftClaimIsUnauthorized : Boolean
+  input nftMeetsOtherReqs : Boolean
+  input isGambling : Boolean
+  input isDonation : Boolean
+  input isCrowdfunding : Boolean
+  input isCrowdlending : Boolean
+  input isPaymentToStateBody : Boolean
+  input isStateOwnedEnterprise : Boolean
+  input isBillPayment : Boolean
+  input isSNADClaim : Boolean
+  input isCardIssuerINRClaim : Boolean
+  input isDeliveredInPerson : Boolean
+  input paidWithQRCodeInStore : Boolean
+  input isProhibitedByAcceptableUsePolicy : Boolean
+  input initiallyMarkedEligible : Boolean
+  input isPayoutsPayment : Boolean
+  input isPersonalPayment : Boolean
+  input isNonPayPalAccountPayment : Boolean
+  input isGuestCheckout : Boolean
+  input sellerInExcludedCountry : Boolean
+  input shippedAfterPayPalSaidNotTo : Boolean
+  input isTravelTicket : Boolean
+  input claimIsUnauthorized : Boolean
+  input claimFiledMoreThan24HoursBeforeTravel : Boolean
+  output isEligible : Boolean
+
+  definition isEligible equals
+    not (
+      isRealEstate or
+      (isVehicle and not isLightRecreationalVehicle) or
+      isBusinessPurchase or isIndustrialMachinery or
+      isCashEquivalent or isGoldPayment or isFinancialProduct or
+      (isNFT and (
+        nftAmountAboveThreshold or
+        (not nftAmountAboveThreshold and
+         not (nftClaimIsUnauthorized and nftMeetsOtherReqs))
+      )) or
+      isGambling or isDonation or isCrowdfunding or isCrowdlending or
+      (isPaymentToStateBody and not isStateOwnedEnterprise) or
+      isBillPayment or isSNADClaim or isCardIssuerINRClaim or
+      (isDeliveredInPerson and not paidWithQRCodeInStore) or
+      (isProhibitedByAcceptableUsePolicy) or
+      isPayoutsPayment or isPersonalPayment or
+      (isNonPayPalAccountPayment and not (isGuestCheckout and not sellerInExcludedCountry)) or
+      shippedAfterPayPalSaidNotTo or
+      (isTravelTicket and claimIsUnauthorized and claimFiledMoreThan24HoursBeforeTravel)
+    )
+
+# --- NFT Eligibility Threshold ---
+
+scope NFTSellerProtectionThreshold =
+  input transactionAmountUSD : Money
+  input isUnauthorizedClaim : Boolean
+  input meetsAllOtherReqs : Boolean
+  output nftEligible : Boolean
+
+  definition nftEligible equals
+    if transactionAmountUSD > `10000.00` then
+      false -- always ineligible above $10,000
+    else
+      isUnauthorizedClaim and meetsAllOtherReqs
+
+# --- Guest Checkout Country Exclusions ---
+
+scope GuestCheckoutCountryExclusion =
+  input sellerCountry : String
+  output isExcludedCountry : Boolean
+
+  definition isExcludedCountry equals
+    sellerCountry equals "Singapore" or
+    sellerCountry equals "China" or
+    sellerCountry equals "Hong Kong" or
+    sellerCountry equals "Australia" or
+    sellerCountry equals "Italy" or
+    sellerCountry equals "France" or
+    sellerCountry equals "Netherlands" or
+    sellerCountry equals "Spain" or
+    sellerCountry equals "Ireland" or
+    sellerCountry equals "Poland" or
+    sellerCountry equals "Sweden" or
+    sellerCountry equals "Bulgaria" or
+    sellerCountry equals "Austria" or
+    sellerCountry equals "Portugal" or
+    sellerCountry equals "Belgium" or
+    sellerCountry equals "Norway" or
+    sellerCountry equals "Greece" or
+    sellerCountry equals "Denmark" or
+    sellerCountry equals "Cyprus" or
+    sellerCountry equals "Lithuania" or
+    sellerCountry equals "Czechia" or
+    sellerCountry equals "Estonia" or
+    sellerCountry equals "Finland" or
+    sellerCountry equals "Romania" or
+    sellerCountry equals "Slovenia" or
+    sellerCountry equals "Hungary" or
+    sellerCountry equals "Slovakia" or
+    sellerCountry equals "Malta" or
+    sellerCountry equals "Latvia" or
+    sellerCountry equals "Luxembourg"
+
+# --- Travel Ticket Claim Window ---
+
+scope TravelTicketClaimWindow =
+  input isTravelTicketSale : Boolean
+  input claimIsUnauthorized : Boolean
+  input hoursBeforeTravelDate : Integer
+  output travelTicketIneligible : Boolean
+
+  definition travelTicketIneligible equals
+    isTravelTicketSale and claimIsUnauthorized and
+    hoursBeforeTravelDate > 24
+
+# --- Acceptable Use Policy Override ---
+
+scope AcceptableUsePolicyOverride =
+  input isProhibitedByAUP : Boolean
+  input initiallyMarkedEligible : Boolean
+  output aupOverridesEligibility : Boolean
+
+  definition aupOverridesEligibility equals
+    isProhibitedByAUP -- even if initially marked eligible
+
+# --- High-Risk Business Model Integration ---
+
+scope HighRiskBusinessIntegration =
+  output additionalRequirementsMayApply : Boolean
+  output payPalWillInformInAdvance : Boolean
+  output reasonableTimeframeForChanges : Boolean
+
+  definition additionalRequirementsMayApply equals true
+  definition payPalWillInformInAdvance equals true
+  definition reasonableTimeframeForChanges equals true
+
+# --- Partial Payment / Installment Exclusion ---
+
+scope PartialPaymentExclusion =
+  input isPartialPayment : Boolean
+  input isInstallmentPayment : Boolean
+  output excludedFromProtection : Boolean
+
+  definition excludedFromProtection equals
+    isPartialPayment or isInstallmentPayment
