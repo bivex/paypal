@@ -1,0 +1,357 @@
+# PayPal Buyer Protection Program
+# Last updated: January 26, 2026
+# Source: https://www.paypal.com/us/webapps/mpp/ua/buyer-protection
+# Forms part of the PayPal User Agreement
+
+# --- Buyer Protection Coverage ---
+
+scope BuyerProtectionCoverage =
+  output coversFullPurchasePrice : Boolean
+  output coversOriginalShipping : Boolean
+  output doesNotCoverReturnShipping : Boolean
+  output payPalDeterminesEligibility : Boolean
+  output determinationIsFinal : Boolean
+  output mayRequireReturnToSeller : Boolean
+
+  definition coversFullPurchasePrice equals true
+  definition coversOriginalShipping equals true
+  definition doesNotCoverReturnShipping equals true
+  definition payPalDeterminesEligibility equals true
+  definition determinationIsFinal equals true
+  definition mayRequireReturnToSeller equals true
+
+# --- Appeal Eligibility ---
+
+scope BuyerProtectionAppeal =
+  input hasNewOrCompellingInfo : Boolean
+  input believesErrorInProcess : Boolean
+  output mayFileAppeal : Boolean
+
+  definition mayFileAppeal equals
+    hasNewOrCompellingInfo or believesErrorInProcess
+
+# --- Claim Types ---
+
+scope ClaimTypeClassification =
+  input itemNotReceived : Boolean
+  input significantlyNotAsDescribed : Boolean
+  input unauthorizedTransaction : Boolean
+  output claimType : DisputeType
+
+  definition claimType equals
+    if itemNotReceived then -- ItemNotReceived
+    else if significantlyNotAsDescribed then -- SignificantlyNotAsDescribed
+    else -- UnauthorizedTransaction
+
+# --- Item Not Received: Exclusions ---
+
+scope ItemNotReceivedExclusions =
+  input collectedInPerson : Boolean
+  input arrangedCollection : Boolean
+  input usedInStore : Boolean
+  input sellerProvidedProofOfShipment : Boolean
+  input sellerProvidedProofOfDelivery : Boolean
+  output claimDoesNotQualify : Boolean
+
+  definition claimDoesNotQualify equals
+    collectedInPerson or arrangedCollection or usedInStore or
+    sellerProvidedProofOfShipment or sellerProvidedProofOfDelivery
+
+# --- Item Not Received: Seller Delivery Evidence ---
+
+scope SellerDeliveryEvidence =
+  input sellerHasDeliveryProofToAddress : Boolean
+  input buyerClaimsNotReceived : Boolean
+  output payPalMayFindForSeller : Boolean
+
+  definition payPalMayFindForSeller equals
+    sellerHasDeliveryProofToAddress and buyerClaimsNotReceived
+
+# --- Significantly Not As Described: Qualifying Conditions ---
+
+scope SignificantlyNotAsDescribedQualifying =
+  input materiallyDifferent : Boolean
+  input completelyDifferentItem : Boolean
+  input conditionMisrepresented : Boolean
+  input advertisedAsAuthenticButCounterfeit : Boolean
+  input missingMajorPartsOrFeatures : Boolean
+  input partialQuantityReceived : Boolean
+  input materiallyDamagedInShipment : Boolean
+  input unusableInReceivedState : Boolean
+  output qualifiesAsSNAD : Boolean
+
+  definition qualifiesAsSNAD equals
+    materiallyDifferent or completelyDifferentItem or
+    conditionMisrepresented or advertisedAsAuthenticButCounterfeit or
+    missingMajorPartsOrFeatures or partialQuantityReceived or
+    materiallyDamagedInShipment or unusableInReceivedState
+
+# --- Significantly Not As Described: Non-Qualifying Conditions ---
+
+scope SignificantlyNotAsDescribedNonQualifying =
+  input materiallySimilar : Boolean
+  input defectCorrectlyDescribed : Boolean
+  input noLongerWanted : Boolean
+  input didNotMeetExpectations : Boolean
+  input minorScratchesDescribedAsUsed : Boolean
+  output doesNotQualifyAsSNAD : Boolean
+
+  definition doesNotQualifyAsSNAD equals
+    materiallySimilar or defectCorrectlyDescribed or
+    noLongerWanted or didNotMeetExpectations or
+    minorScratchesDescribedAsUsed
+
+# --- Ineligible Items and Transactions ---
+
+scope BuyerProtectionIneligibleItems =
+  input isRealEstate : Boolean
+  input isVehicle : Boolean
+  input isLightRecreationalVehicle : Boolean
+  input isBusinessPurchase : Boolean
+  input isIndustrialMachinery : Boolean
+  input isCashEquivalent : Boolean
+  input isGoldPayment : Boolean
+  input isFinancialProduct : Boolean
+  input isNFT : Boolean
+  input isGambling : Boolean
+  input isDonation : Boolean
+  input isCrowdfundingPayment : Boolean
+  input isCrowdlendingPayment : Boolean
+  input isPaymentToStateBody : Boolean
+  input isStateOwnedEnterprise : Boolean
+  input isBillPayment : Boolean
+  input isCustomMadeItemSNADClaim : Boolean
+  input isInPersonCollectionINRClaim : Boolean
+  input isQRCodeInStorePayment : Boolean
+  input isProhibitedByAcceptableUsePolicy : Boolean
+  input isPayoutsPayment : Boolean
+  input isPersonalPayment : Boolean
+  input isNonPayPalAccountPayment : Boolean
+  input isItemForResale : Boolean
+  output isEligibleItem : Boolean
+
+  definition isEligibleItem equals
+    not (isRealEstate or
+         (isVehicle and not isLightRecreationalVehicle) or
+         isBusinessPurchase or isIndustrialMachinery or
+         isCashEquivalent or isGoldPayment or
+         isFinancialProduct or isNFT or isGambling or
+         isDonation or isCrowdfundingPayment or isCrowdlendingPayment or
+         (isPaymentToStateBody and not isStateOwnedEnterprise) or
+         isBillPayment or
+         isCustomMadeItemSNADClaim or
+         (isInPersonCollectionINRClaim and not isQRCodeInStorePayment) or
+         isProhibitedByAcceptableUsePolicy or isPayoutsPayment or
+         isPersonalPayment or isNonPayPalAccountPayment or
+         isItemForResale)
+
+# --- Transaction Eligibility Requirements ---
+
+scope BuyerProtectionEligibilityRequirements =
+  input accountInGoodStanding : Boolean
+  input paidFromPayPalAccount : Boolean
+  input contactedSellerFirst : Boolean
+  input respondedToPayPalRequests : Boolean
+  input openedDisputeInTimeframe : Boolean
+  input noRecoveryFromOtherSource : Boolean
+  output meetsAllRequirements : Boolean
+
+  definition meetsAllRequirements equals
+    accountInGoodStanding and paidFromPayPalAccount and
+    contactedSellerFirst and respondedToPayPalRequests and
+    openedDisputeInTimeframe and noRecoveryFromOtherSource
+
+# --- Dispute Resolution Timeline ---
+
+scope DisputeResolutionTimeline =
+  output escalationWindowDays : Integer
+  output digitalGoodsWaitDays : Integer
+
+  definition escalationWindowDays equals 20
+  definition digitalGoodsWaitDays equals 7
+
+# --- Filing Deadlines by Claim Type ---
+
+scope FilingDeadlines =
+  input claimType : DisputeType
+  input daysSincePayment : Integer
+  input daysSinceDelivery : Integer
+  output withinFilingDeadline : Boolean
+
+  definition withinFilingDeadline equals
+    if claimType equals -- ItemNotReceived then
+      daysSincePayment <= 180
+    else if claimType equals -- SignificantlyNotAsDescribed then
+      (daysSinceDelivery <= 30) or (daysSincePayment <= 180)
+    else
+      true -- Unauthorized: refer to user agreement
+
+# --- SNAD Filing Deadline: Whichever Is Sooner ---
+
+scope SNADFilingDeadlineCalculation =
+  input daysSinceDelivery : Integer
+  input daysSincePayment : Integer
+  output deadlineDays : Integer
+
+  definition deadlineDays equals
+    if daysSinceDelivery < (daysSincePayment - 150) then
+      30 -- delivery deadline kicks in first
+    else
+      180 -- payment deadline is sooner
+
+# --- Proof of Delivery Requirements ---
+
+scope ProofOfDeliveryRequirements =
+  output mustBeViewableOnline : Boolean
+  output mustIncludeDeliveryAddress : Boolean
+  output mustIncludeCityStateOrZip : Boolean
+  output mustIncludeDeliveryDate : Boolean
+  output mustIncludeShippingCompany : Boolean
+
+  definition mustBeViewableOnline equals true
+  definition mustIncludeDeliveryAddress equals true
+  definition mustIncludeCityStateOrZip equals true
+  definition mustIncludeDeliveryDate equals true
+  definition mustIncludeShippingCompany equals true
+
+# --- Dispute Resolution Steps ---
+
+scope DisputeResolutionSteps =
+  output step1OpenDispute : Boolean
+  output step2EscalateToClaim : Boolean
+  output step3ProvideDocumentation : Boolean
+  output step4ShipItemBackIfSNAD : Boolean
+  output step5PayPalFinalDecision : Boolean
+
+  definition step1OpenDispute equals true
+  definition step2EscalateToClaim equals true
+  definition step3ProvideDocumentation equals true
+  definition step4ShipItemBackIfSNAD equals true
+  definition step5PayPalFinalDecision equals true
+
+# --- Claim Outcome: Buyer Wins ---
+
+scope BuyerWinsClaim =
+  output buyerReceivesFullRefund : Boolean
+  output refundIncludesOriginalShipping : Boolean
+  output refundExcludesReturnShipping : Boolean
+
+  definition buyerReceivesFullRefund equals true
+  definition refundIncludesOriginalShipping equals true
+  definition refundExcludesReturnShipping equals true
+
+# --- Claim Outcome: Seller Loses ---
+
+scope SellerLosesClaim =
+  output sellerRefundsFullPurchasePrice : Boolean
+  output sellerRefundsOriginalShipping : Boolean
+  output sellerDoesNotReceiveFeeRefund : Boolean
+
+  definition sellerRefundsFullPurchasePrice equals true
+  definition sellerRefundsOriginalShipping equals true
+  definition sellerDoesNotReceiveFeeRefund equals true
+
+# --- Counterfeit Item Specific Outcome ---
+
+scope CounterfeitItemClaim =
+  input itemIsCounterfeit : Boolean
+  input sellerLostSNADClaim : Boolean
+  output sellerMustFullRefund : Boolean
+  output sellerDoesNotReceiveItemBack : Boolean
+
+  definition sellerMustFullRefund equals
+    itemIsCounterfeit and sellerLostSNADClaim
+
+  definition sellerDoesNotReceiveItemBack equals
+    itemIsCounterfeit and sellerLostSNADClaim
+
+# --- Digital Goods Micropayments ---
+
+scope DigitalGoodsMicropayments =
+  output specialRulesApply : Boolean
+  output predeterminedThresholdsExist : Boolean
+  output mayAutoReverseWithoutAction : Boolean
+  output mayLimitAutoReversalCount : Boolean
+  output standardDisputeProcessStillAvailable : Boolean
+
+  definition specialRulesApply equals true
+  definition predeterminedThresholdsExist equals true
+  definition mayAutoReverseWithoutAction equals true
+  definition mayLimitAutoReversalCount equals true
+  definition standardDisputeProcessStillAvailable equals true
+
+# --- Card Issuer Dispute vs PayPal Dispute ---
+
+scope DisputeForumChoice =
+  input pursuedWithPayPal : Boolean
+  input pursuedWithCardIssuer : Boolean
+  output cannotDoBoth : Boolean
+  output paypalWillCloseIfBothPursued : Boolean
+
+  definition cannotDoBoth equals
+    pursuedWithPayPal and pursuedWithCardIssuer
+
+  definition paypalWillCloseIfBothPursued equals
+    pursuedWithPayPal and pursuedWithCardIssuer
+
+# --- Card Issuer Dispute After PayPal Decision ---
+
+scope CardIssuerAfterPayPal =
+  input payPalDecidedAgainstBuyer : Boolean
+  output mayStillPursueCardIssuer : Boolean
+
+  definition mayStillPursueCardIssuer equals
+    payPalDecidedAgainstBuyer
+
+# --- PayPal Delay Reimbursement ---
+
+scope PayPalDelayReimbursement =
+  input payPalDelayedPastCardDeadline : Boolean
+  input recoveryLessThanFullEntitlement : Boolean
+  output payPalReimbursesRemainder : Boolean
+
+  definition payPalReimbursesRemainder equals
+    payPalDelayedPastCardDeadline and recoveryLessThanFullEntitlement
+
+# --- Double Recovery Prohibition ---
+
+scope DoubleRecoveryProhibition =
+  input alreadyRecoveredFromSeller : Boolean
+  input alreadyRecoveredFromCardIssuer : Boolean
+  output remainderCalculationExcludes : String list
+
+  definition remainderCalculationExcludes equals
+    ["amount_recovered_from_seller", "amount_recovered_from_card_issuer"]
+
+# --- Hold on Funds During Dispute ---
+
+scope DisputeFundHold =
+  output fundsHeldInSellerAccount : Boolean
+  output heldUntilDisputeResolved : Boolean
+
+  definition fundsHeldInSellerAccount equals true
+  definition heldUntilDisputeResolved equals true
+
+# --- QR Code In-Store Exception ---
+
+scope QRCodeInStoreException =
+  input isInStorePurchase : Boolean
+  input paidWithGoodsServicesQR : Boolean
+  output inStoreINRExcluded : Boolean
+  output qrCodeInStoreIncluded : Boolean
+
+  definition inStoreINRExcluded equals
+    isInStorePurchase and not paidWithGoodsServicesQR
+
+  definition qrCodeInStoreIncluded equals
+    isInStorePurchase and paidWithGoodsServicesQR
+
+# --- Seller Proof of Shipment Override ---
+
+scope SellerProofOverride =
+  input sellerProvidedProofOfShipment : Boolean
+  input sellerProvidedProofOfDelivery : Boolean
+  output buyerINRClaimBarred : Boolean
+
+  definition buyerINRClaimBarred equals
+    sellerProvidedProofOfShipment or sellerProvidedProofOfDelivery
