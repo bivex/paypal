@@ -1,0 +1,395 @@
+# Controller-to-Controller Standard Contractual Clauses (SCCs)
+# Last updated: June 8, 2022
+# Source: https://www.paypal.com/us/webapps/mpp/ua/sccs-controller
+# Forms part of the PayPal User Agreement
+
+# --- SCC Incorporation ---
+
+scope SCCIncorporation =
+  output sccsFormPartOfAgreement : Boolean
+  output sccsControlsOnConflict : Boolean
+
+  definition sccsFormPartOfAgreement equals true
+  definition sccsControlsOnConflict equals true
+
+# --- EU Transfer Clauses Acceptance ---
+
+scope EUTransferClausesAcceptance =
+  input merchantSignedAgreement : Boolean
+  input payPalSignedAgreement : Boolean
+  output merchantIsDataExporter : Boolean
+  output merchantRole : DataProtectionRole
+  output payPalIsDataImporter : Boolean
+  output payPalRole : DataProtectionRole
+  output applicableModule : SCCModule
+
+  definition merchantIsDataExporter equals merchantSignedAgreement
+  definition merchantRole equals -- Controller
+  definition payPalIsDataImporter equals payPalSignedAgreement
+  definition payPalRole equals -- Controller
+  definition applicableModule equals -- Module1ControllerToController
+
+# --- EU Transfer Clauses Supersession ---
+
+scope EUTransferClausesSupersession =
+  input newEUTransferClausesPublished : Boolean
+  output newClausesSupersedeCurrent : Boolean
+  output partiesMustExecuteNewClauses : Boolean
+
+  definition newClausesSupersedeCurrent equals newEUTransferClausesPublished
+  definition partiesMustExecuteNewClauses equals newEUTransferClausesPublished
+
+# --- Governing Law ---
+
+scope SCCGoverningLaw =
+  output governingLawOption : SCCGoverningLawOption
+  output governingJurisdiction : String
+
+  definition governingLawOption equals -- Option1GoverningLaw
+  definition governingJurisdiction equals "Luxembourg"
+
+# --- Jurisdiction and Forum ---
+
+scope SCCJurisdiction =
+  output courtsOfLuxembourgResolveDisputes : Boolean
+  output choiceOfForum : String
+
+  definition courtsOfLuxembourgResolveDisputes equals true
+  definition choiceOfForum equals "Luxembourg"
+
+# --- Data Exporter Details ---
+
+scope DataExporterDetails =
+  output exporterIsMerchant : Boolean
+  output exporterRole : DataProtectionRole
+  output addressAsInAgreement : Boolean
+  output contactDetailsAsInAgreement : Boolean
+
+  definition exporterIsMerchant equals true
+  definition exporterRole equals -- Controller
+  definition addressAsInAgreement equals true
+  definition contactDetailsAsInAgreement equals true
+
+# --- Data Importer Details ---
+
+scope DataImporterDetails =
+  output importerIsPayPalGroupMember : Boolean
+  output importerRole : DataProtectionRole
+  output addressAsInAgreement : Boolean
+  output contactDetailsAsInAgreement : Boolean
+
+  definition importerIsPayPalGroupMember equals true
+  definition importerRole equals -- Controller
+  definition addressAsInAgreement equals true
+  definition contactDetailsAsInAgreement equals true
+
+# --- Data Subjects ---
+
+scope SCCDataSubjects =
+  output includesCustomers : Boolean
+  output includesEmployees : Boolean
+  output includesBusinessContacts : Boolean
+
+  definition includesCustomers equals true
+  definition includesEmployees equals true
+  definition includesBusinessContacts equals true
+
+# --- Categories of Personal Data ---
+
+scope SCCPersonalDataCategories =
+  output includesName : Boolean
+  output includesAmountCharged : Boolean
+  output includesDateTime : Boolean
+  output includesBankAccountDetails : Boolean
+  output includesPaymentCardDetails : Boolean
+  output includesCVCCode : Boolean
+  output includesPostCode : Boolean
+  output includesCountryCode : Boolean
+  output includesAddress : Boolean
+  output includesEmailAddress : Boolean
+  output includesFax : Boolean
+  output includesPhone : Boolean
+  output includesWebsite : Boolean
+  output includesExpiryData : Boolean
+  output includesShippingDetails : Boolean
+  output includesTaxStatus : Boolean
+  output includesUniqueCustomerIdentifier : Boolean
+  output includesIPAddress : Boolean
+  output includesLocation : Boolean
+  output includesOtherDataUnderAgreement : Boolean
+
+  definition includesName equals true
+  definition includesAmountCharged equals true
+  definition includesDateTime equals true
+  definition includesBankAccountDetails equals true
+  definition includesPaymentCardDetails equals true
+  definition includesCVCCode equals true
+  definition includesPostCode equals true
+  definition includesCountryCode equals true
+  definition includesAddress equals true
+  definition includesEmailAddress equals true
+  definition includesFax equals true
+  definition includesPhone equals true
+  definition includesWebsite equals true
+  definition includesExpiryData equals true
+  definition includesShippingDetails equals true
+  definition includesTaxStatus equals true
+  definition includesUniqueCustomerIdentifier equals true
+  definition includesIPAddress equals true
+  definition includesLocation equals true
+  definition includesOtherDataUnderAgreement equals true
+
+# --- Sensitive Data Handling ---
+
+scope SCCSensitiveData =
+  input merchantConfiguredToCaptureSensitiveData : Boolean
+  output sensitiveDataApplicable : Boolean
+  output restrictionsAndSafeguardsApply : Boolean
+
+  definition sensitiveDataApplicable equals merchantConfiguredToCaptureSensitiveData
+  definition restrictionsAndSafeguardsApply equals merchantConfiguredToCaptureSensitiveData
+
+# --- Nature of Processing ---
+
+scope SCCNatureOfProcessing =
+  output asSetForthInAgreement : Boolean
+
+  definition asSetForthInAgreement equals true
+
+# --- Transfer Purposes ---
+
+scope SCCTransferPurposes =
+  output forServicePerformance : Boolean
+  output forFraudIdentification : Boolean
+  output forLegalCompliance : Boolean
+  output asSetForthInPrivacyStatement : Boolean
+
+  definition forServicePerformance equals true
+  definition forFraudIdentification equals true
+  definition forLegalCompliance equals true
+  definition asSetForthInPrivacyStatement equals true
+
+# --- Data Retention Criteria ---
+
+scope SCCDataRetentionCriteria =
+  output retainedOnlyAsLongAsNecessary : Boolean
+  output considersAmountNatureAndSensitivity : Boolean
+  output considersRiskOfHarm : Boolean
+  output considersProcessingPurposes : Boolean
+  output considersAlternativeMeans : Boolean
+  output considersApplicableLegalRequirements : Boolean
+
+  definition retainedOnlyAsLongAsNecessary equals true
+  definition considersAmountNatureAndSensitivity equals true
+  definition considersRiskOfHarm equals true
+  definition considersProcessingPurposes equals true
+  definition considersAlternativeMeans equals true
+  definition considersApplicableLegalRequirements equals true
+
+# --- Sub-Processors ---
+
+scope SCCSubProcessors =
+  output mayShareWithThirdPartyProviders : Boolean
+  output thirdPartiesActAtImportersDirection : Boolean
+  output examplesIncludeVerification : Boolean
+  output examplesIncludeTransactionProcessing : Boolean
+  output examplesIncludeCustomerSupport : Boolean
+  output examplesIncludeStorage : Boolean
+  output sameRetentionCriteriaApply : Boolean
+
+  definition mayShareWithThirdPartyProviders equals true
+  definition thirdPartiesActAtImportersDirection equals true
+  definition examplesIncludeVerification equals true
+  definition examplesIncludeTransactionProcessing equals true
+  definition examplesIncludeCustomerSupport equals true
+  definition examplesIncludeStorage equals true
+  definition sameRetentionCriteriaApply equals true
+
+# --- Supervisory Authority ---
+
+scope SCCSupervisoryAuthority =
+  output supervisoryAuthorityPerClause13a : Boolean
+  output authorityForDataExporterCompliance : Boolean
+
+  definition supervisoryAuthorityPerClause13a equals true
+  definition authorityForDataExporterCompliance equals true
+
+# --- Technical Measure: Pseudonymization and Encryption ---
+
+scope SCCPseudonymizationEncryption =
+  output encryptionInTransit : Boolean
+  output encryptionAtRest : Boolean
+  output pseudonymizationTechniquesUsed : Boolean
+  output policiesProtectDataTransfer : Boolean
+
+  definition encryptionInTransit equals true
+  definition encryptionAtRest equals true
+  definition pseudonymizationTechniquesUsed equals true
+  definition policiesProtectDataTransfer equals true
+
+# --- Technical Measure: Change Management and Business Continuity ---
+
+scope SCCChangeManagementBusinessContinuity =
+  output changeManagementProcessInPlace : Boolean
+  output businessContinuityFramework : Boolean
+  output changesPlannedApprovedReviewed : Boolean
+
+  definition changeManagementProcessInPlace equals true
+  definition businessContinuityFramework equals true
+  definition changesPlannedApprovedReviewed equals true
+
+# --- Technical Measure: Disaster Recovery ---
+
+scope SCCDisasterRecovery =
+  output disasterRecoveryProgramInPlace : Boolean
+  output multipleSecureDataCenters : Boolean
+  output primaryAndSecondaryCapability : Boolean
+
+  definition disasterRecoveryProgramInPlace equals true
+  definition multipleSecureDataCenters equals true
+  definition primaryAndSecondaryCapability equals true
+
+# --- Technical Measure: Regular Testing ---
+
+scope SCCRegularTesting =
+  output regularTestingProgram : Boolean
+  output managedByEnterpriseRiskTeam : Boolean
+  output testingReportingAndRemediation : Boolean
+
+  definition regularTestingProgram equals true
+  definition managedByEnterpriseRiskTeam equals true
+  definition testingReportingAndRemediation equals true
+
+# --- Technical Measure: User Identification and Authorization ---
+
+scope SCCUserIdentificationAuthorization =
+  output uniqueCorporateNetworkIdRequired : Boolean
+  output automatedPasswordPolicies : Boolean
+  output roleBasedAccessControl : Boolean
+  output quarterlyAccessCertification : Boolean
+  output leastPrivilegePrinciple : Boolean
+
+  definition uniqueCorporateNetworkIdRequired equals true
+  definition automatedPasswordPolicies equals true
+  definition roleBasedAccessControl equals true
+  definition quarterlyAccessCertification equals true
+  definition leastPrivilegePrinciple equals true
+
+# --- Technical Measure: Physical Security ---
+
+scope SCCPhysicalSecurity =
+  output globalSafetyAndSecurityPolicies : Boolean
+  output specialEmphasisOnSensitiveAreas : Boolean
+  output securitySystemsAndSafeguards : Boolean
+
+  definition globalSafetyAndSecurityPolicies equals true
+  definition specialEmphasisOnSensitiveAreas equals true
+  definition securitySystemsAndSafeguards equals true
+
+# --- Technical Measure: Events Logging and Configuration ---
+
+scope SCCEventsLoggingConfiguration =
+  output eventLoggingDefined : Boolean
+  output centralizedSecurityMonitoring : Boolean
+  output configurationManagementControl : Boolean
+  output systemHardeningBaselines : Boolean
+
+  definition eventLoggingDefined equals true
+  definition centralizedSecurityMonitoring equals true
+  definition configurationManagementControl equals true
+  definition systemHardeningBaselines equals true
+
+# --- Technical Measure: IT Governance and Certification ---
+
+scope SCCITGovernanceCertification =
+  output cisoOverseesInfoSecurity : Boolean
+  output enterpriseRiskAndComplianceProgram : Boolean
+  output iso27001Certification : Boolean
+  output pciApplicableStandards : Boolean
+  output aicpaSoc1AndSoc2 : Boolean
+  output riskControlIdentificationProcess : Boolean
+  output privacyImpactAssessments : Boolean
+  output thirdPartyManagementProgram : Boolean
+
+  definition cisoOverseesInfoSecurity equals true
+  definition enterpriseRiskAndComplianceProgram equals true
+  definition iso27001Certification equals true
+  definition pciApplicableStandards equals true
+  definition aicpaSoc1AndSoc2 equals true
+  definition riskControlIdentificationProcess equals true
+  definition privacyImpactAssessments equals true
+  definition thirdPartyManagementProgram equals true
+
+# --- Technical Measure: Data Minimization ---
+
+scope SCCDataMinimization =
+  output collectAdequateRelevantData : Boolean
+  output limitedToNecessaryPurposes : Boolean
+  output privacyImpactAssessmentCompliance : Boolean
+
+  definition collectAdequateRelevantData equals true
+  definition limitedToNecessaryPurposes equals true
+  definition privacyImpactAssessmentCompliance equals true
+
+# --- Technical Measure: Data Quality and Retention ---
+
+scope SCCDataQualityRetention =
+  output dataCorrectCompleteUpToDate : Boolean
+  output usersCanCorrectParticulars : Boolean
+  output dataGovernanceMonitoring : Boolean
+  output dataClassifiedWithRetentionPeriods : Boolean
+  output disposedAfterRetentionExpires : Boolean
+
+  definition dataCorrectCompleteUpToDate equals true
+  definition usersCanCorrectParticulars equals true
+  definition dataGovernanceMonitoring equals true
+  definition dataClassifiedWithRetentionPeriods equals true
+  definition disposedAfterRetentionExpires equals true
+
+# --- Technical Measure: Accountability ---
+
+scope SCCAccountability =
+  output infoSecurityAndPrivacyPoliciesAligned : Boolean
+  output privacyProgramPolicyInPlace : Boolean
+  output enterpriseRiskComplianceGovernance : Boolean
+  output businessFunctionAccountability : Boolean
+  output globalPrivacyDepartment : Boolean
+  output enterpriseCommunicationsOnPrivacy : Boolean
+  output riskManagementFramework : Boolean
+  output reportingToManagementCommittees : Boolean
+
+  definition infoSecurityAndPrivacyPoliciesAligned equals true
+  definition privacyProgramPolicyInPlace equals true
+  definition enterpriseRiskComplianceGovernance equals true
+  definition businessFunctionAccountability equals true
+  definition globalPrivacyDepartment equals true
+  definition enterpriseCommunicationsOnPrivacy equals true
+  definition riskManagementFramework equals true
+  definition reportingToManagementCommittees equals true
+
+# --- Technical Measure: Data Subject Rights ---
+
+scope SCCDataSubjectRights =
+  output accessRightFulfilled : Boolean
+  output correctionRightFulfilled : Boolean
+  output erasureRightFulfilled : Boolean
+  input hasLegalObligationToRetain : Boolean
+  output erasureMayBeWithheld : Boolean
+
+  definition accessRightFulfilled equals true
+  definition correctionRightFulfilled equals true
+  definition erasureRightFulfilled equals true
+  definition erasureMayBeWithheld equals hasLegalObligationToRetain
+
+# --- Technical Measure: Processor Management ---
+
+scope SCCProcessorManagement =
+  output comprehensiveThirdPartyProgram : Boolean
+  output contractualControlsInPlace : Boolean
+  output subprocessorsRequireAdvanceApproval : Boolean
+  output continuousRiskManagement : Boolean
+
+  definition comprehensiveThirdPartyProgram equals true
+  definition contractualControlsInPlace equals true
+  definition subprocessorsRequireAdvanceApproval equals true
+  definition continuousRiskManagement equals true

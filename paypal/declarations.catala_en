@@ -321,3 +321,67 @@ declaration structure RecurringBuyTerms =
   data maxScheduleAheadDays : Integer
   data cancellationDeadlineHour : Integer
   data cancellationDeadlineMinute : Integer
+
+# --- SCCS (Standard Contractual Clauses) ---
+
+declaration enumeration SCCModule =
+  -- Module1ControllerToController
+  -- Module2ControllerToProcessor
+  -- Module3ProcessorToProcessor
+  -- Module4ProcessorToController
+
+declaration enumeration DataProtectionRole =
+  -- Controller
+  -- Processor
+
+declaration enumeration SCCGoverningLawOption =
+  -- Option1GoverningLaw
+  -- Option2GoverningLaw
+
+declaration enumeration DataSubjectCategory =
+  -- Customers
+  -- Employees
+  -- BusinessContacts
+
+declaration enumeration PersonalDataCategory =
+  -- Name
+  -- AmountCharged
+  -- DateTime
+  -- BankAccountDetails
+  -- PaymentCardDetails
+  -- CVCCode
+  -- PostCode
+  -- CountryCode
+  -- Address
+  -- EmailAddress
+  -- Fax
+  -- Phone
+  -- Website
+  -- ExpiryData
+  -- ShippingDetails
+  -- TaxStatus
+  -- UniqueCustomerIdentifier
+  -- IPAddress
+  -- Location
+  -- OtherDataReceivedUnderAgreement
+
+declaration enumeration TransferPurpose =
+  -- ServicePerformance
+  -- FraudIdentification
+  -- LegalCompliance
+  -- AsSetForthInPrivacyStatement
+
+declaration enumeration TechnicalMeasureType =
+  -- PseudonymizationAndEncryption
+  -- ChangeManagementAndBusinessContinuity
+  -- DisasterRecovery
+  -- RegularTestingAndAssessment
+  -- UserIdentificationAndAuthorization
+  -- PhysicalSecurity
+  -- EventsLoggingAndConfiguration
+  -- ITGovernanceAndCertification
+  -- DataMinimization
+  -- DataQualityAndRetention
+  -- Accountability
+  -- DataSubjectRights
+  -- ProcessorManagement
