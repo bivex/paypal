@@ -1,0 +1,237 @@
+# PayPal Risk Warning on Digital Payment Token Services (Singapore)
+# Last updated: March 3, 2026
+# Source: PayPal DPT Risk Warning / Cryptocurrency Terms (Singapore)
+# Forms part of the PayPal User Agreement
+
+# --- DPT Service Provider Licensing ---
+
+scope DPTRiskWarningLicensing =
+  output payPalLicensedByMASForDPTServices : Boolean
+  output noGuaranteeOfFullRecovery : Boolean
+  output appliesIfPayPalBusinessFails : Boolean
+  output appliesIfThirdPartyBusinessFails : Boolean
+
+  definition payPalLicensedByMASForDPTServices equals true
+  definition noGuaranteeOfFullRecovery equals true
+  definition appliesIfPayPalBusinessFails equals true
+  definition appliesIfThirdPartyBusinessFails equals true
+
+# --- MAS Does Not Supervise Unregulated Services ---
+
+scope DPTRiskWarningUnregulatedServices =
+  output masDoesNotSuperviseUnregulatedServices : Boolean
+  output includesDPTDerivativesTrading : Boolean
+
+  definition masDoesNotSuperviseUnregulatedServices equals true
+  definition includesDPTDerivativesTrading equals true
+
+# --- DPT Familiarity Warning ---
+
+scope DPTRiskWarningFamiliarity =
+  output shouldNotTransactIfUnfamiliar : Boolean
+  output includesHowDPTIsCreated : Boolean
+  output includesHowDPTIsTransferredOrHeld : Boolean
+
+  definition shouldNotTransactIfUnfamiliar equals true
+  definition includesHowDPTIsCreated equals true
+  definition includesHowDPTIsTransferredOrHeld equals true
+
+# --- DPT Value Fluctuation Warning ---
+
+scope DPTRiskWarningValueFluctuation =
+  output dptValueMayFluctuateGreatly : Boolean
+  output mustAcceptRiskOfLosingAllMoney : Boolean
+
+  definition dptValueMayFluctuateGreatly equals true
+  definition mustAcceptRiskOfLosingAllMoney equals true
+
+# --- Stablecoin Services ---
+
+scope DPTRiskWarningStablecoins =
+  output payPalMayOfferStablecoinServices : Boolean
+  output stablecoinsPromotedAsHavingStableValue : Boolean
+
+  definition payPalMayOfferStablecoinServices equals true
+  definition stablecoinsPromotedAsHavingStableValue equals true
+
+# --- Risk Warning Applies to Third-Party Arrangements ---
+
+scope DPTRiskWarningThirdPartyApplication =
+  input inducedByPayPalForThirdPartyDPTTrading : Boolean
+  input arrangementByPayPalForDPTTransmission : Boolean
+  output riskWarningAppliesToThirdPartyPayment : Boolean
+
+  definition riskWarningAppliesToThirdPartyPayment equals
+    inducedByPayPalForThirdPartyDPTTrading or
+    arrangementByPayPalForDPTTransmission
+
+# --- Pre-Transaction Awareness ---
+
+scope DPTPreTransactionAwareness =
+  input paysPayPalMoneyOrDPT : Boolean
+  input paysThirdPartyUnderPayPalArrangement : Boolean
+  output shouldBeAwareOfRisks : Boolean
+
+  definition shouldBeAwareOfRisks equals
+    paysPayPalMoneyOrDPT or paysThirdPartyUnderPayPalArrangement
+
+# --- Contact Information ---
+
+scope DPTContactInformation =
+  output customerServiceAvailable : Boolean
+  output phoneNumber : Boolean
+
+  definition customerServiceAvailable equals true
+  definition phoneNumber equals true
+
+# --- Cryptocurrency Terms Application ---
+
+scope DPTCryptocurrencyTermsApplication =
+  output termsBetweenUserAndPayPalSingapore : Boolean
+  output governsCryptocurrenciesHub : Boolean
+  output governsHoldingTransactingLearning : Boolean
+
+  definition termsBetweenUserAndPayPalSingapore equals true
+  definition governsCryptocurrenciesHub equals true
+  definition governsHoldingTransactingLearning equals true
+
+# --- Consumer Hub Eligibility ---
+
+scope DPTConsumerHubEligibility =
+  input isIndividual : Boolean
+  input isResidentOfEligibleCountry : Boolean
+  input age : Integer
+  input ageOfMajority : Integer
+  output eligibleForConsumerHub : Boolean
+
+  definition eligibleForConsumerHub equals
+    isIndividual and isResidentOfEligibleCountry and
+    age >= 18 and age >= ageOfMajority
+
+# --- Business Hub Eligibility ---
+
+scope DPTBusinessHubEligibility =
+  input isBusinessAccount : Boolean
+  input businessOrganizedInEligibleCountry : Boolean
+  input businessOperatingInEligibleCountry : Boolean
+  input businessResidentOfEligibleCountry : Boolean
+  output eligibleForBusinessHub : Boolean
+
+  definition eligibleForBusinessHub equals
+    isBusinessAccount and
+    (businessOrganizedInEligibleCountry or
+     businessOperatingInEligibleCountry or
+     businessResidentOfEligibleCountry)
+
+# --- Business Hub Certification ---
+
+scope DPTBusinessHubCertification =
+  output mustCertifyBusinessOrCommercialPurpose : Boolean
+
+  definition mustCertifyBusinessOrCommercialPurpose equals true
+
+# --- Service Availability ---
+
+scope DPTServiceAvailability =
+  output variesByCountryRegion : Boolean
+  output mayChangeAtAnyTime : Boolean
+  output confirmedViaDashboard : Boolean
+  output hubVisibleMeansAvailable : Boolean
+
+  definition variesByCountryRegion equals true
+  definition mayChangeAtAnyTime equals true
+  definition confirmedViaDashboard equals true
+  definition hubVisibleMeansAvailable equals true
+
+# --- Agreement Compliance ---
+
+scope DPTAgreementCompliance =
+  output mustComplyWithCryptocurrencyTerms : Boolean
+  output mustComplyWithUserAgreement : Boolean
+  output mustComplyWithPrivacyStatement : Boolean
+  output mustComplyWithAcceptableUsePolicy : Boolean
+
+  definition mustComplyWithCryptocurrencyTerms equals true
+  definition mustComplyWithUserAgreement equals true
+  definition mustComplyWithPrivacyStatement equals true
+  definition mustComplyWithAcceptableUsePolicy equals true
+
+# --- Conflict with User Agreement ---
+
+scope DPTConflictResolution =
+  output cryptocurrencyTermsGovernOnConflict : Boolean
+  output governsToExtentOfConflict : Boolean
+
+  definition cryptocurrencyTermsGovernOnConflict equals true
+  definition governsToExtentOfConflict equals true
+
+# --- Amendments ---
+
+scope DPTAmendments =
+  input reducesRightsOrIncreasesResponsibilities : Boolean
+  output revisedVersionEffectiveWhenPosted : Boolean
+  output substantialChangePostedOnPolicyUpdates : Boolean
+  output minimumAdvanceNoticeDays : Integer
+  output orLongerAsRequiredByLaw : Boolean
+
+  definition revisedVersionEffectiveWhenPosted equals true
+  definition substantialChangePostedOnPolicyUpdates equals
+    reducesRightsOrIncreasesResponsibilities
+  definition minimumAdvanceNoticeDays equals 14
+  definition orLongerAsRequiredByLaw equals true
+
+# --- Future Changes Incorporation ---
+
+scope DPTFutureChangesIncorporation =
+  output policyUpdatesIncorporatedByReference : Boolean
+  output takeEffectAsSpecifiedInUpdate : Boolean
+
+  definition policyUpdatesIncorporatedByReference equals true
+  definition takeEffectAsSpecifiedInUpdate equals true
+
+# --- Continued Use as Acceptance ---
+
+scope DPTContinuedUseAcceptance =
+  output continuedUseIncludingHoldingEqualsAcceptance : Boolean
+  output mustAbideByChanges : Boolean
+
+  definition continuedUseIncludingHoldingEqualsAcceptance equals true
+  definition mustAbideByChanges equals true
+
+# --- Disagreement with Changes ---
+
+scope DPTDisagreementWithChanges =
+  input disagreesWithChanges : Boolean
+  output mustSellOrTransferCryptoAssets : Boolean
+  output mustStopAccessingHub : Boolean
+
+  definition mustSellOrTransferCryptoAssets equals disagreesWithChanges
+  definition mustStopAccessingHub equals disagreesWithChanges
+
+# --- Terms Apply to Previous Use ---
+
+scope DPTTermsPreviousUse =
+  output termsContinueToApplyToPreviousUse : Boolean
+
+  definition termsContinueToApplyToPreviousUse equals true
+
+# --- Hold on Account Restriction ---
+
+scope DPTAccountHoldRestriction =
+  input accountOnHold : Boolean
+  output maySellCryptoAssets : Boolean
+  output mayNotTransferCryptoAssets : Boolean
+
+  definition maySellCryptoAssets equals accountOnHold
+  definition mayNotTransferCryptoAssets equals accountOnHold
+
+# --- Tax Consequences ---
+
+scope DPTTaxConsequences =
+  output taxConsequencesOnSale : Boolean
+  output taxConsequencesOnTransfer : Boolean
+  output taxConsequencesOnReceipt : Boolean
+
+  definition taxConsequencesOnSale equals true
+  definition taxConsequencesOnTransfer equals true
+  definition taxConsequencesOnReceipt equals true
