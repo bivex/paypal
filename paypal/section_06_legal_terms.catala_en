@@ -1,0 +1,274 @@
+# PayPal User Agreement
+# Section 6: Other Legal Terms
+# Last updated: May 19, 2026
+
+# --- Arbitration Agreement ---
+
+scope ArbitrationAgreement =
+  output disputesResolvedByArbitration : Boolean
+  output rightToTrialByJuryWaived : Boolean
+  output classActionsProhibited : Boolean
+  output governedByFederalArbitrationAct : Boolean
+  output smallClaimsCourtException : Boolean
+
+  definition disputesResolvedByArbitration equals true
+  definition rightToTrialByJuryWaived equals true
+  definition classActionsProhibited equals true
+  definition governedByFederalArbitrationAct equals true
+  definition smallClaimsCourtException equals true
+
+# --- Arbitration Opt-Out ---
+
+scope ArbitrationOptOut =
+  output optOutWindowDays : Integer
+  output method : String
+  output mustBePostmarkedByDeadline : Boolean
+  output mustIncludeSignature : Boolean
+  output continuingAppliesAfterOptOut : Boolean
+
+  definition optOutWindowDays equals 30
+  definition method equals "written_notice_by_mail"
+  definition mustBePostmarkedByDeadline equals true
+  definition mustIncludeSignature equals true
+  definition continuingAppliesAfterOptOut equals true
+
+# --- Notice of Dispute ---
+
+scope NoticeOfDispute =
+  output mustSendByCertifiedMail : Boolean
+  output resolutionWindowDays : Integer
+  output mustContain : String list
+
+  definition mustSendByCertifiedMail equals true
+  definition resolutionWindowDays equals 45
+
+  definition mustContain equals
+    ["signature", "email_address", "phone_number",
+     "claim_description", "relief_sought", "supporting_documents"]
+
+# --- Arbitration Costs ---
+
+scope ArbitrationCostRules =
+  input reliefSoughtValue : Money
+  input costProhibitiveComparedToCourt : Boolean
+  output payPalPaysAllFees : Boolean
+  output payPalPaysPortionIfProhibitive : Boolean
+  output smallClaimsThreshold : Money
+  output writtenOnlyThreshold : Money
+
+  definition payPalPaysAllFees equals
+    reliefSoughtValue <= `10000.00`
+
+  definition payPalPaysPortionIfProhibitive equals
+    reliefSoughtValue > `10000.00` and costProhibitiveComparedToCourt
+
+  definition smallClaimsThreshold equals `10000.00`
+  definition writtenOnlyThreshold equals `25000.00`
+
+# --- Arbitration Amendment Notice ---
+
+scope ArbitrationAmendmentNotice =
+  output noticeDaysBeforeEffective : Integer
+  output noticeMethod : String
+  output mayCloseAccountToAvoid : Boolean
+
+  definition noticeDaysBeforeEffective equals 30
+  definition noticeMethod equals "website_and_email"
+  definition mayCloseAccountToAvoid equals true
+
+# --- Governing Law ---
+
+scope GoverningLaw =
+  output governingState : String
+  output federalLawPreempts : Boolean
+  output conflictOfLawsDisregarded : Boolean
+
+  definition governingState equals "Delaware"
+  definition federalLawPreempts equals true
+  definition conflictOfLawsDisregarded equals true
+
+# --- Security Interest ---
+
+scope SecurityInterest =
+  output payPalHasLienOnFunds : Boolean
+  output payPalHasSecurityInterest : Boolean
+
+  definition payPalHasLienOnFunds equals true
+  definition payPalHasSecurityInterest equals true
+
+# --- Negative Balance ---
+
+scope NegativeBalanceRules =
+  output representsAmountOwed : Boolean
+  output mayDeductFromFuturePayments : Boolean
+  output maySetOffAcrossAccounts : Boolean
+  output maySetOffAcrossCurrencies : Boolean
+  output negativeBalanceConversionDays : Integer
+  output mayCombineWithNewDebits : Boolean
+
+  definition representsAmountOwed equals true
+  definition mayDeductFromFuturePayments equals true
+  definition maySetOffAcrossAccounts equals true
+  definition maySetOffAcrossCurrencies equals true
+  definition negativeBalanceConversionDays equals 21
+  definition mayCombineWithNewDebits equals true
+
+# --- Limitation of Liability ---
+
+scope LimitationOfLiability =
+  output liableOnlyForDirectDamages : Boolean
+  output notLiableForLostProfits : Boolean
+  output notLiableForConsequentialDamages : Boolean
+  output notLiableForIntangibleLosses : Boolean
+  output notLiableForServiceDisruption : Boolean
+  output notLiableForThirdPartyActions : Boolean
+
+  definition liableOnlyForDirectDamages equals true
+  definition notLiableForLostProfits equals true
+  definition notLiableForConsequentialDamages equals true
+  definition notLiableForIntangibleLosses equals true
+  definition notLiableForServiceDisruption equals true
+  definition notLiableForThirdPartyActions equals true
+
+# --- Warranty Disclaimer ---
+
+scope WarrantyDisclaimer =
+  output providedAsIs : Boolean
+  output disclaimsMerchantability : Boolean
+  output disclaimsFitnessForPurpose : Boolean
+  output disclaimsNonInfringement : Boolean
+  output doesNotGuaranteeContinuousAccess : Boolean
+
+  definition providedAsIs equals true
+  definition disclaimsMerchantability equals true
+  definition disclaimsFitnessForPurpose equals true
+  definition disclaimsNonInfringement equals true
+  definition doesNotGuaranteeContinuousAccess equals true
+
+# --- Communication Deemed Received ---
+
+scope CommunicationDeemedReceived =
+  output electronicDeliveryHours : Integer
+  output mailDeliveryBusinessDays : Integer
+
+  definition electronicDeliveryHours equals 24
+  definition mailDeliveryBusinessDays equals 3
+
+# --- PayPal As Payment Service Provider Only ---
+
+scope PayPalRoleLimitations =
+  output notEscrowAgent : Boolean
+  output notUserAgentOrTrustee : Boolean
+  output notPartnerOrEmployer : Boolean
+  output doesNotGuaranteeIdentity : Boolean
+  output doesNotDetermineTaxLiability : Boolean
+
+  definition notEscrowAgent equals true
+  definition notUserAgentOrTrustee equals true
+  definition notPartnerOrEmployer equals true
+  definition doesNotGuaranteeIdentity equals true
+  definition doesNotDetermineTaxLiability equals true
+
+# --- Indemnification ---
+
+scope IndemnificationObligation =
+  output mustIndemnifyPayPal : Boolean
+  output coversBreachOfAgreement : Boolean
+  output coversImproperUse : Boolean
+  output coversViolationOfLaw : Boolean
+  output coversThirdPartyActions : Boolean
+  output includesLegalFees : Boolean
+
+  definition mustIndemnifyPayPal equals true
+  definition coversBreachOfAgreement equals true
+  definition coversImproperUse equals true
+  definition coversViolationOfLaw equals true
+  definition coversThirdPartyActions equals true
+  definition includesLegalFees equals true
+
+# --- Unlawful Internet Gambling ---
+
+scope UnlawfulGamblingProhibition =
+  output restrictedTransactionsProhibited : Boolean
+
+  definition restrictedTransactionsProhibited equals true
+
+# --- Tax Responsibilities ---
+
+scope TaxResponsibilities =
+  output feesExcludeTaxes : Boolean
+  output userResponsibleForTaxDetermination : Boolean
+  output payPalMayReportToTaxAuthorities : Boolean
+  output withholdingAppliesIfInfoMissing : Boolean
+  output userMustNotWithhold : Boolean
+
+  definition feesExcludeTaxes equals true
+  definition userResponsibleForTaxDetermination equals true
+  definition payPalMayReportToTaxAuthorities equals true
+  definition withholdingAppliesIfInfoMissing equals true
+  definition userMustNotWithhold equals true
+
+# --- SAML SSO Compliance ---
+
+scope SAMSSSOCompliance =
+  input usesSAMLSSO : Boolean
+  output mustComplyWithMFA : Boolean
+  output applicableRegulations : String list
+
+  definition mustComplyWithMFA equals usesSAMLSSO
+
+  definition applicableRegulations equals
+    ["NY_DFS_Part_500", "16_CFR_Part_314"]
+
+# --- Account Statement ---
+
+scope AccountStatementRules =
+  output userHasRightToStatement : Boolean
+  output balanceAccountGetsAdditionalStatement : Boolean
+
+  definition userHasRightToStatement equals true
+  definition balanceAccountGetsAdditionalStatement equals true
+
+# --- License Grant from Seller ---
+
+scope SellerLicenseGrant =
+  output grantsWorldwideLicense : Boolean
+  output licenseIsNonExclusive : Boolean
+  output licenseIsSublicensable : Boolean
+  output licenseIsRoyaltyFree : Boolean
+  output purposeIncludesMerchantIdentification : Boolean
+
+  definition grantsWorldwideLicense equals true
+  definition licenseIsNonExclusive equals true
+  definition licenseIsSublicensable equals true
+  definition licenseIsRoyaltyFree equals true
+  definition purposeIncludesMerchantIdentification equals true
+
+# --- Assignment ---
+
+scope AssignmentRules =
+  output userMayNotAssign : Boolean
+  output payPalMayAssign : Boolean
+
+  definition userMayNotAssign equals true
+  definition payPalMayAssign equals true
+
+# --- Business Days Definition ---
+
+scope BusinessDaysDefinition =
+  output mondayThroughFriday : Boolean
+  output holidays : String list
+
+  definition mondayThroughFriday equals true
+
+  definition holidays equals
+    ["New Year's Day (Jan 1)",
+     "MLK Jr. Birthday (3rd Mon Jan)",
+     "Washington's Birthday (3rd Mon Feb)",
+     "Memorial Day (last Mon May)",
+     "Independence Day (Jul 4)",
+     "Labor Day (1st Mon Sep)",
+     "Columbus Day (2nd Mon Oct)",
+     "Veterans Day (Nov 11)",
+     "Thanksgiving (4th Thu Nov)",
+     "Christmas Day (Dec 25)"]

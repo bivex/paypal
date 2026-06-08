@@ -1,0 +1,12 @@
+# PayPal User Agreement
+# Last updated: May 19, 2026
+# Source: https://www.paypal.com/us/webapps/mpp/ua/useragreement-full
+# Translated into Catala
+
+include "declarations.catala_en"
+include "section_01_account.catala_en"
+include "section_02_sending_buying.catala_en"
+include "section_03_selling_payments.catala_en"
+include "section_04_restricted_holds.catala_en"
+include "section_05_liability_errors.catala_en"
+include "section_06_legal_terms.catala_en"

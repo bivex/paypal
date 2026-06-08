@@ -1,0 +1,118 @@
+# PayPal User Agreement
+# Section 2: Sending Money and Buying
+# Last updated: May 19, 2026
+
+# --- Sending Money to Friends/Family ---
+
+scope SendMoneyPersonal =
+  input recipientHasAccount : Boolean
+  output recipientCanClaim : Boolean
+  output unclaimedRefundTriggered : Boolean
+  output mayLimitAmount : Boolean
+
+  definition recipientCanClaim equals true
+  definition unclaimedRefundTriggered equals not recipientHasAccount
+  definition mayLimitAmount equals true
+
+scope SendMoneyDeclineRefund =
+  input originalPaymentMethod : PaymentMethod
+  output refundToOriginalMethod : Boolean
+  output refundToBalance : Boolean
+
+  definition refundToOriginalMethod equals
+    originalPaymentMethod equals -- CreditCard or
+    originalPaymentMethod equals -- DebitCard or
+    originalPaymentMethod equals -- PayPalCredit or
+    originalPaymentMethod equals -- BalanceAccount or
+    originalPaymentMethod equals -- BusinessAccountBalance
+
+  definition refundToBalance equals
+    originalPaymentMethod equals -- BankAccount
+
+# --- Buying / Purchase Transactions ---
+
+scope PurchaseTransaction =
+  input sellerHasPayPalAccount : Boolean
+  output sellerCanClaimPayment : Boolean
+  output claimDeadlineDays : Integer
+  output authorizationValidDays : Integer
+
+  definition sellerCanClaimPayment equals true
+  definition claimDeadlineDays equals 30
+  definition authorizationValidDays equals 30
+
+# --- Payment Review ---
+
+scope PaymentReviewProcess =
+  output mayDelayShipment : Boolean
+  output mayCancelTransaction : Boolean
+  output sellerNotifiedToDelay : Boolean
+
+  definition mayDelayShipment equals true
+  definition mayCancelTransaction equals true
+  definition sellerNotifiedToDelay equals true
+
+# --- Automatic Payments ---
+
+scope AutomaticPaymentRules =
+  input accountType : AccountType
+  output cancelNoticeBusinessDays : Integer
+  output varyingAmountNoticeDays : Integer
+  output rangeNoticeOption : Boolean
+
+  definition cancelNoticeBusinessDays equals 3
+  definition varyingAmountNoticeDays equals 10
+  definition rangeNoticeOption equals true
+
+# --- Refund Currency Conversion ---
+
+scope RefundCurrencyConversion =
+  input daysSinceOriginalPayment : Integer
+  output useOriginalRate : Boolean
+  output useCurrentRate : Boolean
+  output refundCurrencyOrder : String list
+
+  definition useOriginalRate equals daysSinceOriginalPayment <= 1
+  definition useCurrentRate equals daysSinceOriginalPayment > 1
+
+  definition refundCurrencyOrder equals
+    ["currency_paid", "primary_holding_currency", "us_dollars"]
+
+# --- Backup Payment Method Order ---
+
+scope BackupPaymentMethodOrder =
+  output order : BackupPaymentOrder list
+
+  definition order equals
+    [-- BalanceOrDebitCard, -- BankAccount,
+     -- CoBrandedCreditCard, -- DebitCard,
+     -- CreditCard, -- ECheck]
+
+# --- Bank Account Transfer Re-presentment ---
+
+scope BankRePresentment =
+  output maxRePresentmentAttempts : Integer
+  output addingBalanceStopsRePresentment : Boolean
+
+  definition maxRePresentmentAttempts equals 2
+  definition addingBalanceStopsRePresentment equals false
+
+# --- E-Check Processing ---
+
+scope ECheckProcessing =
+  output processingDaysUS : Integer
+  output processingDaysInternational : Boolean
+
+  definition processingDaysUS equals 7
+  definition processingDaysInternational equals true -- takes longer
+
+# --- Purchase Protection ---
+
+scope PurchaseProtectionEligibility =
+  output mayCoverFullPurchasePrice : Boolean
+  output mayCoverOriginalShipping : Boolean
+  output payPalDeterminesEligibility : Boolean
+
+  definition mayCoverFullPurchasePrice equals true
+  definition mayCoverOriginalShipping equals true
+  definition payPalDeterminesEligibility equals true

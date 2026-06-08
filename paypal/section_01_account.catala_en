@@ -1,0 +1,191 @@
+# PayPal User Agreement
+# Section 1: About Your Account
+# Last updated: May 19, 2026
+
+# --- Account Eligibility ---
+
+scope AccountEligibilityRules =
+  input accountType : AccountType
+  input eligibility : AccountEligibility
+  output canOpenAccount : Boolean
+  output mustBeResident : Boolean
+  output minimumAge : Integer
+
+  definition canOpenAccount equals
+    if eligibility.isResident and eligibility.territory then
+      if accountType equals -- Personal then
+        eligibility.age >= 18
+      else
+        eligibility.isBusinessEntity
+    else
+      false
+
+  definition mustBeResident equals true
+  definition minimumAge equals 18
+
+# --- Account Type Determination ---
+
+scope AccountTypeDetermination =
+  input primaryPurposeIsPersonal : Boolean
+  input primaryPurposeIsBusiness : Boolean
+  output requiredAccountType : AccountType
+  output payPalMayConvertOrClose : Boolean
+
+  definition requiredAccountType equals
+    if primaryPurposeIsPersonal then
+      -- Personal
+    else
+      -- Business
+
+  definition payPalMayConvertOrClose equals true
+
+# --- Change Notice Periods ---
+
+scope ChangeNoticePeriods =
+  input accountType : AccountType
+  input acceptedBeforeChangePosted : Boolean
+  input changesReduceRights : Boolean
+  output noticePeriodDays : Integer
+  output noticeMethod : ChangeNoticeType
+
+  definition noticePeriodDays equals
+    if changesReduceRights then
+      if acceptedBeforeChangePosted then
+        if accountType equals -- Personal then 21
+        else 5
+      else 0
+    else 0
+
+  definition noticeMethod equals
+    if accountType equals -- Personal then
+      -- PolicyUpdatesPage
+    else
+      -- PolicyUpdatesPage
+
+# --- Account Closing Restrictions ---
+
+scope AccountClosingRestrictions =
+  input hasPendingTransaction : Boolean
+  input hasOpenDispute : Boolean
+  input hasNegativeBalance : Boolean
+  input hasHold : Boolean
+  input hasLimitation : Boolean
+  input hasReserve : Boolean
+  output canCloseAccount : Boolean
+  output closureReasons : String list
+
+  definition canCloseAccount equals
+    not (hasPendingTransaction or hasOpenDispute or
+         hasNegativeBalance or hasHold or hasLimitation or hasReserve)
+
+  definition closureReasons equals
+    (if hasPendingTransaction then ["pending_transaction"] else [])
+    + (if hasOpenDispute then ["open_dispute"] else [])
+    + (if hasNegativeBalance then ["negative_balance"] else [])
+    + (if hasHold then ["hold_active"] else [])
+    + (if hasLimitation then ["limitation_active"] else [])
+    + (if hasReserve then ["reserve_active"] else [])
+
+# --- Payment Method Confirmation ---
+
+scope PaymentMethodConfirmation =
+  input paymentMethod : PaymentMethod
+  output cardConfirmationCharge : Money
+  output bankDepositCount : Integer
+  output bankDepositMaxAmount : Money
+  output bankDebitCount : Integer
+
+  definition cardConfirmationCharge equals
+    `1.95` -- USD, refunded after confirmation
+
+  definition bankDepositCount equals 2
+  definition bankDepositMaxAmount equals `1.00` -- USD each
+  definition bankDebitCount equals 1
+
+# --- Business Account Identification ---
+
+scope BusinessAccountVerification =
+  input businessId : BusinessIdentification
+  output isVerified : Boolean
+  output canHoldBalance : Boolean
+  output canAddFunds : Boolean
+  output canMakePurchases : Boolean
+
+  definition isVerified equals
+    if businessId.entityType equals -- SoleProprietorship then
+      businessId.businessName and businessId.businessAddress and
+      businessId.taxpayerId
+    else
+      businessId.businessName and businessId.businessAddress and
+      businessId.taxpayerId
+
+  definition canHoldBalance equals true
+
+  definition canAddFunds equals isVerified
+
+  definition canMakePurchases equals isVerified
+
+# --- Business Account Routing ---
+
+scope BusinessAccountRouting =
+  input hasVerifiedInfo : Boolean
+  output hasAssignedAccountNumber : Boolean
+  output hasRoutingNumber : Boolean
+  output dailyLimitsApply : Boolean
+
+  definition hasAssignedAccountNumber equals true
+  definition hasRoutingNumber equals true
+  definition dailyLimitsApply equals true
+
+# --- FDIC Insurance ---
+
+scope FDICInsuranceStatus =
+  input hasDebitCard : Boolean
+  input hasDirectDeposit : Boolean
+  input hasCryptoAccount : Boolean
+  input isBusinessAccountWithCrypto : Boolean
+  output eligibleForPassThrough : Boolean
+  output fdicProtectsAgainst : String
+  output fdicDoesNotProtectAgainst : String
+
+  definition eligibleForPassThrough equals
+    hasDebitCard or hasDirectDeposit or hasCryptoAccount or
+    isBusinessAccountWithCrypto
+
+  definition fdicProtectsAgainst equals "bank_failure"
+  definition fdicDoesNotProtectAgainst equals "paypal_failure"
+
+# --- PayPal Savings ---
+
+scope PayPalSavingsRules =
+  output requiresBalanceAccount : Boolean
+  output canFundMerchantTransactions : Boolean
+  output canSendPersonalTransactions : Boolean
+  output providedBy : String
+
+  definition requiresBalanceAccount equals true
+  definition canFundMerchantTransactions equals false
+  definition canSendPersonalTransactions equals false
+  definition providedBy equals "Synchrony Bank"
+
+# --- Dormant Accounts ---
+
+scope DormantAccountRuleScope =
+  output inactivityThresholdYears : Integer
+  output escheatRequired : Boolean
+  output defaultEscheatState : String
+
+  definition inactivityThresholdYears equals 2
+  definition escheatRequired equals true
+  definition defaultEscheatState equals "Delaware"
+
+# --- Check Withdrawal ---
+
+scope CheckWithdrawalRules =
+  output checkValidityDays : Integer
+  output checkFee : Money
+  output willSendToPOBox : Boolean
+
+  definition checkValidityDays equals 180
+  definition checkFee equals `1.50` -- USD, non-refundable
+  definition willSendToPOBox equals false

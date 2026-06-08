@@ -1,0 +1,176 @@
+# PayPal User Agreement
+# Section 4: Restricted Activities, Holds, and Other Actions
+# Last updated: May 19, 2026
+
+# --- Hold Duration Rules ---
+
+scope RiskBasedHoldDuration =
+  output maxDurationDays : Integer
+  output typicalDurationDays : Integer
+  output earlyReleasePossible : Boolean
+  output mayExtendIfDisputed : Boolean
+
+  definition maxDurationDays equals 180
+  definition typicalDurationDays equals 21
+  definition earlyReleasePossible equals true
+  definition mayExtendIfDisputed equals true
+
+# --- Hold Reasons ---
+
+scope HoldPlacementReasons =
+  input isNewSeller : Boolean
+  input isHighRiskCategory : Boolean
+  input hasPerformanceIssues : Boolean
+  input isRiskDecision : Boolean
+  input isDisputedTransaction : Boolean
+  input isMarketplaceInstruction : Boolean
+
+  output mayPlaceHold : Boolean
+
+  definition mayPlaceHold equals
+    isNewSeller or isHighRiskCategory or hasPerformanceIssues or
+    isRiskDecision or isDisputedTransaction or isMarketplaceInstruction
+
+# --- Account Limitation Reasons ---
+
+scope LimitationReasons =
+  input suspectedUnauthorizedAccess : Boolean
+  input cardIssuerAlert : Boolean
+  input legalComplianceRequired : Boolean
+  input policyViolation : Boolean
+  input highRiskSellerPerformance : Boolean
+  output mayLimitAccount : Boolean
+
+  definition mayLimitAccount equals
+    suspectedUnauthorizedAccess or cardIssuerAlert or
+    legalComplianceRequired or policyViolation or
+    highRiskSellerPerformance
+
+# --- Reserve Types ---
+
+scope ReservePlacement =
+  input reserveType : ReserveType
+  input rollingPercentage : Rational
+  input rollingPeriodDays : Integer
+  input minimumAmount : Money
+  output isRollingReserve : Boolean
+  output isMinimumReserve : Boolean
+  output description : String
+
+  definition isRollingReserve equals
+    reserveType equals -- RollingReserve
+
+  definition isMinimumReserve equals
+    reserveType equals -- MinimumReserve or reserveType equals -- UpfrontReserve
+
+  definition description equals
+    if reserveType equals -- RollingReserve then
+      "percentage of daily transactions held then released after rolling period"
+    else if reserveType equals -- MinimumReserve then
+      "minimum amount must remain in account at all times"
+    else if reserveType equals -- UpfrontReserve then
+      "upfront amount deposited all at once"
+    else
+      "no reserve"
+
+# --- Reserve Risk Factors ---
+
+scope ReserveRiskFactors =
+  output considerBusinessTenure : Boolean
+  output considerIndustryChargebackLikelihood : Boolean
+  output considerPaymentProcessingHistory : Boolean
+  output considerCreditHistory : Boolean
+  output considerDeliveryTimeFrames : Boolean
+  output considerReturnDisputeRate : Boolean
+
+  definition considerBusinessTenure equals true
+  definition considerIndustryChargebackLikelihood equals true
+  definition considerPaymentProcessingHistory equals true
+  definition considerCreditHistory equals true
+  definition considerDeliveryTimeFrames equals true
+  definition considerReturnDisputeRate equals true
+
+# --- Actions for Restricted Activities ---
+
+scope RestrictedActivityActions =
+  output mayTerminateAgreement : Boolean
+  output mayRefuseService : Boolean
+  output mayLimitAccess : Boolean
+  output mayHoldBalance180Days : Boolean
+  output maySuspendProtection : Boolean
+  output mayRecoverProtectionFunds : Boolean
+  output mayChargeHighVolumeDisputeFee : Boolean
+  output mayContactBuyers : Boolean
+  output mayTakeLegalAction : Boolean
+
+  definition mayTerminateAgreement equals true
+  definition mayRefuseService equals true
+  definition mayLimitAccess equals true
+  definition mayHoldBalance180Days equals true
+  definition maySuspendProtection equals true
+  definition mayRecoverProtectionFunds equals true
+  definition mayChargeHighVolumeDisputeFee equals true
+  definition mayContactBuyers equals true
+  definition mayTakeLegalAction equals true
+
+# --- Protection Recovery Period ---
+
+scope ProtectionRecoveryPeriod =
+  output recoveryWindowDays : Integer
+  output recoveryBasis : String
+
+  definition recoveryWindowDays equals 30
+  definition recoveryBasis equals "actual_damages"
+
+# --- Court Order / Legal Process Holds ---
+
+scope LegalProcessHold =
+  output mayExceed180Days : Boolean
+  output mayHoldPayments : Boolean
+  output mayPlaceReserve : Boolean
+  output mayReleaseFunds : Boolean
+  output mustNotifyUnlessProhibited : Boolean
+
+  definition mayExceed180Days equals true
+  definition mayHoldPayments equals true
+  definition mayPlaceReserve equals true
+  definition mayReleaseFunds equals true
+  definition mustNotifyUnlessProhibited equals true
+
+# --- Currency Conversion Risk on Holds ---
+
+scope CurrencyConversionHoldRisk =
+  output rateMayDifferFromOriginal : Boolean
+  output mayBeLessFavorable : Boolean
+  output mayBeMoreFavorable : Boolean
+
+  definition rateMayDifferFromOriginal equals true
+  definition mayBeLessFavorable equals true
+  definition mayBeMoreFavorable equals true
+
+# --- Withdrawal Restrictions ---
+
+scope WithdrawalRestrictions =
+  input hasAccountLimitation : Boolean
+  input hasHold : Boolean
+  input hasNegativeBalance : Boolean
+  output mustReinitiateAfterResolution : Boolean
+
+  definition mustReinitiateAfterResolution equals
+    hasAccountLimitation or hasHold or hasNegativeBalance
+
+# --- Withdrawal Limit Verification ---
+
+scope WithdrawalLimitVerification =
+  input verifiedBank : Boolean
+  input linkedCard : Boolean
+  input providedSSN : Boolean
+  output verificationStepsCompleted : Integer
+  output mayIncreaseLimit : Boolean
+
+  definition verificationStepsCompleted equals
+    (if verifiedBank then 1 else 0) +
+    (if linkedCard then 1 else 0) +
+    (if providedSSN then 1 else 0)
+
+  definition mayIncreaseLimit equals verificationStepsCompleted >= 2

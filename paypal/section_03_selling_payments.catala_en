@@ -1,0 +1,163 @@
+# PayPal User Agreement
+# Section 3: Selling and Accepting Payments
+# Last updated: May 19, 2026
+
+# --- Seller Obligations ---
+
+scope SellerObligations =
+  output mustPublishCustomerService : Boolean
+  output mustPublishRefundPolicy : Boolean
+  output mustPublishPrivacyPolicy : Boolean
+  output customerServiceMinRequirements : String list
+  output noSurcharge : Boolean
+  output handlingFeeAllowed : Boolean
+
+  definition mustPublishCustomerService equals true
+  definition mustPublishRefundPolicy equals true
+  definition mustPublishPrivacyPolicy equals true
+
+  definition customerServiceMinRequirements equals
+    ["email_or_url", "phone_number"]
+
+  definition noSurcharge equals true
+  definition handlingFeeAllowed equals true
+
+# --- PayPal/Venmo Presentation ---
+
+scope PayPalPresentationRequirements =
+  output mustBeOnParWithOtherMethods : Boolean
+  output mustNotPresentUpstream : Boolean
+  output mustNotMischaracterize : Boolean
+  output mustNotDiscourageUse : Boolean
+  output mustDisplayAtLeastAsProminently : Boolean
+
+  definition mustBeOnParWithOtherMethods equals true
+  definition mustNotPresentUpstream equals true
+  definition mustNotMischaracterize equals true
+  definition mustNotDiscourageUse equals true
+  definition mustDisplayAtLeastAsProminently equals true
+
+# --- QR Code Transactions ---
+
+scope QRCodeRules =
+  output mustUseGoodsServicesQR : Boolean
+  output mustNotUseInPersonQRForOnline : Boolean
+  output mayRequireAlternativeDeliveryProof : Boolean
+
+  definition mustUseGoodsServicesQR equals true
+  definition mustNotUseInPersonQRForOnline equals true
+  definition mayRequireAlternativeDeliveryProof equals true
+
+# --- Preauthorized Payments Seller Obligations ---
+
+scope PreauthorizedPaymentSellerRules =
+  output mustGetPriorAuthorization : Boolean
+  output mustProvideOnlineCancellation : Boolean
+  output mustAllowStopPaymentDays : Integer
+  output mustNotifyVaryingAmountDays : Integer
+  output mustNotRestartWithoutWrittenAuth : Boolean
+
+  definition mustGetPriorAuthorization equals true
+  definition mustProvideOnlineCancellation equals true
+  definition mustAllowStopPaymentDays equals 3
+  definition mustNotifyVaryingAmountDays equals 10
+  definition mustNotRestartWithoutWrittenAuth equals true
+
+# --- Dispute Fee Calculation ---
+
+scope DisputeFeeCalculation =
+  input disputeRatio : DisputeRatio
+  output disputeFeeType : DisputeFeeType
+  output highVolumeThreshold : Rational
+  output highVolumeSalesCount : Integer
+
+  definition highVolumeThreshold equals `0.015` -- 1.5%
+  definition highVolumeSalesCount equals 100
+
+  definition disputeFeeType equals
+    if disputeRatio.ratio >= `0.015` and
+       disputeRatio.previousThreeMonthsSales > 100 then
+      -- HighVolumeDisputeFee
+    else
+      -- StandardDisputeFee
+
+# --- Dispute Fee Exemptions ---
+
+scope DisputeFeeExemptions =
+  input isUnescalatedInquiry : Boolean
+  input isMutuallyResolved : Boolean
+  input isUnauthorizedTransaction : Boolean
+  input isSellerProtected : Boolean
+  input transactionValueLessThanDoubleFee : Boolean
+  input decidedInSellerFavor : Boolean
+  output exemptFromStandardFee : Boolean
+
+  definition exemptFromStandardFee equals
+    isUnescalatedInquiry or isMutuallyResolved or
+    isUnauthorizedTransaction or isSellerProtected or
+    transactionValueLessThanDoubleFee or decidedInSellerFavor
+
+# --- High Volume Dispute Fee Exemptions ---
+
+scope HighVolumeDisputeFeeExemptions =
+  input isUnescalatedInquiry : Boolean
+  input isMutuallyResolved : Boolean
+  input isUnauthorizedTransaction : Boolean
+  output exemptFromHighVolumeFee : Boolean
+
+  definition exemptFromHighVolumeFee equals
+    isUnescalatedInquiry or isMutuallyResolved or
+    isUnauthorizedTransaction
+
+# --- Dispute Ratio Calculation Window ---
+
+scope DisputeRatioWindow =
+  output calculationPeriodMonths : Integer
+  output appliesToNextMonth : Boolean
+  output includesCardIssuerChargebacks : Boolean
+  output includesBankReversals : Boolean
+  output excludesUnauthorizedTransactionClaims : Boolean
+
+  definition calculationPeriodMonths equals 3
+  definition appliesToNextMonth equals true
+  definition includesCardIssuerChargebacks equals true
+  definition includesBankReversals equals true
+  definition excludesUnauthorizedTransactionClaims equals true
+
+# --- Payment Invalidation Reasons ---
+
+scope PaymentInvalidationReasons =
+  output buyerPurchaseProtectionClaimLost : Boolean
+  output sellerNoResponse : Boolean
+  output sellerLostChargeback : Boolean
+  output sellerDidNotFulfill : Boolean
+  output bankReversalFraudulent : Boolean
+  output paypalSentInError : Boolean
+  output paymentUnauthorized : Boolean
+  output userAgreementViolation : Boolean
+
+  definition buyerPurchaseProtectionClaimLost equals true
+  definition sellerNoResponse equals true
+  definition sellerLostChargeback equals true
+  definition sellerDidNotFulfill equals true
+  definition bankReversalFraudulent equals true
+  definition paypalSentInError equals true
+  definition paymentUnauthorized equals true
+  definition userAgreementViolation equals true
+
+# --- Pricing Error Notification ---
+
+scope PricingErrorNotification =
+  output notificationWindowDays : Integer
+  output acceptanceIfNotReported : Boolean
+
+  definition notificationWindowDays equals 60
+  definition acceptanceIfNotReported equals true
+
+# --- Seller Protection Loss ---
+
+scope SellerProtectionLossOnSuspension =
+  input eligibilitySuspended : Boolean
+  output recoveryPeriodDays : Integer
+
+  definition recoveryPeriodDays equals 30

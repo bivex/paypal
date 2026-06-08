@@ -1,0 +1,173 @@
+# PayPal User Agreement
+# Section 5: Liability for Unauthorized Transactions and Other Errors
+# Last updated: May 19, 2026
+
+# --- Unauthorized Transaction Definition ---
+
+scope UnauthorizedTransactionDefinition =
+  input moneySentWithoutAuthorization : Boolean
+  input didNotBenefitUser : Boolean
+  output isUnauthorizedTransaction : Boolean
+
+  definition isUnauthorizedTransaction equals
+    moneySentWithoutAuthorization and didNotBenefitUser
+
+# --- Not Unauthorized ---
+
+scope NotUnauthorizedTransaction =
+  input grantedAuthorityExceeded : Boolean
+  input previouslyNotifiedPayPal : Boolean
+  input isReversalFromRefundChargeback : Boolean
+  output isNotUnauthorized : Boolean
+
+  definition isNotUnauthorized equals
+    (grantedAuthorityExceeded and not previouslyNotifiedPayPal) or
+    isReversalFromRefundChargeback
+
+# --- Error Resolution Timelines ---
+
+scope ErrorResolutionTimelines =
+  input isNewAccount : Boolean
+  input isPointOfSale : Boolean
+  input isForeignInitiated : Boolean
+  output initialDeterminationBusinessDays : Integer
+  output extendedInvestigationBusinessDays : Integer
+  output newAccountCreditBusinessDays : Integer
+  output resultsNotificationBusinessDays : Integer
+
+  definition initialDeterminationBusinessDays equals 10
+  definition extendedInvestigationBusinessDays equals 45
+  definition newAccountCreditBusinessDays equals 20
+
+  definition resultsNotificationBusinessDays equals 3
+
+# --- Extended Investigation for New/POS/Foreign ---
+
+scope ExtendedInvestigationCases =
+  input isNewAccount : Boolean
+  input isPointOfSale : Boolean
+  input isForeignInitiated : Boolean
+  output investigationBusinessDays : Integer
+
+  definition investigationBusinessDays equals
+    if isNewAccount or isPointOfSale or isForeignInitiated then 90
+    else 45
+
+# --- Error Report Deadline ---
+
+scope ErrorReportDeadline =
+  output statementReviewDays : Integer
+  output oralComplaintWritingDeadlineDays : Integer
+
+  definition statementReviewDays equals 60
+  definition oralComplaintWritingDeadlineDays equals 10
+
+# --- Processing Error Liability ---
+
+scope ProcessingErrorLiability =
+  input insufficientFundsUserFault : Boolean
+  input systemKnownDown : Boolean
+  input extraordinaryCircumstances : Boolean
+  output payPalLiable : Boolean
+
+  definition payPalLiable equals
+    not (insufficientFundsUserFault or systemKnownDown or
+         extraordinaryCircumstances)
+
+# --- Not Considered Errors ---
+
+scope NotAnError =
+  input grantedAccessWithoutPermission : Boolean
+  input isReversalFromRefundChargeback : Boolean
+  input isRoutineBalanceInquiry : Boolean
+  input isDuplicateDocumentRequest : Boolean
+  output isNotAnError : Boolean
+
+  definition isNotAnError equals
+    grantedAccessWithoutPermission or
+    isReversalFromRefundChargeback or
+    isRoutineBalanceInquiry or
+    isDuplicateDocumentRequest
+
+# --- Business Account Debit Dispute ---
+
+scope BusinessAccountDebitDispute =
+  input isUnauthorizedOrExcess : Boolean
+  output mustNotifyByCutoffTime : Boolean
+  output cutoffTime : String
+  output cutoffTimeBusinessDay : String
+  output otherwiseResponsibleDirectly : Boolean
+
+  definition mustNotifyByCutoffTime equals isUnauthorizedOrExcess
+  definition cutoffTime equals "8:00 PM PT"
+  definition cutoffTimeBusinessDay equals "next_business_day_after_posting"
+  definition otherwiseResponsibleDirectly equals true
+
+# --- Remittance Transfer Eligibility ---
+
+scope RemittanceTransferEligibility =
+  input criteria : RemittanceTransferCriteria
+  output isRemittanceTransfer : Boolean
+
+  definition isRemittanceTransfer equals
+    criteria.isPersonalAccount and
+    criteria.isPersonalPurpose and
+    criteria.usesSendMoneyFeature and
+    criteria.amountExceedsThreshold and
+    criteria.recipientOutsideUS
+
+# --- Remittance Transfer Threshold ---
+
+scope RemittanceTransferThreshold =
+  output minimumAmountUSD : Money
+
+  definition minimumAmountUSD equals `15.00` -- USD
+
+# --- Remittance Transfer Error Types ---
+
+scope RemittanceTransferErrorTypes =
+  input incorrectAmount : Boolean
+  input computationalError : Boolean
+  input fundsNotAvailable : Boolean
+  input lateDelivery : Boolean
+  input notDelivered : Boolean
+  input dueToExtraordinaryCircumstances : Boolean
+  input dueToFraudScreening : Boolean
+  input userFraudulentIntent : Boolean
+  output isRemittanceTransferError : Boolean
+
+  definition isRemittanceTransferError equals
+    incorrectAmount or computationalError or
+    (fundsNotAvailable and not dueToExtraordinaryCircumstances) or
+    (lateDelivery and not dueToExtraordinaryCircumstances and
+     not dueToFraudScreening and not userFraudulentIntent) or
+    (notDelivered and not dueToExtraordinaryCircumstances and
+     not dueToFraudScreening and not userFraudulentIntent)
+
+# --- Not Remittance Transfer Errors ---
+
+scope NotRemittanceTransferError =
+  input isStatusInquiryOnly : Boolean
+  input isTaxRecordRequest : Boolean
+  input isRecipientRequestedChange : Boolean
+  input isCurrencyChangeFromProvidedInfo : Boolean
+  output isNotError : Boolean
+
+  definition isNotError equals
+    (isStatusInquiryOnly and not
+     -- exception: funds not available by disclosed date
+     false) or
+    isTaxRecordRequest or
+    isRecipientRequestedChange or
+    isCurrencyChangeFromProvidedInfo
+
+# --- Remittance Transfer Resolution ---
+
+scope RemittanceTransferResolution =
+  output investigationDays : Integer
+  output resultsNotificationDays : Integer
+  output filingDeadlineDays : Integer
+
+  definition investigationDays equals 90
+  definition resultsNotificationDays equals 3
+  definition filingDeadlineDays equals 180
