@@ -489,3 +489,31 @@ declaration enumeration ReceiveFundsCurrency =
   -- THB
   -- GBP
   -- USD
+
+# --- Commercial Entity Agreement ---
+
+declaration enumeration CEAMerchantRegion =
+  -- Europe
+  -- HongKong
+  -- Singapore
+  -- Canada
+  -- Australia
+  -- Philippines
+  -- Malaysia
+  -- UnitedStates
+
+declaration enumeration CEAGlobalPaymentsMemberEntity =
+  -- GPUK
+  -- GlobalPaymentsAsiaPacificHK
+  -- GlobalPaymentsAsiaPacificHKSGBranch
+  -- GPCFinancialCorporation
+  -- GlobalPaymentsAustralia1
+  -- GlobalPaymentsAsiaPacificPH
+  -- GlobalPaymentsCardProcessingMY
+
+declaration enumeration CEAWorldpayAcquirerEntity =
+  -- WorldpayUK
+  -- WorldpayPTE
+  -- WorldpayHK
+  -- CitizensBankNA
+  -- WorldpayPTY

@@ -1,0 +1,660 @@
+# Commercial Entity Agreement for PayPal Payment Card Funded Processing Services
+# Last updated: March 3, 2022
+# Source: https://www.paypal.com/al/webapps/mpp/ua/ceagreement-full
+# Forms part of the PayPal User Agreement
+
+# ============================================================
+# PART 1: GLOBAL PAYMENTS COMMERCIAL ENTITY AGREEMENT
+# ============================================================
+
+# --- Global Payments: Contract Parties ---
+
+scope CEAGlobalPaymentsParties =
+  output merchantIsCommercialEntity : Boolean
+  output separateContractBetweenMerchantProcessorMember : Boolean
+  output puaIncorporated : Boolean
+
+  definition merchantIsCommercialEntity equals true
+  definition separateContractBetweenMerchantProcessorMember equals true
+  definition puaIncorporated equals true
+
+# --- Global Payments: Member Determination ---
+
+scope CEAGlobalPaymentsMember =
+  input merchantRegion : CEAMerchantRegion
+  output member : CEAGlobalPaymentsMemberEntity
+
+  definition member equals
+    if merchantRegion equals -- Europe then -- GPUK
+    else if merchantRegion equals -- HongKong then -- GlobalPaymentsAsiaPacificHK
+    else if merchantRegion equals -- Singapore then -- GlobalPaymentsAsiaPacificHKSGBranch
+    else if merchantRegion equals -- Canada then -- GPCFinancialCorporation
+    else if merchantRegion equals -- Australia then -- GlobalPaymentsAustralia1
+    else if merchantRegion equals -- Philippines then -- GlobalPaymentsAsiaPacificPH
+    else -- GlobalPaymentsCardProcessingMY
+
+# --- Global Payments: Processor Role ---
+
+scope CEAGlobalPaymentsProcessorRole =
+  output processorIsExclusiveAgentOfMember : Boolean
+  output memberResponsibleForProcessorPerformance : Boolean
+  output memberMustApproveFeesInAdvance : Boolean
+  output processorMayNotAccessMerchantFunds : Boolean
+
+  definition processorIsExclusiveAgentOfMember equals true
+  definition memberResponsibleForProcessorPerformance equals true
+  definition memberMustApproveFeesInAdvance equals true
+  definition processorMayNotAccessMerchantFunds equals true
+
+# --- Global Payments: Deposit Transactions ---
+
+scope CEAGlobalPaymentsDepositTransactions =
+  input obtainedAuthorization : Boolean
+  input completedTransaction : Boolean
+  input shippedOrProvidedGoods : Boolean
+  input performedService : Boolean
+  input obtainedRecurringConsent : Boolean
+  output maySubmitTransaction : Boolean
+
+  definition maySubmitTransaction equals
+    obtainedAuthorization and completedTransaction and
+    (shippedOrProvidedGoods or performedService or obtainedRecurringConsent)
+
+# --- Global Payments: Anti Money Laundering ---
+
+scope CEAGlobalPaymentsAntiMoneyLaundering =
+  input transactionFromPurchaseOfGoodsOrServices : Boolean
+  output transactionAllowed : Boolean
+
+  definition transactionAllowed equals transactionFromPurchaseOfGoodsOrServices
+
+# --- Global Payments: Split Transactions Prohibition ---
+
+scope CEAGlobalPaymentsSplitTransactions =
+  output splitTransactionsProhibited : Boolean
+
+  definition splitTransactionsProhibited equals true
+
+# --- Global Payments: Minimum or Maximum Transaction Amounts ---
+
+scope CEAGlobalPaymentsMinMaxAmounts =
+  output shallNotSetMinimumOrMaximum : Boolean
+
+  definition shallNotSetMinimumOrMaximum equals true
+
+# --- Global Payments: Surcharges ---
+
+scope CEAGlobalPaymentsSurcharges =
+  output noSurchargesOnDebitCard : Boolean
+
+  definition noSurchargesOnDebitCard equals true
+
+# --- Global Payments: Visa and MasterCard Marks ---
+
+scope CEAGlobalPaymentsMarksUsage =
+  output authorizedToUseLogos : Boolean
+  output onlyToIndicateAcceptance : Boolean
+  output shallNotImplyEndorsement : Boolean
+  output shallNotReferenceInEligibility : Boolean
+
+  definition authorizedToUseLogos equals true
+  definition onlyToIndicateAcceptance equals true
+  definition shallNotImplyEndorsement equals true
+  definition shallNotReferenceInEligibility equals true
+
+# --- Global Payments: Credit Vouchers ---
+
+scope CEAGlobalPaymentsCreditVouchers =
+  input previousDebitCompleted : Boolean
+  output noCreditVouchersForNonCredit : Boolean
+  output noDepositToFundsToCardholderAccount : Boolean
+  output creditRequiresPriorDebit : Boolean
+
+  definition noCreditVouchersForNonCredit equals true
+  definition noDepositToFundsToCardholderAccount equals true
+  definition creditRequiresPriorDebit equals previousDebitCompleted
+
+# --- Global Payments: Cash Disbursements ---
+
+scope CEAGlobalPaymentsCashDisbursements =
+  output disbursementLimitedToChequeOrCurrencyValue : Boolean
+  output noCollectionOfDishonouredCheque : Boolean
+
+  definition disbursementLimitedToChequeOrCurrencyValue equals true
+  definition noCollectionOfDishonouredCheque equals true
+
+# --- Global Payments: Authorization Requirements ---
+
+scope CEAGlobalPaymentsAuthorization =
+  output mustObtainAuthorizationForAllAmounts : Boolean
+
+  definition mustObtainAuthorizationForAllAmounts equals true
+
+# --- Global Payments: Non-Discrimination ---
+
+scope CEAGlobalPaymentsNonDiscrimination =
+  output shallNotDiscriminateAgainstVisaMasterCard : Boolean
+
+  definition shallNotDiscriminateAgainstVisaMasterCard equals true
+
+# --- Global Payments: Present Transactions within 30 Business Days ---
+
+scope CEAGlobalPaymentsPresentmentTiming =
+  input goodsShippedOrServicesProvided : Boolean
+  input cardholderAgreedToDelayedDelivery : Boolean
+  input businessDaysSinceTransaction : Integer
+  output mayPresentTransaction : Boolean
+  output delayedPresentmentDisclosureRequired : Boolean
+
+  definition mayPresentTransaction equals
+    goodsShippedOrServicesProvided or cardholderAgreedToDelayedDelivery
+
+  definition delayedPresentmentDisclosureRequired equals
+    cardholderAgreedToDelayedDelivery and not goodsShippedOrServicesProvided
+
+# --- Global Payments: Fraudulent Use Prohibition ---
+
+scope CEAGlobalPaymentsFraudulentUseProhibition =
+  output shallNotRequestOrUseForFraudulentPurpose : Boolean
+  output shallNotUseForUnauthorizedPurpose : Boolean
+
+  definition shallNotRequestOrUseForFraudulentPurpose equals true
+  definition shallNotUseForUnauthorizedPurpose equals true
+
+# --- Global Payments: Merchant Identification ---
+
+scope CEAGlobalPaymentsMerchantIdentification =
+  output mustProminentlyIdentifyMerchant : Boolean
+  output atAllPointsOfInteraction : Boolean
+
+  definition mustProminentlyIdentifyMerchant equals true
+  definition atAllPointsOfInteraction equals true
+
+# --- Global Payments: Association Rules Compliance ---
+
+scope CEAGlobalPaymentsAssociationRules =
+  output merchantAgreesToComplyWithAssociationRules : Boolean
+
+  definition merchantAgreesToComplyWithAssociationRules equals true
+
+# --- Global Payments: Refund Policy Disclosure ---
+
+scope CEAGlobalPaymentsRefundPolicy =
+  output refundPolicyMustBeOnWebsite : Boolean
+  output mustBeDisclosedPriorToSale : Boolean
+  output doesNotEliminateChargebackLiability : Boolean
+  output distanceSellingRegulationsMayApply : Boolean
+
+  definition refundPolicyMustBeOnWebsite equals true
+  definition mustBeDisclosedPriorToSale equals true
+  definition doesNotEliminateChargebackLiability equals true
+  definition distanceSellingRegulationsMayApply equals true
+
+# --- Global Payments: Term and Termination ---
+
+scope CEAGlobalPaymentsTermTermination =
+  input puaTerminated : Boolean
+  input merchantBreach : Boolean
+  input exceptionalReason : Boolean
+  output ceaEffectiveUponAcceptance : Boolean
+  output continuesWhileServicesUsed : Boolean
+  output mayTerminateForBreach : Boolean
+  output mayTerminateForExceptionalReason : Boolean
+  output autoTerminatesOnPUATermination : Boolean
+  output survivingTermsIncludeIndemnification : Boolean
+  output survivingTermsIncludeChargebacks : Boolean
+  output survivingTermsIncludeLiabilityLimitations : Boolean
+
+  definition ceaEffectiveUponAcceptance equals true
+  definition continuesWhileServicesUsed equals true
+  definition mayTerminateForBreach equals merchantBreach or exceptionalReason
+  definition mayTerminateForExceptionalReason equals exceptionalReason
+  definition autoTerminatesOnPUATermination equals puaTerminated
+  definition survivingTermsIncludeIndemnification equals true
+  definition survivingTermsIncludeChargebacks equals true
+  definition survivingTermsIncludeLiabilityLimitations equals true
+
+# --- Global Payments: Indemnification ---
+
+scope CEAGlobalPaymentsIndemnification =
+  output merchantIndemnifiesMemberAndProcessor : Boolean
+  output coversBreachOfWarranty : Boolean
+  output coversBreachOfCovenant : Boolean
+  output coversMisrepresentation : Boolean
+  output coversTortiousConduct : Boolean
+  output coversContraventionOfLegalRequirements : Boolean
+
+  definition merchantIndemnifiesMemberAndProcessor equals true
+  definition coversBreachOfWarranty equals true
+  definition coversBreachOfCovenant equals true
+  definition coversMisrepresentation equals true
+  definition coversTortiousConduct equals true
+  definition coversContraventionOfLegalRequirements equals true
+
+# --- Global Payments: Arbitration ---
+
+scope CEAGlobalPaymentsArbitration =
+  output disputesResolvedByArbitration : Boolean
+  output venueLondonEngland : Boolean
+  output conductedInEnglish : Boolean
+  output singleArbitrator : Boolean
+  output iccRulesApply : Boolean
+  output noRightOfAppeal : Boolean
+  output daysToAgreeOnArbitrator : Integer
+
+  definition disputesResolvedByArbitration equals true
+  definition venueLondonEngland equals true
+  definition conductedInEnglish equals true
+  definition singleArbitrator equals true
+  definition iccRulesApply equals true
+  definition noRightOfAppeal equals true
+  definition daysToAgreeOnArbitrator equals 30
+
+# --- Global Payments: Warranty Disclaimer ---
+
+scope CEAGlobalPaymentsWarrantyDisclaimer =
+  output disclaimAllRepresentationsOrWarranties : Boolean
+  output noWarrantyOfMerchantability : Boolean
+  output noWarrantyOfFitnessForPurpose : Boolean
+  output noWarrantyOfQuality : Boolean
+
+  definition disclaimAllRepresentationsOrWarranties equals true
+  definition noWarrantyOfMerchantability equals true
+  definition noWarrantyOfFitnessForPurpose equals true
+  definition noWarrantyOfQuality equals true
+
+# --- Global Payments: Limitation of Liability ---
+
+scope CEAGlobalPaymentsLiabilityLimitation =
+  output noLiabilityForLostProfits : Boolean
+  output noLiabilityForConsequentialDamages : Boolean
+  output noLiabilityForPunitiveDamages : Boolean
+  output noLiabilityForDelaysOutsideControl : Boolean
+  output cumulativeLiabilityCappedAtTransactionVolume : Boolean
+  output deathAndPersonalInjuryNotExcluded : Boolean
+  output fraudLiabilityNotExcluded : Boolean
+
+  definition noLiabilityForLostProfits equals true
+  definition noLiabilityForConsequentialDamages equals true
+  definition noLiabilityForPunitiveDamages equals true
+  definition noLiabilityForDelaysOutsideControl equals true
+  definition cumulativeLiabilityCappedAtTransactionVolume equals true
+  definition deathAndPersonalInjuryNotExcluded equals true
+  definition fraudLiabilityNotExcluded equals true
+
+# --- Global Payments: Enforceability ---
+
+scope CEAGlobalPaymentsEnforceability =
+  output noThirdPartyEnforcement : Boolean
+  output contractsRightsOfThirdPartiesActExcluded : Boolean
+
+  definition noThirdPartyEnforcement equals true
+  definition contractsRightsOfThirdPartiesActExcluded equals true
+
+# --- Global Payments: Governing Law ---
+
+scope CEAGlobalPaymentsGoverningLaw =
+  output governedByLawsOfEnglandAndWales : Boolean
+  output nonExclusiveJurisdictionEnglandAndWales : Boolean
+
+  definition governedByLawsOfEnglandAndWales equals true
+  definition nonExclusiveJurisdictionEnglandAndWales equals true
+
+# --- Global Payments: Waiver ---
+
+scope CEAGlobalPaymentsWaiver =
+  output failureToAssertNotWaiver : Boolean
+
+  definition failureToAssertNotWaiver equals true
+
+# --- Global Payments: Relationship ---
+
+scope CEAGlobalPaymentsRelationship =
+  output noPartnershipOrAgency : Boolean
+  output independentContractors : Boolean
+  output neitherMayBindOther : Boolean
+
+  definition noPartnershipOrAgency equals true
+  definition independentContractors equals true
+  definition neitherMayBindOther equals true
+
+# --- Global Payments: No Illegal Use ---
+
+scope CEAGlobalPaymentsNoIllegalUse =
+  output shallNotUseServicesForIllegalPurposes : Boolean
+  output shallNotDisruptNetworks : Boolean
+
+  definition shallNotUseServicesForIllegalPurposes equals true
+  definition shallNotDisruptNetworks equals true
+
+# --- Global Payments: Severability ---
+
+scope CEAGlobalPaymentsSeverability =
+  output invalidProvisionDoesNotInvalidateRemainder : Boolean
+
+  definition invalidProvisionDoesNotInvalidateRemainder equals true
+
+# ============================================================
+# PART 2: WORLDPAY COMMERCIAL ENTITY AGREEMENT
+# ============================================================
+
+# --- Worldpay: Contract Parties ---
+
+scope CEAWorldpayParties =
+  output merchantIsCommercialEntity : Boolean
+  output separateContractBetweenMerchantAndAcquirer : Boolean
+  output payPalIsAcquirerAgent : Boolean
+  output payPalNotPartyToContract : Boolean
+
+  definition merchantIsCommercialEntity equals true
+  definition separateContractBetweenMerchantAndAcquirer equals true
+  definition payPalIsAcquirerAgent equals true
+  definition payPalNotPartyToContract equals true
+
+# --- Worldpay: Acquirer Determination ---
+
+scope CEAWorldpayAcquirer =
+  input merchantRegion : CEAMerchantRegion
+  output acquirer : CEAWorldpayAcquirerEntity
+
+  definition acquirer equals
+    if merchantRegion equals -- Europe then -- WorldpayUK
+    else if merchantRegion equals -- Singapore then -- WorldpayPTE
+    else if merchantRegion equals -- HongKong then -- WorldpayHK
+    else if merchantRegion equals -- UnitedStates then -- CitizensBankNA
+    else -- WorldpayPTY
+
+# --- Worldpay: Amendments ---
+
+scope CEAWorldpayAmendments =
+  input substantialChange : Boolean
+  output thirtyDaysPriorNoticeForSubstantial : Boolean
+  output immediateEffectiveForNonSubstantial : Boolean
+  output mayCloseAccountBeforeNoticeExpires : Boolean
+  output substantialMeansReducedRightsOrIncreasedResponsibilities : Boolean
+
+  definition thirtyDaysPriorNoticeForSubstantial equals substantialChange
+  definition immediateEffectiveForNonSubstantial equals not substantialChange
+  definition mayCloseAccountBeforeNoticeExpires equals substantialChange
+  definition substantialMeansReducedRightsOrIncreasedResponsibilities equals true
+
+# --- Worldpay: Purpose ---
+
+scope CEAWorldpayPurpose =
+  output acquirerProcessesCardTransactions : Boolean
+  output merchantCompliesWithAssociationRules : Boolean
+
+  definition acquirerProcessesCardTransactions equals true
+  definition merchantCompliesWithAssociationRules equals true
+
+# --- Worldpay: Acquirer Obligations ---
+
+scope CEAWorldpayAcquirerObligations =
+  output obligationsLimitedToCardProcessing : Boolean
+  output otherObligationsArePayPals : Boolean
+  output acquirerPaysNetTransactionValue : Boolean
+  output paymentToPayPalDeemedGoodReceipt : Boolean
+
+  definition obligationsLimitedToCardProcessing equals true
+  definition otherObligationsArePayPals equals true
+  definition acquirerPaysNetTransactionValue equals true
+  definition paymentToPayPalDeemedGoodReceipt equals true
+
+# --- Worldpay: Merchant Indemnifies for Payment Method ---
+
+scope CEAWorldpayPaymentIndemnity =
+  output merchantIndemnifiesAcquirerForLosses : Boolean
+
+  definition merchantIndemnifiesAcquirerForLosses equals true
+
+# --- Worldpay: Deferral of Funds ---
+
+scope CEAWorldpayFundsDeferral =
+  output acquirerMayDeferPayment : Boolean
+  output mayDeferForChargebacksOrFines : Boolean
+  output mayDeferForFraudOrIllegalActivity : Boolean
+  output deferredAmountsMayBeSetOff : Boolean
+  output merchantBearsTotalChargebackResponsibility : Boolean
+  output responsibilitySurvivesTermination : Boolean
+
+  definition acquirerMayDeferPayment equals true
+  definition mayDeferForChargebacksOrFines equals true
+  definition mayDeferForFraudOrIllegalActivity equals true
+  definition deferredAmountsMayBeSetOff equals true
+  definition merchantBearsTotalChargebackResponsibility equals true
+  definition responsibilitySurvivesTermination equals true
+
+# --- Worldpay: Deposit Transactions ---
+
+scope CEAWorldpayDepositTransactions =
+  input transactionFromBonaFideSale : Boolean
+  input notRefinanceOfExistingObligation : Boolean
+  output maySubmitTransaction : Boolean
+
+  definition maySubmitTransaction equals
+    transactionFromBonaFideSale and notRefinanceOfExistingObligation
+
+# --- Worldpay: Split Transactions ---
+
+scope CEAWorldpaySplitTransactions =
+  input partialShipment : Boolean
+  input delayedDelivery : Boolean
+  input specialOrderDeposit : Boolean
+  output splitProhibited : Boolean
+  output splitAllowedForPartialShipment : Boolean
+
+  definition splitProhibited equals true
+  definition splitAllowedForPartialShipment equals
+    partialShipment or delayedDelivery or specialOrderDeposit
+
+# --- Worldpay: Minimum/Maximum/Surcharges ---
+
+scope CEAWorldpayMinMaxSurcharges =
+  output shallNotSetMinMaxOrSurcharges : Boolean
+  output unlessPermittedByLocalJurisdiction : Boolean
+
+  definition shallNotSetMinMaxOrSurcharges equals true
+  definition unlessPermittedByLocalJurisdiction equals true
+
+# --- Worldpay: Visa and Mastercard Marks ---
+
+scope CEAWorldpayMarksUsage =
+  output mustUseLogosOnPromotionalMaterials : Boolean
+  output mustUseLogosOnWebsite : Boolean
+
+  definition mustUseLogosOnPromotionalMaterials equals true
+  definition mustUseLogosOnWebsite equals true
+
+# --- Worldpay: Non-Discrimination ---
+
+scope CEAWorldpayNonDiscrimination =
+  output shallNotDiscriminateAgainstVisaMastercard : Boolean
+  output unlessPermittedByLocalJurisdiction : Boolean
+
+  definition shallNotDiscriminateAgainstVisaMastercard equals true
+  definition unlessPermittedByLocalJurisdiction equals true
+
+# --- Worldpay: Access to Cardholder Data ---
+
+scope CEAWorldpayCardholderDataAccess =
+  output mustComplyWithPCIDSS : Boolean
+  output mustComplyWithPayPalDataSecurity : Boolean
+  output shallNotUseDataForFraudulentPurpose : Boolean
+  output shallNotSellPurchaseOrExchangeData : Boolean
+  output shallOnlyDiscloseToAcquirerOrGovernment : Boolean
+
+  definition mustComplyWithPCIDSS equals true
+  definition mustComplyWithPayPalDataSecurity equals true
+  definition shallNotUseDataForFraudulentPurpose equals true
+  definition shallNotSellPurchaseOrExchangeData equals true
+  definition shallOnlyDiscloseToAcquirerOrGovernment equals true
+
+# --- Worldpay: Merchant Identification ---
+
+scope CEAWorldpayMerchantIdentification =
+  output mustProminentlyIdentifyMerchant : Boolean
+  output mustIncludePhysicalAddress : Boolean
+  output mustEnableDomesticVsCrossBorderDetermination : Boolean
+
+  definition mustProminentlyIdentifyMerchant equals true
+  definition mustIncludePhysicalAddress equals true
+  definition mustEnableDomesticVsCrossBorderDetermination equals true
+
+# --- Worldpay: Chargebacks ---
+
+scope CEAWorldpayChargebacks =
+  output mustUseReasonableMethodsToResolve : Boolean
+  output mustComplyWithInformationRequests : Boolean
+  output shallNotRechargeWithoutAuthorization : Boolean
+
+  definition mustUseReasonableMethodsToResolve equals true
+  definition mustComplyWithInformationRequests equals true
+  definition shallNotRechargeWithoutAuthorization equals true
+
+# --- Worldpay: Refund Policy Disclosure ---
+
+scope CEAWorldpayRefundPolicy =
+  output refundPolicyMustBeOnWebsite : Boolean
+  output mustBeDisclosedPriorToSale : Boolean
+  output mustComplyWithLawsAndAssociationRules : Boolean
+
+  definition refundPolicyMustBeOnWebsite equals true
+  definition mustBeDisclosedPriorToSale equals true
+  definition mustComplyWithLawsAndAssociationRules equals true
+
+# --- Worldpay: Audit ---
+
+scope CEAWorldpayAudit =
+  output mustDiscloseInfoUponAcquirerRequest : Boolean
+  output acquirerMayAssessCompliance : Boolean
+  output acquirerMayAssessFinancialRisk : Boolean
+
+  definition mustDiscloseInfoUponAcquirerRequest equals true
+  definition acquirerMayAssessCompliance equals true
+  definition acquirerMayAssessFinancialRisk equals true
+
+# --- Worldpay: Term and Termination ---
+
+scope CEAWorldpayTermTermination =
+  input payPalAgreementTerminated : Boolean
+  input merchantBreach : Boolean
+  input acquirerBreach : Boolean
+  input acquiringServicesAgreementTerminated : Boolean
+  output ceaEffectiveUponPUAEnforcement : Boolean
+  output continuesWhilePUAInForce : Boolean
+  output autoTerminatesOnPUATermination : Boolean
+  output acquirerMayTerminateForMerchantBreach : Boolean
+  output merchantMayTerminateForAcquirerBreach : Boolean
+  output acquirerMayTerminateOnServiceAgreementEnd : Boolean
+  output survivingTermsIncludeIndemnification : Boolean
+  output survivingTermsIncludeLiabilityLimitations : Boolean
+
+  definition ceaEffectiveUponPUAEnforcement equals true
+  definition continuesWhilePUAInForce equals true
+  definition autoTerminatesOnPUATermination equals payPalAgreementTerminated
+  definition acquirerMayTerminateForMerchantBreach equals merchantBreach
+  definition merchantMayTerminateForAcquirerBreach equals acquirerBreach
+  definition acquirerMayTerminateOnServiceAgreementEnd equals acquiringServicesAgreementTerminated
+  definition survivingTermsIncludeIndemnification equals true
+  definition survivingTermsIncludeLiabilityLimitations equals true
+
+# --- Worldpay: Indemnification ---
+
+scope CEAWorldpayIndemnification =
+  output merchantIndemnifiesAcquirer : Boolean
+  output coversBreachOfWarranty : Boolean
+  output coversBreachOfCovenant : Boolean
+  output coversMisrepresentation : Boolean
+  output coversNegligenceOrWillfulMisconduct : Boolean
+  output coversCardTransactions : Boolean
+  output coversPayPalServiceUse : Boolean
+  output coversAssociationFines : Boolean
+
+  definition merchantIndemnifiesAcquirer equals true
+  definition coversBreachOfWarranty equals true
+  definition coversBreachOfCovenant equals true
+  definition coversMisrepresentation equals true
+  definition coversNegligenceOrWillfulMisconduct equals true
+  definition coversCardTransactions equals true
+  definition coversPayPalServiceUse equals true
+  definition coversAssociationFines equals true
+
+# --- Worldpay: Assignment ---
+
+scope CEAWorldpayAssignment =
+  output merchantMayNotAssignWithoutConsent : Boolean
+  output acquirerMayAssignWithoutConsent : Boolean
+
+  definition merchantMayNotAssignWithoutConsent equals true
+  definition acquirerMayAssignWithoutConsent equals true
+
+# --- Worldpay: Warranty Disclaimer ---
+
+scope CEAWorldpayWarrantyDisclaimer =
+  output disclaimAllRepresentationsOrWarranties : Boolean
+  output noWarrantyOfMerchantability : Boolean
+  output noWarrantyOfFitnessForPurpose : Boolean
+
+  definition disclaimAllRepresentationsOrWarranties equals true
+  definition noWarrantyOfMerchantability equals true
+  definition noWarrantyOfFitnessForPurpose equals true
+
+# --- Worldpay: Limitation of Liability ---
+
+scope CEAWorldpayLiabilityLimitation =
+  output noLiabilityForLostProfits : Boolean
+  output noLiabilityForConsequentialDamages : Boolean
+  output noLiabilityForDelaysOutsideControl : Boolean
+  output cumulativeLiabilityCappedAtTransactionVolume : Boolean
+  output deathAndPersonalInjuryNotExcluded : Boolean
+  output fraudLiabilityNotExcluded : Boolean
+
+  definition noLiabilityForLostProfits equals true
+  definition noLiabilityForConsequentialDamages equals true
+  definition noLiabilityForDelaysOutsideControl equals true
+  definition cumulativeLiabilityCappedAtTransactionVolume equals true
+  definition deathAndPersonalInjuryNotExcluded equals true
+  definition fraudLiabilityNotExcluded equals true
+
+# --- Worldpay: Waiver ---
+
+scope CEAWorldpayWaiver =
+  output failureToAssertNotWaiver : Boolean
+
+  definition failureToAssertNotWaiver equals true
+
+# --- Worldpay: Relationship ---
+
+scope CEAWorldpayRelationship =
+  output noPartnershipOrAgency : Boolean
+  output independentContractors : Boolean
+  output neitherMayBindOther : Boolean
+
+  definition noPartnershipOrAgency equals true
+  definition independentContractors equals true
+  definition neitherMayBindOther equals true
+
+# --- Worldpay: No Illegal Use ---
+
+scope CEAWorldpayNoIllegalUse =
+  output shallNotUseServicesForIllegalPurposes : Boolean
+  output shallNotDisruptNetworks : Boolean
+
+  definition shallNotUseServicesForIllegalPurposes equals true
+  definition shallNotDisruptNetworks equals true
+
+# --- Worldpay: Severability ---
+
+scope CEAWorldpaySeverability =
+  output invalidProvisionDoesNotInvalidateRemainder : Boolean
+
+  definition invalidProvisionDoesNotInvalidateRemainder equals true
+
+# --- Worldpay: Governing Law ---
+
+scope CEAWorldpayGoverningLaw =
+  output governedByEnglishLaw : Boolean
+  output exclusiveJurisdictionEnglandAndWales : Boolean
+
+  definition governedByEnglishLaw equals true
+  definition exclusiveJurisdictionEnglandAndWales equals true
