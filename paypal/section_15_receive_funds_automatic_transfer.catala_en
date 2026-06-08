@@ -1,0 +1,305 @@
+# PayPal Receive Funds and Automatic Transfer Agreement
+# Last updated: October 8, 2014
+# Source: https://www.paypal.com/al/webapps/mpp/ua/receive-funds-agreement
+# Forms part of the PayPal User Agreement
+
+# --- Agreement Incorporation ---
+
+scope ReceiveFundsAgreementIncorporation =
+  output agreementAppliesInAdditionToUserAgreement : Boolean
+  output capitalizedTermsFromUserAgreement : Boolean
+
+  definition agreementAppliesInAdditionToUserAgreement equals true
+  definition capitalizedTermsFromUserAgreement equals true
+
+# --- Agreement Amendments ---
+
+scope ReceiveFundsAmendments =
+  input includesSubstantialChange : Boolean
+  output revisedVersionEffectiveWhenPosted : Boolean
+  output thirtyDaysNoticeForSubstantialChange : Boolean
+
+  definition revisedVersionEffectiveWhenPosted equals true
+  definition thirtyDaysNoticeForSubstantialChange equals includesSubstantialChange
+
+# --- Eligibility ---
+
+scope ReceiveFundsEligibility =
+  input linkedUSBankAccount : Boolean
+  input linkedVisaCreditCard : Boolean
+  input completedVerification : Boolean
+  output eligibleToReceivePayments : Boolean
+
+  definition eligibleToReceivePayments equals
+    (linkedUSBankAccount or linkedVisaCreditCard) and completedVerification
+
+# --- Automatic Transfer ---
+
+scope ReceiveFundsAutomaticTransfer =
+  output automaticTransferOccursRegularly : Boolean
+  output transferWithinFirst3Days : Boolean
+  output noFeeForAutomaticTransfer : Boolean
+
+  definition automaticTransferOccursRegularly equals true
+  definition transferWithinFirst3Days equals true
+  definition noFeeForAutomaticTransfer equals true
+
+# --- Manual Transfer and Fee ---
+
+scope ReceiveFundsManualTransfer =
+  input transferToVisaCreditCard : Boolean
+  input transferToUSBankAccount : Boolean
+  output manualTransferAvailable : Boolean
+  output manualVisaFee : Money
+  output manualBankTransferFree : Boolean
+
+  definition manualTransferAvailable equals true
+  definition manualVisaFee equals if transferToVisaCreditCard then `5.00` else `0.00`
+  definition manualBankTransferFree equals transferToUSBankAccount
+
+# --- Payment Hold Period: Initial 30 Days ---
+
+scope ReceiveFundsHoldPeriod =
+  input daysSincePaymentReceived : Integer
+  input payPalWaivedHold : Boolean
+  input heldForAnotherReason : Boolean
+  output subjectTo30DayHold : Boolean
+  output fundsInPendingBalance : Boolean
+  output fundsReleasedToAvailable : Boolean
+
+  definition subjectTo30DayHold equals
+    not payPalWaivedHold and daysSincePaymentReceived < 30
+
+  definition fundsInPendingBalance equals subjectTo30DayHold
+
+  definition fundsReleasedToAvailable equals
+    daysSincePaymentReceived >= 30 and not heldForAnotherReason and not subjectTo30DayHold
+
+# --- Payment Hold Waiver Factors ---
+
+scope ReceiveFundsHoldWaiver =
+  input lengthOfTimeAsCustomer : Integer
+  input lowCustomerComplaints : Boolean
+  input goodsTypeLowRisk : Boolean
+  output payPalMayWaiveHold : Boolean
+  output waiverAtSoleDiscretion : Boolean
+
+  definition payPalMayWaiveHold equals
+    lengthOfTimeAsCustomer > 0 and lowCustomerComplaints and goodsTypeLowRisk
+
+  definition waiverAtSoleDiscretion equals true
+
+# --- Withdrawal Limits ---
+
+scope ReceiveFundsWithdrawalLimits =
+  output automaticVisaTransferLimit : Money
+  output manualVisaDailyLimit : Money
+  output totalVisaDailyLimit : Money
+
+  definition automaticVisaTransferLimit equals `10000.00`
+  definition manualVisaDailyLimit equals `500.00`
+  definition totalVisaDailyLimit equals `10000.00`
+
+# --- Financial Instrument Priority ---
+
+scope ReceiveFundsInstrumentPriority =
+  input hasMultipleInstruments : Boolean
+  output firstLinkedInstrumentUsed : Boolean
+  output mayChangePreferenceViaProfile : Boolean
+
+  definition firstLinkedInstrumentUsed equals hasMultipleInstruments
+  definition mayChangePreferenceViaProfile equals true
+
+# --- Financial Instrument Removal ---
+
+scope ReceiveFundsInstrumentRemoval =
+  input removedLinkedInstrument : Boolean
+  input addedNewInstrument : Boolean
+  input transferFailed : Boolean
+  output mustAddNewInstrument : Boolean
+  output loseAbilityToReceivePayments : Boolean
+
+  definition mustAddNewInstrument equals removedLinkedInstrument or transferFailed
+  definition loseAbilityToReceivePayments equals
+    (removedLinkedInstrument or transferFailed) and not addedNewInstrument
+
+# --- Restriction on Sending Payments ---
+
+scope ReceiveFundsSendingRestriction =
+  output mayUseCreditCardToSend : Boolean
+  output mayNotUseBalanceToSend : Boolean
+  output mayNotUseBankAccountToSend : Boolean
+  output balanceMustBeWithdrawn : Boolean
+
+  definition mayUseCreditCardToSend equals true
+  definition mayNotUseBalanceToSend equals true
+  definition mayNotUseBankAccountToSend equals true
+  definition balanceMustBeWithdrawn equals true
+
+# --- Transaction Fee: Standard Rate ---
+
+scope ReceiveFundsStandardRate =
+  input monthlyPaymentVolume : Money
+  output standardRateApplies : Boolean
+  output standardRatePercent : Rational
+  output standardRateThreshold : Money
+
+  definition standardRateApplies equals
+    monthlyPaymentVolume <= `3000.00`
+  definition standardRatePercent equals 49 / 1000
+  definition standardRateThreshold equals `3000.00`
+
+# --- Transaction Fee: Merchant Rate Tiers ---
+
+scope ReceiveFundsMerchantRateTier1 =
+  input monthlyPaymentVolume : Money
+  output tier1Applies : Boolean
+  output tier1Percent : Rational
+
+  definition tier1Applies equals
+    monthlyPaymentVolume > `3000.00` and monthlyPaymentVolume <= `10000.00`
+  definition tier1Percent equals 44 / 1000
+
+scope ReceiveFundsMerchantRateTier2 =
+  input monthlyPaymentVolume : Money
+  output tier2Applies : Boolean
+  output tier2Percent : Rational
+
+  definition tier2Applies equals
+    monthlyPaymentVolume > `10000.00` and monthlyPaymentVolume <= `100000.00`
+  definition tier2Percent equals 42 / 1000
+
+scope ReceiveFundsMerchantRateTier3 =
+  input monthlyPaymentVolume : Money
+  output tier3Applies : Boolean
+  output tier3Percent : Rational
+
+  definition tier3Applies equals
+    monthlyPaymentVolume > `100000.00`
+  definition tier3Percent equals 39 / 1000
+
+# --- Merchant Rate Qualification ---
+
+scope ReceiveFundsMerchantRateQualification =
+  input submittedApplication : Boolean
+  input qualifyingMonthlyVolume : Boolean
+  input inGoodStanding : Boolean
+  output qualifiesForMerchantRate : Boolean
+
+  definition qualifiesForMerchantRate equals
+    submittedApplication and qualifyingMonthlyVolume and inGoodStanding
+
+# --- Transaction Fee Applies to All Received Amounts ---
+
+scope ReceiveFundsFeeApplication =
+  output feeAppliesToAllCommercialTransactions : Boolean
+  output feeAppliesIncludingPendingBalance : Boolean
+  output feeIsPercentagePlusFixed : Boolean
+
+  definition feeAppliesToAllCommercialTransactions equals true
+  definition feeAppliesIncludingPendingBalance equals true
+  definition feeIsPercentagePlusFixed equals true
+
+# --- Fee Exemption Countries ---
+
+scope ReceiveFundsFeeExemption =
+  input userCountry : ReceiveFundsCountry
+  output standardUserAgreementFeesApply : Boolean
+
+  definition standardUserAgreementFeesApply equals
+    userCountry equals -- Albania or userCountry equals -- BosniaHerzegovina or
+    userCountry equals -- Egypt
+
+# --- Fixed Fee by Currency ---
+
+scope ReceiveFundsFixedFeeAUD =
+  output fixedFee : Money
+  definition fixedFee equals `0.30`
+
+scope ReceiveFundsFixedFeeBRL =
+  output fixedFee : Money
+  definition fixedFee equals `0.60`
+
+scope ReceiveFundsFixedFeeCAD =
+  output fixedFee : Money
+  definition fixedFee equals `0.30`
+
+scope ReceiveFundsFixedFeeCZK =
+  output fixedFee : Money
+  definition fixedFee equals `10.00`
+
+scope ReceiveFundsFixedFeeDKK =
+  output fixedFee : Money
+  definition fixedFee equals `2.60`
+
+scope ReceiveFundsFixedFeeEUR =
+  output fixedFee : Money
+  definition fixedFee equals `0.35`
+
+scope ReceiveFundsFixedFeeHKD =
+  output fixedFee : Money
+  definition fixedFee equals `2.35`
+
+scope ReceiveFundsFixedFeeHUF =
+  output fixedFee : Money
+  definition fixedFee equals `90.00`
+
+scope ReceiveFundsFixedFeeILS =
+  output fixedFee : Money
+  definition fixedFee equals `1.20`
+
+scope ReceiveFundsFixedFeeJPY =
+  output fixedFee : Money
+  definition fixedFee equals `40.00`
+
+scope ReceiveFundsFixedFeeMYR =
+  output fixedFee : Money
+  definition fixedFee equals `2.00`
+
+scope ReceiveFundsFixedFeeMXN =
+  output fixedFee : Money
+  definition fixedFee equals `4.00`
+
+scope ReceiveFundsFixedFeeNZD =
+  output fixedFee : Money
+  definition fixedFee equals `0.45`
+
+scope ReceiveFundsFixedFeeNOK =
+  output fixedFee : Money
+  definition fixedFee equals `2.80`
+
+scope ReceiveFundsFixedFeePHP =
+  output fixedFee : Money
+  definition fixedFee equals `15.00`
+
+scope ReceiveFundsFixedFeePLN =
+  output fixedFee : Money
+  definition fixedFee equals `1.35`
+
+scope ReceiveFundsFixedFeeSGD =
+  output fixedFee : Money
+  definition fixedFee equals `0.50`
+
+scope ReceiveFundsFixedFeeSEK =
+  output fixedFee : Money
+  definition fixedFee equals `3.25`
+
+scope ReceiveFundsFixedFeeCHF =
+  output fixedFee : Money
+  definition fixedFee equals `0.55`
+
+scope ReceiveFundsFixedFeeTWD =
+  output fixedFee : Money
+  definition fixedFee equals `10.00`
+
+scope ReceiveFundsFixedFeeTHB =
+  output fixedFee : Money
+  definition fixedFee equals `11.00`
+
+scope ReceiveFundsFixedFeeGBP =
+  output fixedFee : Money
+  definition fixedFee equals `0.20`
+
+scope ReceiveFundsFixedFeeUSD =
+  output fixedFee : Money
+  definition fixedFee equals `0.30`

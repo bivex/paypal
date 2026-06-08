@@ -440,3 +440,27 @@ declaration enumeration CardImmediateTerminationReason =
   -- InaccurateInformation
   -- HighRiskAccount
   -- AssociationRuleViolation
+
+# --- Receive Funds and Automatic Transfer ---
+
+declaration enumeration ReceiveFundsCountry =
+  -- Albania
+  -- Algeria
+  -- AntiguaAndBarbuda
+  -- Barbados
+  -- Belize
+  -- BosniaHerzegovina
+  -- Dominica
+  -- Egypt
+  -- Fiji
+  -- FrenchPolynesia
+  -- Grenada
+  -- Lesotho
+  -- Malawi
+  -- NewCaledonia
+  -- Palau
+  -- SaintKittsAndNevis
+  -- SaintLucia
+  -- Seychelles
+  -- TrinidadAndTobago
+  -- TurksAndCaicos
