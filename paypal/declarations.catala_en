@@ -1,0 +1,243 @@
+# PayPal User Agreement - Type Declarations
+# Last updated: May 19, 2026
+# Source: https://www.paypal.com/us/webapps/mpp/ua/useragreement-full
+
+# --- Account Types ---
+
+declaration enumeration AccountType =
+  -- Personal
+  -- Business
+
+declaration enumeration AccountStatus =
+  -- Active
+  -- Limited
+  -- Suspended
+  -- Closed
+
+declaration enumeration AccountCloseReason =
+  -- UserInitiated
+  -- PolicyViolation
+  -- RiskDecision
+  -- DormantAccount
+  -- CourtOrder
+
+declaration enumeration BusinessEntityType =
+  -- SoleProprietorship
+  -- Corporation
+  -- LLC
+  -- Partnership
+  -- Other
+
+# --- Payment Methods ---
+
+declaration enumeration PaymentMethod =
+  -- CreditCard
+  -- DebitCard
+  -- BankAccount
+  -- PayPalCredit
+  -- BalanceAccount
+  -- BusinessAccountBalance
+  -- PayPalDebitCard
+  -- ECheck
+  -- PayWithRewards
+
+declaration enumeration BackupPaymentOrder =
+  -- BalanceOrDebitCard
+  -- BankAccount
+  -- CoBrandedCreditCard
+  -- DebitCard
+  -- CreditCard
+  -- ECheck
+
+# --- Transaction Types ---
+
+declaration enumeration TransactionType =
+  -- PersonalTransaction
+  -- CommercialTransaction
+  -- Donation
+  -- Purchase
+  -- Refund
+  -- Reversal
+  -- Chargeback
+  -- AutomaticPayment
+  -- RemittanceTransfer
+
+declaration enumeration TransactionStatus =
+  -- Pending
+  -- Completed
+  -- Failed
+  -- Reversed
+  -- Refunded
+  -- Cancelled
+  -- Held
+
+declaration enumeration DisputeType =
+  -- UnauthorizedTransaction
+  -- ItemNotReceived
+  -- SignificantlyNotAsDescribed
+  -- Chargeback
+  -- BankReversal
+
+declaration enumeration DisputeFeeType =
+  -- StandardDisputeFee
+  -- HighVolumeDisputeFee
+  -- NoFee
+
+declaration enumeration DisputeResolution =
+  -- BuyerWins
+  -- SellerWins
+  -- MutualResolution
+  -- EscalatedToClaim
+
+# --- Holds, Limitations, Reserves ---
+
+declaration enumeration HoldReason =
+  -- NewSeller
+  -- HighRiskCategory
+  -- PerformanceIssues
+  -- RiskDecision
+  -- DisputedTransaction
+  -- MarketplaceInstruction
+  -- RegulatoryRequirement
+  -- CourtOrder
+
+declaration enumeration LimitationReason =
+  -- SuspectedUnauthorizedAccess
+  -- CardIssuerAlert
+  -- LegalCompliance
+  -- PolicyViolation
+  -- HighRiskSellerPerformance
+
+declaration enumeration ReserveType =
+  -- RollingReserve
+  -- MinimumReserve
+  -- UpfrontReserve
+  -- NoReserve
+
+# --- Fund Operations ---
+
+declaration enumeration TransferType =
+  -- StandardTransfer
+  -- InstantTransfer
+  -- CheckWithdrawal
+  -- CashWithdrawal
+
+declaration enumeration CurrencyConversionParty =
+  -- PayPal
+  -- CardIssuer
+  -- Mastercard
+
+declaration enumeration RefundDestination =
+  -- OriginalPaymentMethod
+  -- BalanceAccount
+  -- BusinessAccountBalance
+  -- BankAccount
+  -- Check
+
+# --- Protection Programs ---
+
+declaration enumeration ProtectionType =
+  -- PurchaseProtection
+  -- SellerProtection
+  -- NotEligible
+
+# --- Error / Unauthorized ---
+
+declaration enumeration ErrorType =
+  -- IncorrectDebit
+  -- IncorrectCredit
+  -- MissingTransaction
+  -- ComputationalError
+  -- ProcessingError
+  -- NotAnError
+
+declaration enumeration RemittanceTransferError =
+  -- IncorrectAmount
+  -- ComputationalError
+  -- FundsNotAvailable
+  -- LateDelivery
+  -- NotDelivered
+  -- NotAnError
+
+# --- Legal / Miscellaneous ---
+
+declaration enumeration ChangeNoticeType =
+  -- PolicyUpdatesPage
+  -- Email
+  -- WrittenNotice
+
+declaration enumeration ArbitrationStatus =
+  -- Active
+  -- OptedOut
+  -- InProgress
+  -- Resolved
+
+# --- Numeric Structures ---
+
+declaration structure AccountEligibility =
+  data isResident : Boolean
+  data age : Integer
+  data isBusinessEntity : Boolean
+  data territory : Boolean
+
+declaration structure BusinessIdentification =
+  data businessName : Boolean
+  data businessAddress : Boolean
+  data taxpayerId : Boolean
+  data entityType : BusinessEntityType
+
+declaration structure DisputeRatio =
+  data totalClaims : Integer
+  data totalSales : Integer
+  data ratio : Rational
+  data previousThreeMonthsSales : Integer
+
+declaration structure ReserveTerms =
+  data reserveType : ReserveType
+  data percentage : Rational
+  data rollingPeriodDays : Integer
+  data minimumAmount : Money
+  data upfrontAmount : Money
+
+declaration structure ErrorResolutionTimeline =
+  data initialDeterminationDays : Integer
+  data extendedInvestigationDays : Integer
+  data newAccountExtendedDays : Integer
+  data creditAccountDays : Integer
+
+declaration structure HoldTerms =
+  data maxDurationDays : Integer
+  data riskBasedDurationDays : Integer
+  data earlyReleasePossible : Boolean
+
+declaration structure FeeStructure =
+  data transactionFee : Money
+  disputeFeeStandard : Money
+  disputeFeeHighVolume : Money
+  chargebackFee : Money
+  checkWithdrawalFee : Money
+  instantTransferFeePercent : Rational
+
+declaration structure RefundCurrencyRule =
+  data withinOneDayUseOriginalRate : Boolean
+  data beyondOneDayUseCurrentRate : Boolean
+  data refundCurrency : String
+
+declaration structure RemittanceTransferCriteria =
+  data isPersonalAccount : Boolean
+  data isPersonalPurpose : Boolean
+  data usesSendMoneyFeature : Boolean
+  data amountExceedsThreshold : Boolean
+  data recipientOutsideUS : Boolean
+
+declaration structure ChangeNoticePeriod =
+  data personalAccountDays : Integer
+  data businessAccountDays : Integer
+
+declaration structure DormantAccountRule =
+  data inactivityYears : Integer
+  data escheatRequired : Boolean
+
+declaration structure CheckValidity =
+  data validityDays : Integer
+  data fee : Money
